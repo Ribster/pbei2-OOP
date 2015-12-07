@@ -2,7 +2,7 @@
 
 // ctor
 Bedrijfsklant::Bedrijfsklant(QString naam, Adres adres, double smallKorting, double bigKorting, QString btwnummer, bool volumekorting, bool bedrijfskorting, bool verwijderd):
-    Klant(naam, adres, smallKorting, bigKorting, verwijderd), _BTWnummer(btwnummer), _Bedrijfskorting(bedrijfskorting), _Volumekorting(volumekorting)
+    Klant(naam, adres, smallKorting, bigKorting, verwijderd, ClientType_Business), _BTWnummer(btwnummer), _Bedrijfskorting(bedrijfskorting), _Volumekorting(volumekorting)
 {
 
 }

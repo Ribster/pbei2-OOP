@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QVector>
+#include <QTextStream>
 
 #include "databasemanagement.h"
 
@@ -24,6 +25,14 @@ typedef enum ArtikelType{
     ArtikelType_Band    = 1,
     ArtikelType_Velg    = 2
 } ArtikelType;
+
+/**
+ * @brief  Client types
+ */
+typedef enum ClientType{
+    ClientType_Personal    = 1,
+    ClientType_Business    = 2
+} ClientType;
 
 /**
  * @brief  Units of measurement used
@@ -217,6 +226,29 @@ private:
      * @retval None
      */
     void menu_exit(void);
+
+    // CLIENTS
+
+    /**
+     * @brief  User interface for adding a client
+     * @param  None
+     * @retval bool Wether the addition of the client was successfull
+     */
+    bool clients_Add(void);
+
+    // ARTICLES
+
+
+    // INVOICES
+
+
+    // ERROR MESSAGE
+    /**
+     * @brief  Getting the authorization of the current logged in user
+     * @param  UserLevel    The user level of the current item
+     * @retval bool         Wether the user is authorized
+     */
+    bool getAuthorized(UserLevel);
 
 private:
 

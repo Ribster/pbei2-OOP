@@ -96,7 +96,6 @@ void application::selectionMenu(void){
 
                 // let the menu be selected
                 menuclient_menulistItemexecution(selectvalue);
-
         } else if (_app_menuarticle){
             // Article menu is selected
                 // get the user selection
@@ -104,7 +103,6 @@ void application::selectionMenu(void){
 
                 // let the menu be selected
                 menuarticle_menulistItemexecution(selectvalue);
-
         } else {
             // Main menu is selected
                 // get the user selection
@@ -112,7 +110,6 @@ void application::selectionMenu(void){
 
                 // let the menu be selected
                 menumain_menulistItemexecution(selectvalue);
-
         }
     }
 }
@@ -191,6 +188,9 @@ void application::menuclient_menulistItemexecution(int menuselection){
             break;
         case MenuList_Clients_Add:
             // add clients
+            if(getAuthorized(UserLevel_User)){
+                clients_Add();
+            }
             break;
         case MenuList_Clients_Delete:
 
@@ -239,4 +239,67 @@ void application::printSelectionfeedback(QString label, int selection, QString t
 void application::menu_exit(void){
     this->_app_alive = false;
     printHeaderText(globals_menuexit, "We are closing the application. Bye bye!");
+}
+
+
+// CLIENTS
+bool application::clients_Add(void){
+    QTextStream qtin(stdin);
+    QString selectvalue;
+    bool answered = false;
+
+    // addition of client
+        // client variables
+        ClientType tempclass_business;
+            // only for business
+            QString tempclass_btw;
+            bool tempclass_bedrijfskorting;
+            bool tempclass_volumekorting;
+
+        QString tempclass_naam;
+        Adres tempclass_adres;
+        double tempclass_setkorting1;
+        double tempclass_setkorting2;
+
+    // business
+    do {
+        cout << "Is the new client a business ? [Y / N]" << endl;
+            qtin >> selectvalue;
+        answered = true;
+        if(selectvalue == "Y" || selectvalue == "y" || selectvalue == "yes" || selectvalue == "YES"){
+            tempclass_business = ClientType_Business;
+        } else if(selectvalue == "N" || selectvalue == "n" || selectvalue == "no" || selectvalue == "NO"){
+            tempclass_business = ClientType_Personal;
+        } else {
+            answered = false;
+        }
+
+    } while(answered == false);
+
+    // naam
+
+    // adres
+
+    // setkorting 1
+
+    // setkorting 2
+
+        // if business
+        if(tempclass_business == ClientType_Business){
+            // btw nummer
+            // bedrijfskorting
+            // volumekorting
+        }
+
+
+}
+
+// ERROR MESSAGE
+bool application::getAuthorized(UserLevel lvlCheck){
+    if(lvlCheck == UserLevel_Admin && _userlevel == UserLevel_User){
+            cout << "You are not authorized to do this. We are sorry." << endl;
+            return false;
+    }
+
+    return true;
 }

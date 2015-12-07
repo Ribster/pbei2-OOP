@@ -1,8 +1,8 @@
 #include "klant.h"
 
 // ctor
-Klant::Klant(QString naam, Adres adres, double smallKorting, double bigKorting, bool verwijderd):
-    _Naam(naam), _Adres(adres), _Setkorting(smallKorting), _Setkorting2(bigKorting), _Bedrijf(false), _Verwijderd(verwijderd)
+Klant::Klant(QString naam, Adres adres, double smallKorting, double bigKorting, bool verwijderd, ClientType klantentype):
+    _Naam(naam), _Adres(adres), _Setkorting(smallKorting), _Setkorting2(bigKorting), _Bedrijf(false), _Verwijderd(verwijderd), _ClientType(klantentype)
 {
 
 }
