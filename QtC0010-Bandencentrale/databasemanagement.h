@@ -21,147 +21,147 @@ public:
      * @param  None
      * @retval Bandencentrale   The pointer to the dynamic allocated object
      */
-    Bandencentrale* getTireCompany(void);
+    static Bandencentrale* getTireCompany(void);
 
     /**
      * @brief  Get all the articles from file
      * @param  None
      * @retval Artikel   The pointer to the dynamic allocated object
      */
-    QVector<Artikel*> getArticles(void);
+    static QVector<Artikel*> getArticles(void);
 
     /**
      * @brief  Get all the tires from file
      * @param  None
      * @retval Artikel   The pointer to the dynamic allocated object
      */
-    QVector<Band*> getTires(void);
+    static QVector<Band*> getTires(void);
 
     /**
      * @brief  Get all the rimms from file
      * @param  None
      * @retval Artikel   The pointer to the dynamic allocated object
      */
-    QVector<Velg*> getRimms(void);
+    static QVector<Velg*> getRimms(void);
 
     /**
      * @brief  Get all the clients from file
      * @param  None
      * @retval Artikel   The pointer to the dynamic allocated object
      */
-    QVector<Klant*> getClients(void);
+    static QVector<Klant*> getClients(void);
 
     /**
      * @brief  Get all the invoices from file
      * @param  None
      * @retval Artikel   The pointer to the dynamic allocated object
      */
-    QVector<Factuur*> getInvoices(void);
+    static QVector<Factuur*> getInvoices(void);
 
     /**
      * @brief  Write the object to file
      * @param  Artikel  The object that needs to be written
      * @retval bool     Wether the action was succesfull
      */
-    bool writeArticle(Artikel&);
+    static bool writeArticle(Artikel&);
 
     /**
      * @brief  Write the object to file
      * @param  Band     The object that needs to be written
      * @retval bool     Wether the action was succesfull
      */
-    bool writeArticle(Band&);
+    static bool writeArticle(Band&);
 
     /**
      * @brief  Write the object to file
      * @param  Velg     The object that needs to be written
      * @retval bool     Wether the action was succesfull
      */
-    bool writeArticle(Velg&);
+    static bool writeArticle(Velg&);
 
     /**
      * @brief  Write the object to file
      * @param  Klant    The object that needs to be written
      * @retval bool     Wether the action was succesfull
      */
-    bool writeClient(Klant&);
+    static bool writeClient(Klant&);
 
     /**
      * @brief  Write the object to file
      * @param  Factuur  The object that needs to be written
      * @retval bool     Wether the action was succesfull
      */
-    bool writeInvoice(Factuur&);
+    static bool writeInvoice(Factuur&);
 
     /**
      * @brief  Update the object in file
      * @param  Artikel  The object that needs to be updated
      * @retval bool     Wether the action was succesfull
      */
-    bool updateArticle(Artikel&);
+    static bool updateArticle(Artikel&);
 
     /**
      * @brief  Update the object in file
      * @param  Band     The object that needs to be updated
      * @retval bool     Wether the action was succesfull
      */
-    bool updateArticle(Band&);
+    static bool updateArticle(Band&);
 
     /**
      * @brief  Update the object in file
      * @param  Velg     The object that needs to be updated
      * @retval bool     Wether the action was succesfull
      */
-    bool updateArticle(Velg&);
+    static bool updateArticle(Velg&);
 
     /**
      * @brief  Update the object in file
      * @param  Klant    The object that needs to be updated
      * @retval bool     Wether the action was succesfull
      */
-    bool updateClient(Klant&);
+    static bool updateClient(Klant&);
 
     /**
      * @brief  Update the object in file
      * @param  Factuur  The object that needs to be updated
      * @retval bool     Wether the action was succesfull
      */
-    bool updateInvoice(Factuur&);
+    static bool updateInvoice(Factuur&);
 
     /**
      * @brief  Delete the object in file
      * @param  Artikel  The object that needs to be deleted
      * @retval bool     Wether the action was succesfull
      */
-    bool deleteArticle(Artikel&);
+    static bool deleteArticle(Artikel&);
 
     /**
      * @brief  Delete the object in file
      * @param  Band     The object that needs to be deleted
      * @retval bool     Wether the action was succesfull
      */
-    bool deleteArticle(Band&);
+    static bool deleteArticle(Band&);
 
     /**
      * @brief  Delete the object in file
      * @param  Velg     The object that needs to be deleted
      * @retval bool     Wether the action was succesfull
      */
-    bool deleteArticle(Velg&);
+    static bool deleteArticle(Velg&);
 
     /**
      * @brief  Delete the object in file
      * @param  Klant    The object that needs to be deleted
      * @retval bool     Wether the action was succesfull
      */
-    bool deleteClient(Klant&);
+    static bool deleteClient(Klant&);
 
     /**
      * @brief  Delete the object in file
      * @param  Factuur  The object that needs to be deleted
      * @retval bool     Wether the action was succesfull
      */
-    bool deleteInvoice(Factuur&);
+    static bool deleteInvoice(Factuur&);
 
 private:
 

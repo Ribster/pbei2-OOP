@@ -51,13 +51,13 @@ void application::userLogin(){
     QString userlevel;
 
     // print welcome message
-    printHeaderText("INFO", "This is the application for selling Tires and Rimms.");
+    printHeaderText(globals_info, "This is the application for selling Tires and Rimms.");
 
     // get the user level
     do {
-        printHeaderText("LOGIN", "Select the user account to log in:");
-        printSelectionchoice("", UserLevel_Admin, "Director (autoretrieve database)");
-        printSelectionchoice("", UserLevel_User, "Salesman (autoretrieve database)");
+        printHeaderText(globals_login, "Select the user account to log in:");
+        printSelectionchoice(globals_itemprefix, UserLevel_Admin, "Director (autoretrieve database)");
+        printSelectionchoice(globals_itemprefix, UserLevel_User, "Salesman (autoretrieve database)");
 
         cin >> selectvalue;
         cin.get();
@@ -65,16 +65,21 @@ void application::userLogin(){
 
     // string selection according to user level
     if(selectvalue == UserLevel_Admin){
-        userlevel = "Director";
+        userlevel = globals_director;
     } else if (selectvalue == UserLevel_User) {
-        userlevel = "Salesman";
+        userlevel = globals_salesman;
     }
 
     // give feedback of the selection
-    printSelectionfeedback("LOGIN", selectvalue, userlevel);
+    printSelectionfeedback(globals_login, selectvalue, userlevel);
 
     // store it for further handling
     this->_userlevel = selectvalue;
+}
+
+void application::databaseRetrieve(void){
+    // get the wole company in a dynamically generated object
+    this->_bandencentrale = DatabaseManagement::getTireCompany();
 }
 
 void application::selectionMenu(void){
@@ -114,7 +119,7 @@ void application::selectionMenu(void){
 
 int application::menumain_querySelection(void){
     // push and receive main menu selection
-    return generalQueryUserselection("MAIN MENU", _menulist_main);
+    return generalQueryUserselection(globals_menumain, _menulist_main);
 }
 
 void application::menumain_menulistItemexecution(int menuselection){
@@ -138,7 +143,7 @@ void application::menumain_menulistItemexecution(int menuselection){
 
 int application::menuarticle_querySelection(void){
     // push and receive article menu selection
-    return generalQueryUserselection("MAIN MENU > ARTICLE MENU", _menulist_articles);
+    return generalQueryUserselection(globals_menuarticles, _menulist_articles);
 }
 
 void application::menuarticle_menulistItemexecution(int menuselection){
@@ -168,7 +173,7 @@ void application::menuarticle_menulistItemexecution(int menuselection){
 
 int application::menuclient_querySelection(void){
     // push and receive client menu selection
-    return generalQueryUserselection("MAIN MENU > CLIENT MENU", _menulist_clients);
+    return generalQueryUserselection(globals_menuclients, _menulist_clients);
 }
 
 void application::menuclient_menulistItemexecution(int menuselection){
@@ -185,7 +190,7 @@ void application::menuclient_menulistItemexecution(int menuselection){
 
             break;
         case MenuList_Clients_Add:
-
+            // add clients
             break;
         case MenuList_Clients_Delete:
 
@@ -233,5 +238,5 @@ void application::printSelectionfeedback(QString label, int selection, QString t
 
 void application::menu_exit(void){
     this->_app_alive = false;
-    printHeaderText("MAIN MENU > EXIT", "We are closing the application. Bye bye!");
+    printHeaderText(globals_menuexit, "We are closing the application. Bye bye!");
 }

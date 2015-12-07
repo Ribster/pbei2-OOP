@@ -28,6 +28,14 @@ public:
     void setKlanten(QVector<Klant*>);
     void setArtikels(QVector<Artikel*>);
 
+    // functions
+    /**
+     * @brief  Add a client
+     * @param  Klant    The object that needs to be written
+     * @retval bool     Wether the action was succesfull
+     */
+    bool addClient(Klant&);
+
 private:
     QString _Naam;
     Adres _Adres;

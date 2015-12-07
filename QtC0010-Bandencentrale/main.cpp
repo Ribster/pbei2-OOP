@@ -7,6 +7,9 @@ int main(int argc, char *argv[])
     // call the user login routine
     app.userLogin();
 
+    // retrieve the database
+    app.databaseRetrieve();
+
     // call the selection menu with underlying function calls
     app.selectionMenu();
 

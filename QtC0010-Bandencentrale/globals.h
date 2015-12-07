@@ -95,6 +95,15 @@ typedef enum MenuList_Articles {
     MenuList_Articles_Max       = MenuList_Articles_History
 } MenuList_Articles;
 
+const QString globals_director = "Director";
+const QString globals_salesman = "Salesman";
+const QString globals_info = "INFO";
+const QString globals_login = "LOGIN";
+const QString globals_itemprefix = "";
+const QString globals_menumain = "MAIN MENU";
+const QString globals_menuexit = "MAIN MENU > EXIT";
+const QString globals_menuarticles = "MAIN MENU > ARTICLE MENU";
+const QString globals_menuclients = "MAIN MENU > CLIENT MENU";
 
 class application final
 {
@@ -110,6 +119,13 @@ public:
      * @retval None
      */
     void userLogin(void);
+
+    /**
+     * @brief  Retrieve the Tire Workshop from the local database
+     * @param  None
+     * @retval None
+     */
+    void databaseRetrieve(void);
 
     /**
      * @brief  Main routine for guiding the user through the possible menu's
@@ -216,6 +232,7 @@ private:
     QVector<QString> _menulist_clients;
     QVector<QString> _menulist_articles;
 
+    Bandencentrale *_bandencentrale;
 };
 
 #endif // GLOBALS_H

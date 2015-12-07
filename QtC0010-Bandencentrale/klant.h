@@ -9,7 +9,7 @@ class Klant
 {
 public:
     // ctor
-    Klant();
+    Klant(QString naam, Adres adres, double smallKorting, double bigKorting, bool verwijderd);
     // dtor
     virtual ~Klant();
 
@@ -27,12 +27,13 @@ public:
     void setBedrijf(bool);
     void setSetkorting2(double);
 
-private:
+protected:
     QString _Naam;
     Adres _Adres;
     double _Setkorting;
     bool _Bedrijf;
     double _Setkorting2;
+    bool _Verwijderd;
 };
 
 #endif // KLANT_H
