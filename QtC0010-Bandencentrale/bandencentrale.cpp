@@ -4,7 +4,8 @@ using namespace std;
 
 Bandencentrale::Bandencentrale()
 {
-
+//    cout << "Klanten empty: " << _Klanten.isEmpty() << endl;
+//    cout << "Artikel empty: " << _Artikels.isEmpty() << endl;
 }
 
 Bandencentrale::~Bandencentrale(){
@@ -52,7 +53,7 @@ void Bandencentrale::setArtikels(QVector<Artikel*> newVal){
 bool Bandencentrale::addClient(Klant& ptr){
     // make a client ID if current id is zero
     if(ptr.getClientID() == 0){
-        ptr.setClientID(this->getNewClientID());
+        //ptr.setClientID(this->getNewClientID());
     }
 
     // add client to client list
@@ -68,18 +69,22 @@ int Bandencentrale::getNewClientID(void){
 }
 
 void Bandencentrale::printClientList(void){
-    QVector<Klant*>::iterator i;
-    for(i = _Klanten.begin(); i != _Klanten.end(); i++){
-        if((*i)->getBedrijf()){
-            cout << "Bedrijf" << endl;
-            // we are dealing with a company
-            //this->getBedrijfsklant((*i))->print();
-        } else {
-            cout << "Client" << endl;
-            // client
-            //(*i)->print();
-        }
-    }
+    // return if vector is empty
+    if(this->_Klanten.isEmpty()) return;
+
+    // loop over the Vector
+//    QVector<Klant*>::iterator i;
+//    for(i = _Klanten.begin(); i != _Klanten.end(); i++){
+//        if((*i)->getBedrijf()){
+//            cout << "Bedrijf" << endl;
+//            // we are dealing with a company
+//            //this->getBedrijfsklant((*i))->print();
+//        } else {
+//            cout << "Client" << endl;
+//            // client
+//            //(*i)->print();
+//        }
+//    }
 }
 
 // CONVERSION

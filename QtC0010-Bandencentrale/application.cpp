@@ -27,7 +27,7 @@ application::application(int argc, char **argv){
     _menulist_articles.push_back("Stock/Selling History");
 
     // fetch bandencentrale from filesystem
-    _bandencentrale = new Bandencentrale;
+    _bandencentrale = new Bandencentrale();
 }
 
 // dtor
@@ -180,6 +180,10 @@ void application::menuclient_menulistItemexecution(int menuselection){
             // print clients
             if(getAuthorized(UserLevel_User)){
                 _bandencentrale->printClientList();
+
+                //QString tmp = _bandencentrale->getNaam();
+
+
             }
             break;
         case MenuList_Clients_Add:

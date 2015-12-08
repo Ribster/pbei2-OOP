@@ -2,6 +2,8 @@
 #define APPLICATION_H
 
 #include <iostream>
+#include <QtGlobal>
+#include <QDebug>
 
 #include "globals.h"
 
