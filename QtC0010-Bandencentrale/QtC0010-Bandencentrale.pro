@@ -8,10 +8,12 @@ QT       += core
 
 QT       -= gui
 
-TARGET = QtC0010-Bandencentrale
+QMAKE_CXXFLAGS += -Wno-c++11-extensions
+
+TARGET    = QtC0010-Bandencentrale
 CONFIG   += console
 CONFIG   -= app_bundle
-CONFIG += c++11
+CONFIG   += c++11
 
 TEMPLATE = app
 

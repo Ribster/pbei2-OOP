@@ -122,7 +122,7 @@ int application::menumain_querySelection(void){
 void application::menumain_menulistItemexecution(int menuselection){
     // check the input values
     if(menuselection < 1) return;
-    if(menuselection > _menulist_main.length()) return;
+    if(menuselection > _menulist_main.size()) return;
 
     // select the input and execute the correct application
     switch (menuselection) {
@@ -146,7 +146,7 @@ int application::menuarticle_querySelection(void){
 void application::menuarticle_menulistItemexecution(int menuselection){
     // check the input values
     if(menuselection < 1) return;
-    if(menuselection > _menulist_articles.length()) return;
+    if(menuselection > _menulist_articles.size()) return;
 
     // select the input and execute the correct application
     switch (menuselection) {
@@ -176,7 +176,7 @@ int application::menuclient_querySelection(void){
 void application::menuclient_menulistItemexecution(int menuselection){
     // check the input values
     if(menuselection < 1) return;
-    if(menuselection > _menulist_clients.length()) return;
+    if(menuselection > _menulist_clients.size()) return;
 
     // select the input and execute the correct application
     switch (menuselection) {
@@ -208,12 +208,12 @@ int application::generalQueryUserselection(QString label, QVector<QString> &stri
     // loop over the possible selections
     do {
         printHeaderText(label, "Please select the functionality you want to run:");
-        for(int i = 0; i<stringContainer.length(); i++){
+        for(int i = 0; i<stringContainer.size(); i++){
             printSelectionchoice("", i+1, stringContainer.at(i));
         }
         cin >> selectvalue;
         cin.get();
-    } while(!(selectvalue >= 1 || selectvalue <= (stringContainer.length()-1) ) );
+    } while(!(selectvalue >= 1 || selectvalue <= (stringContainer.size()-1) ) );
 
     // give feedback of the selection
         //printSelectionfeedback(label, selectvalue, stringContainer.at(selectvalue-1));
@@ -277,6 +277,8 @@ bool application::clients_Add(void){
     } while(answered == false);
 
     // naam
+
+
 
     // adres
 
