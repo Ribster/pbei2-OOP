@@ -10,7 +10,7 @@ class Bedrijfsklant final : public Klant
 {
 public:
     // ctor
-    Bedrijfsklant(QString naam, Adres adres, double smallKorting, double bigKorting, QString btwnummer, bool volumekorting, bool bedrijfskorting, bool verwijderd);
+    Bedrijfsklant(QString naam, Adres adres, double smallKorting, double bigKorting, QString btwnummer, double volumekorting, double bedrijfskorting, bool verwijderd, int klantenID = 0);
     // dtor
     virtual ~Bedrijfsklant();
 
@@ -26,10 +26,17 @@ public:
     void setBedrijfskorting(bool);
     void setVerwijderd(bool);
 
+    /**
+     * @brief  Print the current client to the output terminal
+     * @param  None
+     * @retval None
+     */
+    void print(void) override;
+
 private:
     QString _BTWnummer;
-    bool _Bedrijfskorting;
-    bool _Volumekorting;
+    double _Bedrijfskorting;
+    double _Volumekorting;
 
 };
 

@@ -1,8 +1,8 @@
 #include "bedrijfsklant.h"
 
 // ctor
-Bedrijfsklant::Bedrijfsklant(QString naam, Adres adres, double smallKorting, double bigKorting, QString btwnummer, bool volumekorting, bool bedrijfskorting, bool verwijderd):
-    Klant(naam, adres, smallKorting, bigKorting, verwijderd, ClientType_Business), _BTWnummer(btwnummer), _Bedrijfskorting(bedrijfskorting), _Volumekorting(volumekorting)
+Bedrijfsklant::Bedrijfsklant(QString naam, Adres adres, double smallKorting, double bigKorting, QString btwnummer, double volumekorting, double bedrijfskorting, bool verwijderd, int klantenID):
+    Klant(naam, adres, smallKorting, bigKorting, verwijderd, ClientType_Business, klantenID), _BTWnummer(btwnummer), _Bedrijfskorting(bedrijfskorting), _Volumekorting(volumekorting)
 {
 
 }
@@ -31,17 +31,41 @@ bool Bedrijfsklant::getVerwijderd(void){
 
 // setters
 void Bedrijfsklant::setBTWnummer(QString newVal){
-    _BTWnummer = newVal;
+    this->_BTWnummer = newVal;
 }
 
 void Bedrijfsklant::setVolumekorting(bool newVal){
-    _Volumekorting = newVal;
+    this->_Volumekorting = newVal;
 }
 
 void Bedrijfsklant::setBedrijfskorting(bool newVal){
-    _Bedrijfskorting = newVal;
+    this->_Bedrijfskorting = newVal;
 }
 
-void Bedrijfsklant::setVerwijderd(bool){
-
+void Bedrijfsklant::setVerwijderd(bool newVal){
+    this->_Verwijderd = newVal;
 }
+
+void Bedrijfsklant::print(void){
+    QTextStream qtout(stdout);
+    //this->_ClientType;
+    qtout << "Detailed information about the company client:" << endl;
+    qtout << "ID: " << this->_KlantID << endl;
+    qtout << "Name: " << this->_Naam << endl;
+    this->printAddress(this->_Adres);
+
+    qtout << "TAV number: " << this->_BTWnummer << endl;
+
+    qtout << "Set Discount on a set of 4: " << this->_Setkorting << "%" << endl;
+    qtout << "Set Discount on a bulk of 10 sets: " << this->_Setkorting2 << "%" << endl;
+    qtout << "Volume discount: " << this->_Volumekorting << "%" << endl;
+    qtout << "Company discount: " << this->_Bedrijfskorting << "%" << endl;
+
+    qtout << "Client is deleted: ";
+    if(this->_Verwijderd){
+        qtout << "Yes" << endl;
+    } else {
+        qtout << "No" << endl;
+    }
+}
+

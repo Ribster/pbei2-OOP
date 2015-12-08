@@ -26,8 +26,8 @@ SOURCES += main.cpp \
     velg.cpp \
     bedrijfsklant.cpp \
     band.cpp \
-    globals.cpp \
-    databasemanagement.cpp
+    databasemanagement.cpp \
+    application.cpp
 
 HEADERS += \
     bandencentrale.h \
@@ -38,4 +38,5 @@ HEADERS += \
     bedrijfsklant.h \
     band.h \
     globals.h \
-    databasemanagement.h
+    databasemanagement.h \
+    application.h

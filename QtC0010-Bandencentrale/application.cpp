@@ -1,15 +1,4 @@
-#include "globals.h"
-
-#include "artikel.h"
-#include "band.h"
-#include "bandencentrale.h"
-#include "bedrijfsklant.h"
-#include "factuur.h"
-#include "globals.h"
-#include "klant.h"
-#include "velg.h"
-
-#include <iostream>
+#include "application.h"
 
 using namespace std;
 
@@ -36,11 +25,15 @@ application::application(int argc, char **argv){
     _menulist_articles.push_back("Add Article");
     _menulist_articles.push_back("Delete Article");
     _menulist_articles.push_back("Stock/Selling History");
+
+    // fetch bandencentrale from filesystem
+    _bandencentrale = new Bandencentrale;
 }
 
 // dtor
 application::~application(){
-
+    // delete bandencentrale
+    delete _bandencentrale;
 }
 
 // login
@@ -71,7 +64,7 @@ void application::userLogin(){
     }
 
     // give feedback of the selection
-    printSelectionfeedback(globals_login, selectvalue, userlevel);
+        //printSelectionfeedback(globals_login, selectvalue, userlevel);
 
     // store it for further handling
     this->_userlevel = selectvalue;
@@ -184,7 +177,10 @@ void application::menuclient_menulistItemexecution(int menuselection){
             _app_menuclient = false;
             break;
         case MenuList_Clients_List:
-
+            // print clients
+            if(getAuthorized(UserLevel_User)){
+                _bandencentrale->printClientList();
+            }
             break;
         case MenuList_Clients_Add:
             // add clients
@@ -223,17 +219,19 @@ int application::generalQueryUserselection(QString label, QVector<QString> &stri
 }
 
 void application::printHeaderText(QString label, QString text){
-    cout << "------------------------------------------------------------------" << endl;
-    cout << "[" << label.toUtf8().constData() << "]\t" << text.toUtf8().constData() << endl;
+    QTextStream qtout(stdout);
+    qtout << globals_headerLine << endl;
+    qtout << globals_headerFirst << label << globals_headerSecond << text << endl;
 }
 
 void application::printSelectionchoice(QString label, int selection, QString text){
-    cout << label.toUtf8().constData() << "\t[" << selection << "]\t" << text.toUtf8().constData() << endl;
+    QTextStream qtout(stdout);
+    qtout << label << globals_selectionFirst << selection << globals_selectionSecond << text << endl;
 }
 
 void application::printSelectionfeedback(QString label, int selection, QString text){
-    cout << "[" << label.toUtf8().constData() << "]\tYour choice is: " << selection << ", you selected: " << text.toUtf8().constData() << endl;
-
+    QTextStream qtout(stdout);
+    qtout << globals_selectionFeedbackFirst << label << globals_selectionFeedbackSecond << "Your choice is: " << selection << ", you selected: " << text << endl;
 }
 
 void application::menu_exit(void){
@@ -245,6 +243,7 @@ void application::menu_exit(void){
 // CLIENTS
 bool application::clients_Add(void){
     QTextStream qtin(stdin);
+    QTextStream qtout(stdout);
     QString selectvalue;
     bool answered = false;
 
@@ -253,8 +252,8 @@ bool application::clients_Add(void){
         ClientType tempclass_business;
             // only for business
             QString tempclass_btw;
-            bool tempclass_bedrijfskorting;
-            bool tempclass_volumekorting;
+            double tempclass_bedrijfskorting;
+            double tempclass_volumekorting;
 
         QString tempclass_naam;
         Adres tempclass_adres;
@@ -263,7 +262,7 @@ bool application::clients_Add(void){
 
     // business
     do {
-        cout << "Is the new client a business ? [Y / N]" << endl;
+        qtout << "Is the new client a business ? [Y / N]" << endl;
             qtin >> selectvalue;
         answered = true;
         if(selectvalue == "Y" || selectvalue == "y" || selectvalue == "yes" || selectvalue == "YES"){
@@ -277,23 +276,109 @@ bool application::clients_Add(void){
     } while(answered == false);
 
     // naam
-
-
+    do {
+        qtout << "What is the clients name ?" << endl;
+        qtin >> tempclass_naam;
+    } while(tempclass_naam.isEmpty());
 
     // adres
-
+        do {
+            qtout << "What is the clients Street Name ?" << endl;
+            qtin >> tempclass_adres.straatnaam;
+        } while(tempclass_adres.straatnaam.isEmpty());
+        do {
+            qtout << "What is the clients Street Number ?" << endl;
+            qtin >> tempclass_adres.straatnummer;
+        } while(tempclass_adres.straatnummer.isEmpty());
+        do {
+            QString tmp;
+            qtout << "What is the clients Postal Code ?" << endl;
+            qtin >> tmp;
+            tempclass_adres.postcode = tmp.toInt();
+        } while(tempclass_adres.postcode == 0);
+        do {
+            qtout << "What is the clients Town Name ?" << endl;
+            qtin >> tempclass_adres.gemeente;
+        } while(tempclass_adres.gemeente.isEmpty());
+        do {
+            qtout << "What is the clients Country Name ?" << endl;
+            qtin >> tempclass_adres.land;
+        } while(tempclass_adres.land.isEmpty());
     // setkorting 1
-
+            QString tmp;
+            qtout << "What is the clients Set Discount on a set of 4 ? [%]" << endl;
+            qtin >> tmp;
+            tempclass_setkorting1 = tmp.toDouble();
     // setkorting 2
+            qtout << "What is the clients Set Discount on a bulk of 10 sets ? [%]" << endl;
+            tmp.clear();
+            qtin >> tmp;
+            tempclass_setkorting2 = tmp.toDouble();
 
         // if business
         if(tempclass_business == ClientType_Business){
             // btw nummer
+            do {
+                qtout << "What is the clients Business TAV number ?" << endl;
+                qtin >> tempclass_btw;
+            } while(tempclass_adres.gemeente.isEmpty());
+
+            QString tmp;
             // bedrijfskorting
+            qtout << "What is the clients company discount? [%]" << endl;
+            qtin >> tmp;
+            tempclass_bedrijfskorting = tmp.toDouble();
+
             // volumekorting
+            qtout << "What is the clients company volume discount ? [%]" << endl;
+            tmp.clear();
+            qtin >> tmp;
+            tempclass_volumekorting = tmp.toDouble();
         }
 
+        answered = true;
 
+    Klant *newKlant;
+    // create klant
+    if ( tempclass_business == ClientType_Business){
+        // business
+        newKlant = dynamic_cast<Klant*>(new Bedrijfsklant(
+                                            tempclass_naam,
+                                            tempclass_adres,
+                                            tempclass_setkorting1,
+                                            tempclass_setkorting2,
+                                            tempclass_btw,
+                                            tempclass_volumekorting,
+                                            tempclass_bedrijfskorting,
+                                            false
+                                            ));
+    } else {
+        // personal client
+        newKlant = new Klant(
+                    tempclass_naam,
+                    tempclass_adres,
+                    tempclass_setkorting1,
+                    tempclass_setkorting2,
+                    false
+                    );
+    }
+
+
+
+    // print everything out
+    if ( newKlant->getBedrijf() ){
+        // business
+        getBedrijfsklant(newKlant)->print();
+    } else {
+        // personal client
+        newKlant->print();
+    }
+
+    // add client to file system
+    _bandencentrale->addClient(*newKlant);
+
+
+    return answered;
 }
 
 // ERROR MESSAGE
@@ -304,4 +389,9 @@ bool application::getAuthorized(UserLevel lvlCheck){
     }
 
     return true;
+}
+
+// CONVERSION
+Bedrijfsklant* application::getBedrijfsklant(Klant* ptr){
+    return dynamic_cast<Bedrijfsklant*>(ptr);
 }
