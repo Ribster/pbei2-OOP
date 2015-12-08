@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QVector>
+#include <QList>
 #include <iostream>
 
 #include "klant.h"
@@ -23,14 +24,14 @@ public:
     // GETTERS
     QString getNaam(void);
     Adres getAdres(void);
-    QVector<Klant*> getKlanten(void);
-    QVector<Artikel*> getArtikels(void);
+    QList<Klant*> getKlanten(void);
+    QList<Artikel*> getArtikels(void);
 
     // SETTERS
     void setNaam(QString);
     void setAdres(Adres);
-    void setKlanten(QVector<Klant*>);
-    void setArtikels(QVector<Artikel*>);
+    void setKlanten(QList<Klant*>);
+    void setArtikels(QList<Artikel*>);
 
     // FUNCTIONS
     /**
@@ -65,8 +66,8 @@ public:
 private:
     QString _Naam;
     Adres _Adres;
-    QVector<Klant*> _Klanten;
-    QVector<Artikel*> _Artikels;
+    QList<Klant*> _Klanten;
+    QList<Artikel*> _Artikels;
     int _maxClientID = 0;
 };
 

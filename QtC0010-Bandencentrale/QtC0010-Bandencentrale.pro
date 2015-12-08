@@ -12,6 +12,7 @@ QMAKE_CXXFLAGS += -Wno-c++11-extensions
 
 TARGET    = QtC0010-Bandencentrale
 CONFIG   += console
+CONFIG   += qt warn_on release rtti exceptions
 CONFIG   -= app_bundle
 CONFIG   += c++11
 

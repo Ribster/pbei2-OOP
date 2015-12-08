@@ -23,6 +23,8 @@ public:
     // dtor
     ~application();
 
+    void getPtr(void);
+
     /**
      * @brief  Asks the user for user access level
      * @param  None

@@ -4,6 +4,8 @@ using namespace std;
 
 // ctor
 application::application(int argc, char **argv){
+    QTextStream qtout(stdout);
+
     this->_argc = argc;
     this->_argv = argv;
 
@@ -28,12 +30,23 @@ application::application(int argc, char **argv){
 
     // fetch bandencentrale from filesystem
     _bandencentrale = new Bandencentrale();
+
+    getPtr();
+
 }
 
 // dtor
 application::~application(){
     // delete bandencentrale
     delete _bandencentrale;
+}
+
+void application::getPtr(void){
+    QTextStream qtout(stdout);
+
+    QString ptrStr = QString("0x%1").arg((quintptr)this->_bandencentrale,
+                        QT_POINTER_SIZE * 2, 16, QChar('0'));
+    qtout << "0 bandencentrale ptr: " << ptrStr << endl;
 }
 
 // login
@@ -167,6 +180,8 @@ int application::menuclient_querySelection(void){
 }
 
 void application::menuclient_menulistItemexecution(int menuselection){
+    QTextStream qtout(stdout);
+
     // check the input values
     if(menuselection < 1) return;
     if(menuselection > _menulist_clients.size()) return;
@@ -179,11 +194,9 @@ void application::menuclient_menulistItemexecution(int menuselection){
         case MenuList_Clients_List:
             // print clients
             if(getAuthorized(UserLevel_User)){
-                _bandencentrale->printClientList();
+                getPtr();
 
-                //QString tmp = _bandencentrale->getNaam();
-
-
+                this->_bandencentrale->printClientList();
             }
             break;
         case MenuList_Clients_Add:
@@ -379,8 +392,11 @@ bool application::clients_Add(void){
     }
 
     // add client to file system
-    _bandencentrale->addClient(*newKlant);
+    QString ptrStr = QString("0x%1").arg((quintptr)this->_bandencentrale,
+                        QT_POINTER_SIZE * 2, 16, QChar('0'));
+    qtout << "1 bandencentrale ptr: " << ptrStr << endl;
 
+    this->_bandencentrale->addClient(*newKlant);
 
     return answered;
 }

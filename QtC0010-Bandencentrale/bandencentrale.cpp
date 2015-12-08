@@ -6,11 +6,13 @@ Bandencentrale::Bandencentrale()
 {
 //    cout << "Klanten empty: " << _Klanten.isEmpty() << endl;
 //    cout << "Artikel empty: " << _Artikels.isEmpty() << endl;
+    _Klanten.clear();
+    _Artikels.clear();
 }
 
 Bandencentrale::~Bandencentrale(){
     // delete all the clients
-    QVector<Klant*>::iterator i;
+    QList<Klant*>::iterator i;
     for(i = _Klanten.begin(); i != _Klanten.end(); i++){
         delete *i;
     }
@@ -25,11 +27,11 @@ Adres Bandencentrale::getAdres(void){
     return _Adres;
 }
 
-QVector<Klant*> Bandencentrale::getKlanten(void){
+QList<Klant*> Bandencentrale::getKlanten(void){
     return _Klanten;
 }
 
-QVector<Artikel*> Bandencentrale::getArtikels(void){
+QList<Artikel*> Bandencentrale::getArtikels(void){
     return _Artikels;
 }
 
@@ -42,18 +44,18 @@ void Bandencentrale::setAdres(Adres newVal){
     _Adres = newVal;
 }
 
-void Bandencentrale::setKlanten(QVector<Klant*> newVal){
+void Bandencentrale::setKlanten(QList<Klant*> newVal){
     _Klanten = newVal;
 }
 
-void Bandencentrale::setArtikels(QVector<Artikel*> newVal){
+void Bandencentrale::setArtikels(QList<Artikel*> newVal){
     _Artikels = newVal;
 }
 
 bool Bandencentrale::addClient(Klant& ptr){
     // make a client ID if current id is zero
     if(ptr.getClientID() == 0){
-        //ptr.setClientID(this->getNewClientID());
+        ptr.setClientID(this->getNewClientID());
     }
 
     // add client to client list
@@ -69,22 +71,27 @@ int Bandencentrale::getNewClientID(void){
 }
 
 void Bandencentrale::printClientList(void){
+    QTextStream qtout(stdout);
+    QString ptrStr = QString("0x%1").arg((quintptr)this,
+                        QT_POINTER_SIZE * 2, 16, QChar('0'));
+    qtout << "2 bandencentrale ptr: " << ptrStr << endl;
+
     // return if vector is empty
     if(this->_Klanten.isEmpty()) return;
 
     // loop over the Vector
-//    QVector<Klant*>::iterator i;
-//    for(i = _Klanten.begin(); i != _Klanten.end(); i++){
-//        if((*i)->getBedrijf()){
-//            cout << "Bedrijf" << endl;
-//            // we are dealing with a company
-//            //this->getBedrijfsklant((*i))->print();
-//        } else {
-//            cout << "Client" << endl;
-//            // client
-//            //(*i)->print();
-//        }
-//    }
+    QList<Klant*>::iterator i;
+    for(i = _Klanten.begin(); i != _Klanten.end(); i++){
+        if((*i)->getBedrijf()){
+            cout << "Bedrijf" << endl;
+            // we are dealing with a company
+            //this->getBedrijfsklant((*i))->print();
+        } else {
+            cout << "Client" << endl;
+            // client
+            //(*i)->print();
+        }
+    }
 }
 
 // CONVERSION
