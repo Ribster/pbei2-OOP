@@ -13,6 +13,7 @@ DatabaseManagement::~DatabaseManagement()
 }
 
 Bandencentrale* DatabaseManagement::getTireCompany(void){
+    // fetch bandencentrale from filesystem
 
 }
 
