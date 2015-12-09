@@ -13,9 +13,9 @@ public:
     virtual ~Velg();
 
     // getters
-    double getBreedte(void);
-    Kleuren getKleur(void);
-    bool getAluminium(void);
+    const double getBreedte(void) const;
+    const Kleuren getKleur(void) const;
+    const bool getAluminium(void) const;
 
     // setters
     void setBreedte(double);

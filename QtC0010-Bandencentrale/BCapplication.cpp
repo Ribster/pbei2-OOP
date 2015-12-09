@@ -5,8 +5,25 @@ using namespace std;
 // SLOTS
 
 void BCapplication::run(void){
+    // login user
     userLogin();
-    //databaseRetrieve();
+
+    // get bandencentrale from filesystem
+    databaseRetrieve();
+
+    // set fixed centrale info
+    _bandencentrale->setNaam("Bandencentrale OOP");
+    Adres tmpAdres;
+    tmpAdres.gemeente = "Sint-Katelijne-Waver";
+    tmpAdres.land = "Belgie";
+    tmpAdres.postcode = 2860;
+    tmpAdres.straatnaam = "DeNayerstraat";
+    tmpAdres.straatnummer = "1";
+    _bandencentrale->setAdres(tmpAdres);
+
+    DatabaseManagement::writeTirecompany(_bandencentrale);
+
+    // blocking selection loop
     selectionMenu();
 
     emit finished();
@@ -43,9 +60,9 @@ BCapplication::BCapplication(int argc, char **argv, QObject *parent):
     _menulist_articles.push_back("Stock/Selling History");
 
     // fetch bandencentrale from filesystem
-    _bandencentrale = new Bandencentrale();
+    //_bandencentrale = new Bandencentrale();
 
-    DatabaseManagement::writeTirecompany(_bandencentrale);
+    //DatabaseManagement::writeTirecompany(_bandencentrale);
 }
 
 // dtor

@@ -12,15 +12,15 @@ Velg::~Velg(){
 }
 
 // getters
-double Velg::getBreedte(void){
+const double Velg::getBreedte(void) const {
     return _Breedte;
 }
 
-Kleuren Velg::getKleur(void){
+const Kleuren Velg::getKleur(void) const {
     return _Kleur;
 }
 
-bool Velg::getAluminium(void){
+const bool Velg::getAluminium(void) const {
     return _Aluminium;
 }
 

@@ -13,10 +13,10 @@ public:
     virtual ~Band();
 
     // getters
-    double getBreedte(void);
-    double getHoogte(void);
-    char getSnelheidsindex(void);
-    Seizoen getSeizoen(void);
+    const double getBreedte(void) const;
+    const double getHoogte(void) const;
+    const char getSnelheidsindex(void) const;
+    const Seizoen getSeizoen(void) const;
 
     // setters
     void setBreedte(double);

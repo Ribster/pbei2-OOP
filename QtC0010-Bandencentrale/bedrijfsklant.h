@@ -15,10 +15,10 @@ public:
     virtual ~Bedrijfsklant();
 
     // getters
-    QString getBTWnummer(void);
-    bool getVolumekorting(void);
-    bool getBedrijfskorting(void);
-    bool getVerwijderd(void);
+    const QString getBTWnummer(void) const;
+    const bool getVolumekorting(void) const;
+    const bool getBedrijfskorting(void) const;
+    const bool getVerwijderd(void) const;
 
     // setters
     void setBTWnummer(QString);

@@ -47,6 +47,21 @@ private:
     static bool writeTirecompanyObject(Bandencentrale*);
 
     /**
+     * @brief  Low Level read of the Bandencentrale object.
+     * @param  Bandencentrale   The object that needs to be read
+     * @retval bool             Wether the action was succesfull
+     */
+    static bool readTirecompanyObject(Bandencentrale*);
+
+    /**
+     * @brief  Low Level read of the Bandencentrale object.
+     * @param  int              The id of the centrale
+     * @param  Bandencentrale   The object that needs to be read
+     * @retval bool             Wether the action was succesfull
+     */
+    static Bandencentrale* readTirecompanyObject(int);
+
+    /**
      * @brief  Low Level write of the Bandencentrale object's Clients
      * @param  Bandencentrale   The object that needs to be written
      * @retval bool             Wether the action was succesfull
@@ -89,11 +104,25 @@ private:
     static QString getBandencentraleFoldername(Bandencentrale*);
 
     /**
+     * @brief  Get the folder name of bandencentrale
+     * @param  int              Bandencentrale ID
+     * @retval QString          Folder name for the Bandencentrale object
+     */
+    static QString getBandencentraleFoldername(int);
+
+    /**
      * @brief  Get the folder name of bandencentrale Clients
      * @param  Bandencentrale*  Ptr to the bandencentrale object
      * @retval QString          Folder name for the Bandencentrale object
      */
-    static QString getBandencentraleFoldernameKlanten(Bandencentrale*);
+    static QString getBandencentraleFoldernameKlantenPersonal(Bandencentrale*);
+
+    /**
+     * @brief  Get the folder name of bandencentrale Clients
+     * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @retval QString          Folder name for the Bandencentrale object
+     */
+    static QString getBandencentraleFoldernameKlantenCorporate(Bandencentrale*);
 
     /**
      * @brief  Get the folder name of bandencentrale Articles
@@ -115,6 +144,13 @@ private:
      * @retval QString          Path name for the Bandencentrale object
      */
     static QString getBandencentraleFullPathname(Bandencentrale*);
+
+    /**
+     * @brief  Get the path name of bandencentrale
+     * @param  int              Centrale ID
+     * @retval QString          Path name for the Bandencentrale object
+     */
+    static QString getBandencentraleFullPathname(int);
 };
 
 QDataStream &operator<<(QDataStream &out, const Adres &ptr);
@@ -122,5 +158,31 @@ QDataStream &operator>>(QDataStream &in, Adres &ptr);
 
 QDataStream &operator<<(QDataStream &out, const Bandencentrale &ptr);
 QDataStream &operator>>(QDataStream &in, Bandencentrale &ptr);
+
+QDataStream &operator<<(QDataStream &out, const Klant &ptr);
+QDataStream &operator>>(QDataStream &in, Klant &ptr);
+
+QDataStream &operator<<(QDataStream &out, const Bedrijfsklant &ptr);
+QDataStream &operator>>(QDataStream &in, Bedrijfsklant &ptr);
+
+QDataStream &operator<<(QDataStream &out, const Artikel &ptr);
+QDataStream &operator>>(QDataStream &in, Artikel &ptr);
+
+QDataStream &operator<<(QDataStream &out, const Velg &ptr);
+QDataStream &operator>>(QDataStream &in, Velg &ptr);
+
+QDataStream &operator<<(QDataStream &out, const Band &ptr);
+QDataStream &operator>>(QDataStream &in, Band &ptr);
+
+QDataStream &operator<<(QDataStream &out, const Factuur &ptr);
+QDataStream &operator>>(QDataStream &in, Factuur &ptr);
+
+QDataStream &operator<<(QDataStream &out, const ClientType &ptr);
+QDataStream &operator>>(QDataStream &in, ClientType &ptr);
+
+QDataStream &operator<<(QDataStream &out, const ArtikelType &ptr);
+QDataStream &operator>>(QDataStream &in, ArtikelType &ptr);
+
+
 
 #endif // DATABASEMANAGEMENT_H

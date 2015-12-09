@@ -13,28 +13,36 @@ Klant::~Klant(){
 }
 
 // getters
-QString Klant::getNaam(void){
+const QString Klant::getNaam(void) const {
     return _Naam;
 }
 
-Adres Klant::getAdres(void){
+const Adres Klant::getAdres(void) const {
     return _Adres;
 }
 
-double Klant::getSetKorting(void){
+const double Klant::getSetKorting(void) const {
     return _Setkorting;
 }
 
-bool Klant::getBedrijf(void){
+const bool Klant::getBedrijf(void) const {
     return _Bedrijf;
 }
 
-double Klant::getSetkorting2(void){
+const double Klant::getSetkorting2(void) const {
     return _Setkorting2;
 }
 
-int Klant::getClientID(void){
+const int Klant::getClientID(void) const {
     return this->_KlantID;
+}
+
+const bool Klant::getDeleted(void) const{
+    return this->_Verwijderd;
+}
+
+const ClientType Klant::getClientType(void) const{
+    return this->_ClientType;
 }
 
 // setters

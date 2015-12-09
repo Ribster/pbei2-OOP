@@ -12,11 +12,11 @@ Factuur::~Factuur(){
 }
 
 // getters
-int Factuur::getFactuurnummer(void){
+const int Factuur::getFactuurnummer(void) const {
     return _Factuurnummer;
 }
 
-Klant* Factuur::getKlant(void){
+const Klant* Factuur::getKlant(void) const {
     return _Klant;
 }
 
@@ -24,11 +24,11 @@ QVector<Artikel*> Factuur::getArtikels(void){
     return _Artikels;
 }
 
-double Factuur::getTotaalprijs(void){
+const double Factuur::getTotaalprijs(void) const {
     return _Totaalprijs;
 }
 
-double Factuur::getKorting(void){
+const double Factuur::getKorting(void) const {
     return _Korting;
 }
 

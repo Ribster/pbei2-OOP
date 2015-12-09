@@ -18,6 +18,7 @@ class Bandencentrale final
 {
 public:
     // ctor
+    Bandencentrale();
     Bandencentrale(Adres adr, QString naam, int clientID = 0, int workshopID = 0);
     // dtor
     virtual ~Bandencentrale();
@@ -44,7 +45,7 @@ public:
 
     // SETTERS
     void setNaam(QString);
-    void setAdres(Adres);
+    void setAdres(Adres&);
     void setKlanten(QList<Klant*>);
     void setArtikels(QList<Artikel*>);
 

@@ -1,7 +1,8 @@
 #include "artikel.h"
 
 // ctor
-Artikel::Artikel()
+Artikel::Artikel(QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal):
+    _Naam(naam), _Fabrikant(fabrikant), _Prijs(prijs), _Diameter(diameter), _Type(type), _Aantal(aantal)
 {
 
 }
@@ -13,27 +14,27 @@ Artikel::~Artikel(){
 }
 
 // getters
-QString Artikel::getNaam(void){
+const QString Artikel::getNaam(void) const {
     return this->_Naam;
 }
 
-QString Artikel::getFabrikant(void){
+const QString Artikel::getFabrikant(void) const {
     return this->_Fabrikant;
 }
 
-double Artikel::getPrijs(void){
+const double Artikel::getPrijs(void) const {
     return this->_Prijs;
 }
 
-double Artikel::getDiameter(void){
+const double Artikel::getDiameter(void) const {
     return this->_Diameter;
 }
 
-ArtikelType Artikel::getType(void){
+const ArtikelType Artikel::getType(void) const {
     return this->_Type;
 }
 
-int Artikel::getAantal(void){
+const int Artikel::getAantal(void) const {
     return this->_Aantal;
 }
 

@@ -14,7 +14,7 @@ CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefau
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 DEFINES       = -DQT_NO_DEBUG -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -Wno-c++11-extensions -Wno-ignored-qualifiers -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -Wno-c++11-extensions -Wno-return-type -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
 INCPATH       = -I../QtC0010-Bandencentrale -I. -I/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers -I. -I/Developer/Qt5.5.0/5.5/clang_64/mkspecs/macx-clang -F/Developer/Qt5.5.0/5.5/clang_64/lib
 QMAKE         = /Developer/Qt5.5.0/5.5/clang_64/bin/qmake
 DEL_FILE      = rm -f
@@ -196,7 +196,6 @@ DIST          = /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/sdk.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/default_post.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/objective_c.prf \
-		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/exceptions.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/warn_on.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/qt.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/resources.prf \
@@ -204,6 +203,7 @@ DIST          = /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/unix/thread.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/rez.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/testcase_targets.prf \
+		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/exceptions.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/yacc.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/lex.prf \
 		../QtC0010-Bandencentrale/QtC0010-Bandencentrale.pro ../QtC0010-Bandencentrale/bandencentrale.h \
@@ -394,7 +394,6 @@ Makefile: ../QtC0010-Bandencentrale/QtC0010-Bandencentrale.pro /Developer/Qt5.5.
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/sdk.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/default_post.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/objective_c.prf \
-		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/exceptions.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/warn_on.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/qt.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/resources.prf \
@@ -402,6 +401,7 @@ Makefile: ../QtC0010-Bandencentrale/QtC0010-Bandencentrale.pro /Developer/Qt5.5.
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/unix/thread.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/rez.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/testcase_targets.prf \
+		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/exceptions.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/yacc.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/lex.prf \
 		../QtC0010-Bandencentrale/QtC0010-Bandencentrale.pro \
@@ -534,7 +534,6 @@ Makefile: ../QtC0010-Bandencentrale/QtC0010-Bandencentrale.pro /Developer/Qt5.5.
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/sdk.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/default_post.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/objective_c.prf:
-/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/exceptions.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/warn_on.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/qt.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/resources.prf:
@@ -542,6 +541,7 @@ Makefile: ../QtC0010-Bandencentrale/QtC0010-Bandencentrale.pro /Developer/Qt5.5.
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/unix/thread.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/rez.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/testcase_targets.prf:
+/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/exceptions.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/yacc.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/lex.prf:
 ../QtC0010-Bandencentrale/QtC0010-Bandencentrale.pro:

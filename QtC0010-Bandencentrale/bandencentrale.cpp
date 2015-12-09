@@ -4,11 +4,14 @@
 
 using namespace std;
 
+Bandencentrale::Bandencentrale(){
+    // default constructor
+}
+
 Bandencentrale::Bandencentrale(Adres adr, QString naam, int clientID, int workshopID):
     _Adres(adr), _Naam(naam), _maxClientID(clientID), _tireWorkshopID(workshopID)
 {
-    _Klanten.clear();
-    _Artikels.clear();
+
 }
 
 Bandencentrale::~Bandencentrale(){
@@ -49,7 +52,7 @@ void Bandencentrale::setNaam(QString newVal){
     this->_Naam = newVal;
 }
 
-void Bandencentrale::setAdres(Adres newVal){
+void Bandencentrale::setAdres(Adres &newVal){
     this->_Adres = newVal;
 }
 

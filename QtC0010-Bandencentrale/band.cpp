@@ -12,19 +12,19 @@ Band::~Band(){
 }
 
 // getters
-double Band::getBreedte(void){
+const double Band::getBreedte(void) const {
     return _Breedte;
 }
 
-double Band::getHoogte(void){
+const double Band::getHoogte(void) const {
     return _Hoogte;
 }
 
-char Band::getSnelheidsindex(void){
+const char Band::getSnelheidsindex(void) const {
     return _Snelheidsindex;
 }
 
-Seizoen Band::getSeizoen(void){
+const Seizoen Band::getSeizoen(void) const {
     return _Seizoen;
 }
 

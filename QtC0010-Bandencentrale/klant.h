@@ -17,18 +17,32 @@ public:
     virtual ~Klant();
 
     // getters
-    QString getNaam(void);
-    Adres getAdres(void);
-    double getSetKorting(void);
-    bool getBedrijf(void);
-    double getSetkorting2(void);
+    const QString getNaam(void) const;
+    const Adres getAdres(void) const;
+    const double getSetKorting(void) const;
+    const bool getBedrijf(void) const;
+    const double getSetkorting2(void) const;
 
     /**
      * @brief  Getting the unique client identifier; Initialized to zero.
      * @param  None
      * @retval int      Client identification, if zero, uninitialized
      */
-    int getClientID(void);
+    const int getClientID(void) const;
+
+    /**
+     * @brief  Getting the deleted flag
+     * @param  None
+     * @retval bool     Wether the client is deleted or not
+     */
+    const bool getDeleted(void) const;
+
+    /**
+     * @brief  Getting the client type
+     * @param  None
+     * @retval ClientType   The type of client
+     */
+    const ClientType getClientType(void) const;
 
     // setters
     void setNaam(QString);
@@ -61,12 +75,12 @@ public:
 protected:
     QString _Naam;
     Adres _Adres;
-    double _Setkorting;
-    double _Setkorting2;
-    bool _Bedrijf;
-    bool _Verwijderd;
-    ClientType _ClientType;
-    int _KlantID;
+    double _Setkorting = 0.0;
+    double _Setkorting2 = 0.0;
+    bool _Bedrijf = false;
+    bool _Verwijderd = false;
+    ClientType _ClientType = ClientType_Personal;
+    int _KlantID = 0;
 };
 
 #endif // KLANT_H
