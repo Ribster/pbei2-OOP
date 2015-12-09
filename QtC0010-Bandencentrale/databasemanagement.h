@@ -133,6 +133,20 @@ private:
     static QString getBandencentraleFoldernameArtikels(Bandencentrale*);
 
     /**
+     * @brief  Get the folder name of bandencentrale Articles
+     * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @retval QString          Folder name for the Bandencentrale object
+     */
+    static QString getBandencentraleFilenameArtikelsBand(Bandencentrale*, Band*);
+
+    /**
+     * @brief  Get the folder name of bandencentrale Articles
+     * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @retval QString          Folder name for the Bandencentrale object
+     */
+    static QString getBandencentraleFilenameArtikelsVelg(Bandencentrale*, Velg*);
+
+    /**
      * @brief  Get the folder name of bandencentrale Invoices
      * @param  Bandencentrale*  Ptr to the bandencentrale object
      * @retval QString          Folder name for the Bandencentrale object

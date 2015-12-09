@@ -14,7 +14,7 @@ CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefau
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 DEFINES       = -DQT_NO_DEBUG -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -Wno-c++11-extensions -Wno-return-type -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -Wno-c++11-extensions -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
 INCPATH       = -I../QtC0010-Bandencentrale -I. -I/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers -I. -I/Developer/Qt5.5.0/5.5/clang_64/mkspecs/macx-clang -F/Developer/Qt5.5.0/5.5/clang_64/lib
 QMAKE         = /Developer/Qt5.5.0/5.5/clang_64/bin/qmake
 DEL_FILE      = rm -f
@@ -762,6 +762,7 @@ moc_BCapplication.cpp: /Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Head
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		../QtC0010-Bandencentrale/artikel.h \
 		../QtC0010-Bandencentrale/band.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QChar \
 		../QtC0010-Bandencentrale/bandencentrale.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QList \
 		../QtC0010-Bandencentrale/klant.h \
@@ -963,6 +964,7 @@ main.o: ../QtC0010-Bandencentrale/main.cpp /Developer/Qt5.5.0/5.5/clang_64/lib/Q
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtcoreversion.h \
 		../QtC0010-Bandencentrale/artikel.h \
 		../QtC0010-Bandencentrale/band.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QChar \
 		../QtC0010-Bandencentrale/bandencentrale.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QList \
 		../QtC0010-Bandencentrale/klant.h \
@@ -989,6 +991,8 @@ bandencentrale.o: ../QtC0010-Bandencentrale/bandencentrale.cpp ../QtC0010-Banden
 		../QtC0010-Bandencentrale/bedrijfsklant.h \
 		../QtC0010-Bandencentrale/velg.h \
 		../QtC0010-Bandencentrale/band.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QChar \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qchar.h \
 		../QtC0010-Bandencentrale/factuur.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bandencentrale.o ../QtC0010-Bandencentrale/bandencentrale.cpp
 
@@ -1047,6 +1051,8 @@ bedrijfsklant.o: ../QtC0010-Bandencentrale/bedrijfsklant.cpp ../QtC0010-Bandence
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bedrijfsklant.o ../QtC0010-Bandencentrale/bedrijfsklant.cpp
 
 band.o: ../QtC0010-Bandencentrale/band.cpp ../QtC0010-Bandencentrale/band.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QChar \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qchar.h \
 		../QtC0010-Bandencentrale/artikel.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QString \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1066,6 +1072,8 @@ databasemanagement.o: ../QtC0010-Bandencentrale/databasemanagement.cpp ../QtC001
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QChar \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qchar.h \
 		../QtC0010-Bandencentrale/klant.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
@@ -1253,6 +1261,7 @@ BCapplication.o: ../QtC0010-Bandencentrale/BCapplication.cpp ../QtC0010-Bandence
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		../QtC0010-Bandencentrale/artikel.h \
 		../QtC0010-Bandencentrale/band.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QChar \
 		../QtC0010-Bandencentrale/bandencentrale.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QList \
 		../QtC0010-Bandencentrale/klant.h \

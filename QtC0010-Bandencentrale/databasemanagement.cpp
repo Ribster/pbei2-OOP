@@ -93,7 +93,9 @@ Bandencentrale* DatabaseManagement::readTirecompanyObject(int id){
 }
 
 bool DatabaseManagement::writeTirecompanyObjectClients(Bandencentrale* ptr){
-
+    // run over each client
+    // determine if it is a company or personal client
+    // push it out
 }
 
 bool DatabaseManagement::writeTirecompanyObjectItems(Bandencentrale* ptr){
@@ -147,6 +149,14 @@ QString DatabaseManagement::getBandencentraleFoldernameKlantenCorporate(Bandence
 
 QString DatabaseManagement::getBandencentraleFoldernameArtikels(Bandencentrale* ptr){
     return getBandencentraleFoldername(ptr) + "/" + globals_bandencentrale_foldername_Articles;
+}
+
+QString DatabaseManagement::getBandencentraleFilenameArtikelsBand(Bandencentrale* centr, Band* ptr){
+    return getBandencentraleFoldername(centr) + "/" + globals_bandencentrale_foldername_Articles + "/" + QString::number(ptr->getArtikelID()) + globals_bandencentrale_foldername_Articles_Band + globals_bandencentrale_fileExtension;
+}
+
+QString DatabaseManagement::getBandencentraleFilenameArtikelsVelg(Bandencentrale* centr, Velg* ptr){
+    return getBandencentraleFoldername(centr) + "/" + globals_bandencentrale_foldername_Articles + "/" + QString::number(ptr->getArtikelID()) + globals_bandencentrale_foldername_Articles_Velg + globals_bandencentrale_fileExtension;
 }
 
 QString DatabaseManagement::getBandencentraleFoldernameFacturen(Bandencentrale* ptr){
@@ -239,7 +249,8 @@ QDataStream &operator>>(QDataStream &in, Bedrijfsklant &ptr){
 }
 
 QDataStream &operator<<(QDataStream &out, const Artikel &ptr){
-    out << ptr.getNaam() << ptr.getFabrikant() << ptr.getPrijs() << ptr.getDiameter() << ptr.getType() << ptr.getAantal();
+    out << ptr.getNaam() << ptr.getFabrikant() << ptr.getPrijs()
+        << ptr.getDiameter() << ptr.getType() << ptr.getAantal() << ptr.getArtikelID();
     return out;
 }
 
@@ -250,14 +261,16 @@ QDataStream &operator>>(QDataStream &in, Artikel &ptr){
     double Diameter;
     ArtikelType Type;
     int Aantal;
-    in >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal;
-    ptr = Artikel(Naam, Fabrikant, Prijs, Diameter, Type, Aantal);
+    int artikelID;
+    in >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal >> artikelID;
+    ptr = Artikel(Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID);
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const Velg &ptr){
     out << ptr.getBreedte() << ptr.getKleur() << ptr.getAluminium() << ptr.getNaam() << ptr.getFabrikant()
-        << ptr.getPrijs() << ptr.getDiameter() << ptr.getType() << ptr.getAantal();
+        << ptr.getPrijs() << ptr.getDiameter() << ptr.getType()
+        << ptr.getAantal() << ptr.getArtikelID();
     return out;
 }
 
@@ -271,16 +284,17 @@ QDataStream &operator>>(QDataStream &in, Velg &ptr){
     double Diameter;
     ArtikelType Type;
     int Aantal;
+    int artikelID;
 
-    in >> Breedte >> Kleur >> Aluminium >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal;
-    ptr = Velg(Breedte, Kleur, Aluminium, Naam, Fabrikant, Prijs, Diameter, Type, Aantal);
+    in >> Breedte >> Kleur >> Aluminium >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal >> artikelID;
+    ptr = Velg(Breedte, Kleur, Aluminium, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID);
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const Band &ptr){
     out << ptr.getBreedte() << ptr.getHoogte() << ptr.getSnelheidsindex() << ptr.getSeizoen()
         << ptr.getNaam() << ptr.getFabrikant() << ptr.getPrijs() << ptr.getDiameter() << ptr.getType()
-        << ptr.getAantal();
+        << ptr.getAantal() << ptr.getArtikelID();
     return out;
 }
 
@@ -295,10 +309,11 @@ QDataStream &operator>>(QDataStream &in, Band &ptr){
     double Diameter;
     ArtikelType Type;
     int Aantal;
+    int artikelID;
 
     in >> Breedte >> Hoogte >> Snelheidsindex >> seizoen >> Naam >> Fabrikant >> Prijs >> Diameter
-            >> Type >> Aantal;
-    ptr = Band(Breedte, Hoogte, Snelheidsindex, seizoen, Naam, Fabrikant, Prijs, Diameter, Type, Aantal);
+            >> Type >> Aantal >> artikelID;
+    ptr = Band(Breedte, Hoogte, Snelheidsindex, seizoen, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID);
     return in;
 }
 

@@ -9,17 +9,18 @@ class Artikel
 {
 public:
     // ctor
-    Artikel(QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal);
+    Artikel(QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal, int artikelID);
     // dtor
     virtual ~Artikel();
 
     // getters
-    virtual const QString getNaam(void) const;
-    virtual const QString getFabrikant(void) const;
-    virtual const double getPrijs(void) const;
-    virtual const double getDiameter(void) const;
-    virtual const ArtikelType getType(void) const;
-    virtual const int getAantal(void) const;
+    virtual QString getNaam(void) const;
+    virtual QString getFabrikant(void) const;
+    virtual double getPrijs(void) const;
+    virtual double getDiameter(void) const;
+    virtual ArtikelType getType(void) const;
+    virtual int getAantal(void) const;
+    virtual int getArtikelID(void) const;
 
     // setters
     virtual void setNaam(QString);
@@ -28,6 +29,7 @@ public:
     virtual void setDiameter(double);
     virtual void setType(ArtikelType);
     virtual void setAantal(int);
+    virtual void setArtikelID(int);
 
 protected:
     QString _Naam;
@@ -36,6 +38,7 @@ protected:
     double _Diameter;
     ArtikelType _Type;
     int _Aantal;
+    int _ArtikelID;
 };
 
 #endif // ARTIKEL_H

@@ -122,6 +122,8 @@ const QString globals_selectionFeedbackSecond = "]\t";
 
 const QString globals_bandencentrale_foldername = "-Bandencentrale";
 const QString globals_bandencentrale_foldername_Articles = "Items";
+const QString globals_bandencentrale_foldername_Articles_Band = "-Band";
+const QString globals_bandencentrale_foldername_Articles_Velg = "-Velg";
 const QString globals_bandencentrale_foldername_ClientsCorporate = "Clients/Corporate";
 const QString globals_bandencentrale_foldername_ClientsPersonal = "Clients/Personal";
 const QString globals_bandencentrale_foldername_Invoices = "Invoices";

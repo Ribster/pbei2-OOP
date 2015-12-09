@@ -13,19 +13,19 @@ Bedrijfsklant::~Bedrijfsklant(){
 }
 
 // getters
-const QString Bedrijfsklant::getBTWnummer(void) const {
+QString Bedrijfsklant::getBTWnummer(void) const {
     return _BTWnummer;
 }
 
-const bool Bedrijfsklant::getVolumekorting(void) const {
+bool Bedrijfsklant::getVolumekorting(void) const {
     return _Volumekorting;
 }
 
-const bool Bedrijfsklant::getBedrijfskorting(void) const {
+bool Bedrijfsklant::getBedrijfskorting(void) const {
     return _Bedrijfskorting;
 }
 
-const bool Bedrijfsklant::getVerwijderd(void) const {
+bool Bedrijfsklant::getVerwijderd(void) const {
     return _Verwijderd;
 }
 

@@ -9,7 +9,7 @@ Bandencentrale::Bandencentrale(){
 }
 
 Bandencentrale::Bandencentrale(Adres adr, QString naam, int clientID, int workshopID):
-    _Adres(adr), _Naam(naam), _maxClientID(clientID), _tireWorkshopID(workshopID)
+    _Naam(naam), _Adres(adr), _maxClientID(clientID), _tireWorkshopID(workshopID)
 {
 
 }
@@ -23,11 +23,11 @@ Bandencentrale::~Bandencentrale(){
 }
 
 // getters
-const QString Bandencentrale::getNaam(void) const {
+QString Bandencentrale::getNaam(void) const {
     return this->_Naam;
 }
 
-const Adres Bandencentrale::getAdres(void) const {
+Adres Bandencentrale::getAdres(void) const {
     return this->_Adres;
 }
 
@@ -39,11 +39,11 @@ QList<Artikel*> Bandencentrale::getArtikels(void){
     return this->_Artikels;
 }
 
-const int Bandencentrale::getWorkshopID(void) const {
+int Bandencentrale::getWorkshopID(void) const {
     return this->_tireWorkshopID;
 }
 
-const int Bandencentrale::getClientID(void) const {
+int Bandencentrale::getClientID(void) const {
     return this->_maxClientID;
 }
 

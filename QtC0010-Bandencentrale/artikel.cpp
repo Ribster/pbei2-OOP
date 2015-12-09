@@ -1,8 +1,8 @@
 #include "artikel.h"
 
 // ctor
-Artikel::Artikel(QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal):
-    _Naam(naam), _Fabrikant(fabrikant), _Prijs(prijs), _Diameter(diameter), _Type(type), _Aantal(aantal)
+Artikel::Artikel(QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal, int artikelID):
+    _Naam(naam), _Fabrikant(fabrikant), _Prijs(prijs), _Diameter(diameter), _Type(type), _Aantal(aantal), _ArtikelID(artikelID)
 {
 
 }
@@ -14,28 +14,31 @@ Artikel::~Artikel(){
 }
 
 // getters
-const QString Artikel::getNaam(void) const {
+QString Artikel::getNaam(void) const {
     return this->_Naam;
 }
 
-const QString Artikel::getFabrikant(void) const {
+QString Artikel::getFabrikant(void) const {
     return this->_Fabrikant;
 }
 
-const double Artikel::getPrijs(void) const {
+double Artikel::getPrijs(void) const {
     return this->_Prijs;
 }
 
-const double Artikel::getDiameter(void) const {
+double Artikel::getDiameter(void) const {
     return this->_Diameter;
 }
 
-const ArtikelType Artikel::getType(void) const {
+ArtikelType Artikel::getType(void) const {
     return this->_Type;
 }
 
-const int Artikel::getAantal(void) const {
+int Artikel::getAantal(void) const {
     return this->_Aantal;
+}
+int Artikel::getArtikelID(void) const{
+    return this->_ArtikelID;
 }
 
 // setters
@@ -61,4 +64,7 @@ void Artikel::setType(ArtikelType newVal){
 
 void Artikel::setAantal(int newVal){
     this->_Aantal = newVal;
+}
+void Artikel::setArtikelID(int newVal){
+    this->_ArtikelID = newVal;
 }

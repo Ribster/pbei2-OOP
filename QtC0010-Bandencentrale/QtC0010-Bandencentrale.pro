@@ -8,7 +8,7 @@ QT       += core
 
 QT       -= gui
 
-QMAKE_CXXFLAGS += -Wno-c++11-extensions -Wno-return-type
+QMAKE_CXXFLAGS += -Wno-c++11-extensions
 QMAKE_LFLAGS += -v
 
 TARGET    = TireCompany

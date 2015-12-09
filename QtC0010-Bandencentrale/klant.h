@@ -17,32 +17,32 @@ public:
     virtual ~Klant();
 
     // getters
-    const QString getNaam(void) const;
-    const Adres getAdres(void) const;
-    const double getSetKorting(void) const;
-    const bool getBedrijf(void) const;
-    const double getSetkorting2(void) const;
+    QString getNaam(void) const;
+    Adres getAdres(void) const;
+    double getSetKorting(void) const;
+    bool getBedrijf(void) const;
+    double getSetkorting2(void) const;
 
     /**
      * @brief  Getting the unique client identifier; Initialized to zero.
      * @param  None
      * @retval int      Client identification, if zero, uninitialized
      */
-    const int getClientID(void) const;
+    int getClientID(void) const;
 
     /**
      * @brief  Getting the deleted flag
      * @param  None
      * @retval bool     Wether the client is deleted or not
      */
-    const bool getDeleted(void) const;
+    bool getDeleted(void) const;
 
     /**
      * @brief  Getting the client type
      * @param  None
      * @retval ClientType   The type of client
      */
-    const ClientType getClientType(void) const;
+    ClientType getClientType(void) const;
 
     // setters
     void setNaam(QString);

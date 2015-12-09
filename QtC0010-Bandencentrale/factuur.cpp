@@ -13,23 +13,23 @@ Factuur::~Factuur(){
 }
 
 // getters
-const int Factuur::getFactuurnummer(void) const {
+int Factuur::getFactuurnummer(void) const {
     return _Factuurnummer;
 }
 
-const int Factuur::getKlant(void) const {
+int Factuur::getKlant(void) const {
     return _Klant;
 }
 
-const QMap<int, int> Factuur::getArtikels(void) const{
+QMap<int, int> Factuur::getArtikels(void) const{
     return _ArtikelCount;
 }
 
-const double Factuur::getTotaalprijs(void) const {
+double Factuur::getTotaalprijs(void) const {
     return _Totaalprijs;
 }
 
-const double Factuur::getKorting(void) const {
+double Factuur::getKorting(void) const {
     return _Korting;
 }
 

@@ -24,8 +24,8 @@ public:
     virtual ~Bandencentrale();
 
     // GETTERS
-    const QString getNaam(void) const;
-    const Adres getAdres(void) const;
+    QString getNaam(void) const;
+    Adres getAdres(void) const;
     QList<Klant*> getKlanten(void);
     QList<Artikel*> getArtikels(void);
 
@@ -34,14 +34,14 @@ public:
      * @param  None
      * @retval int      Return the ID of the workshop
      */
-    const int getWorkshopID(void) const;
+    int getWorkshopID(void) const;
 
     /**
      * @brief  Get the client Identifier
      * @param  None
      * @retval int      Return the ID of the client
      */
-    const int getClientID(void) const;
+    int getClientID(void) const;
 
     // SETTERS
     void setNaam(QString);

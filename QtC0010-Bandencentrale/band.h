@@ -10,15 +10,15 @@ class Band final : public Artikel
 {
 public:
     // ctor
-    Band(double breedte, double hoogte, QChar snelheidsindex, Seizoen seizoen, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal);
+    Band(double breedte, double hoogte, QChar snelheidsindex, Seizoen seizoen, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal, int artikelID);
     // dtor
     virtual ~Band();
 
     // getters
-    const double getBreedte(void) const;
-    const double getHoogte(void) const;
-    const QChar getSnelheidsindex(void) const;
-    const Seizoen getSeizoen(void) const;
+    double getBreedte(void) const;
+    double getHoogte(void) const;
+    QChar getSnelheidsindex(void) const;
+    Seizoen getSeizoen(void) const;
 
     // setters
     void setBreedte(double);

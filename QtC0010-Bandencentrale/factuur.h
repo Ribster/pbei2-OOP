@@ -16,11 +16,11 @@ public:
     virtual ~Factuur();
 
     // getters
-    const int getFactuurnummer(void) const;
-    const int getKlant(void) const;
-    const QMap<int, int> getArtikels(void) const;
-    const double getTotaalprijs(void) const;
-    const double getKorting(void) const;
+    int getFactuurnummer(void) const;
+    int getKlant(void) const;
+    QMap<int, int> getArtikels(void) const;
+    double getTotaalprijs(void) const;
+    double getKorting(void) const;
 
     // setters
     void setFactuurnummer(int);
