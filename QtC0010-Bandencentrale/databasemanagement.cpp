@@ -45,6 +45,17 @@ bool DatabaseManagement::writeTirecompany(Bandencentrale* ptr){
 }
 
 bool DatabaseManagement::writeTirecompanyObject(Bandencentrale* ptr){
+    QString path = getBandencentraleFullPathname(ptr) + "/" + getBandencentraleFoldername(ptr) + globals_bandencentrale_fileExtension;
+    QFile file(path);
+
+    if (file.open(QIODevice::WriteOnly))
+    {
+        QDataStream out(&file);
+        out << *ptr;
+        file.close();
+    }
+
+    return true;
 
 }
 
@@ -102,5 +113,38 @@ QString DatabaseManagement::getBandencentraleFoldernameFacturen(Bandencentrale* 
 }
 
 QString DatabaseManagement::getBandencentraleFullPathname(Bandencentrale* ptr){
-    return getProgramDirectory().path() + "/" + QString::number(ptr->getWorkshopID()) + globals_bandencentrale_foldername;
+    return getProgramDirectory().path() + "/" + getBandencentraleFoldername(ptr);
 }
+
+QDataStream &operator<<(QDataStream &out, const Adres &ptr){
+    out << ptr.gemeente << ptr.land << ptr.postcode << ptr.straatnaam << ptr.straatnummer;
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, Adres &ptr){
+    QString gemeente;
+    QString land;
+    int postcode;
+    QString straatnaam;
+    QString straatnummer;
+    in >> gemeente >> land >> postcode >> straatnaam >> straatnummer;
+    ptr = Adres({straatnaam, straatnummer, postcode, gemeente, land});
+    return in;
+}
+
+QDataStream &operator<<(QDataStream &out, const Bandencentrale &ptr){
+    out << ptr.getAdres() << ptr.getNaam() << ptr.getClientID() << ptr.getWorkshopID();
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, Bandencentrale &ptr){
+    Adres adr;
+    QString naam;
+    int clientID;
+    int workshopID;
+    in >> adr >> naam >> clientID >> workshopID;
+    ptr = Bandencentrale(adr, naam, clientID, workshopID);
+    return in;
+}
+
+

@@ -14,7 +14,7 @@ CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefau
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 DEFINES       = -DQT_NO_DEBUG -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -Wno-c++11-extensions -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -Wno-c++11-extensions -Wno-ignored-qualifiers -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
 INCPATH       = -I../QtC0010-Bandencentrale -I. -I/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers -I. -I/Developer/Qt5.5.0/5.5/clang_64/mkspecs/macx-clang -F/Developer/Qt5.5.0/5.5/clang_64/lib
 QMAKE         = /Developer/Qt5.5.0/5.5/clang_64/bin/qmake
 DEL_FILE      = rm -f
@@ -186,6 +186,7 @@ DIST          = /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/qt_config.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/spec_post.prf \
+		../QtC0010-Bandencentrale/.qmake.stash \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/default_pre.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -383,6 +384,7 @@ Makefile: ../QtC0010-Bandencentrale/QtC0010-Bandencentrale.pro /Developer/Qt5.5.
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/qt_config.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/default_pre.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -522,6 +524,7 @@ Makefile: ../QtC0010-Bandencentrale/QtC0010-Bandencentrale.pro /Developer/Qt5.5.
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/qt_config.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/macx-clang/qmake.conf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/exclusive_builds.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/default_pre.prf:
 /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/mac/default_pre.prf:
@@ -767,6 +770,7 @@ moc_BCapplication.cpp: /Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Head
 		../QtC0010-Bandencentrale/factuur.h \
 		../QtC0010-Bandencentrale/databasemanagement.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDir \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		../QtC0010-Bandencentrale/BCapplication.h
 	/Developer/Qt5.5.0/5.5/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Developer/Qt5.5.0/5.5/clang_64/mkspecs/macx-clang -I/Users/Robbe/GITHUB/pbei2-OOP/QtC0010-Bandencentrale -I/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers -I. -F/Developer/Qt5.5.0/5.5/clang_64/lib ../QtC0010-Bandencentrale/BCapplication.h -o moc_BCapplication.cpp
 
@@ -966,7 +970,8 @@ main.o: ../QtC0010-Bandencentrale/main.cpp /Developer/Qt5.5.0/5.5/clang_64/lib/Q
 		../QtC0010-Bandencentrale/velg.h \
 		../QtC0010-Bandencentrale/factuur.h \
 		../QtC0010-Bandencentrale/databasemanagement.h \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDir
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDir \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDataStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../QtC0010-Bandencentrale/main.cpp
 
 bandencentrale.o: ../QtC0010-Bandencentrale/bandencentrale.cpp ../QtC0010-Bandencentrale/bandencentrale.h \
@@ -1059,6 +1064,8 @@ databasemanagement.o: ../QtC0010-Bandencentrale/databasemanagement.cpp ../QtC001
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdir.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QString \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDataStream \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		../QtC0010-Bandencentrale/klant.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
@@ -1253,7 +1260,8 @@ BCapplication.o: ../QtC0010-Bandencentrale/BCapplication.cpp ../QtC0010-Bandence
 		../QtC0010-Bandencentrale/velg.h \
 		../QtC0010-Bandencentrale/factuur.h \
 		../QtC0010-Bandencentrale/databasemanagement.h \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDir
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDir \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDataStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o BCapplication.o ../QtC0010-Bandencentrale/BCapplication.cpp
 
 moc_BCapplication.o: moc_BCapplication.cpp 

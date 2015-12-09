@@ -4,7 +4,8 @@
 
 using namespace std;
 
-Bandencentrale::Bandencentrale()
+Bandencentrale::Bandencentrale(Adres adr, QString naam, int clientID, int workshopID):
+    _Adres(adr), _Naam(naam), _maxClientID(clientID), _tireWorkshopID(workshopID)
 {
     _Klanten.clear();
     _Artikels.clear();
@@ -19,11 +20,11 @@ Bandencentrale::~Bandencentrale(){
 }
 
 // getters
-QString Bandencentrale::getNaam(void){
+const QString Bandencentrale::getNaam(void) const {
     return this->_Naam;
 }
 
-Adres Bandencentrale::getAdres(void){
+const Adres Bandencentrale::getAdres(void) const {
     return this->_Adres;
 }
 
@@ -35,8 +36,12 @@ QList<Artikel*> Bandencentrale::getArtikels(void){
     return this->_Artikels;
 }
 
-int Bandencentrale::getWorkshopID(void){
+const int Bandencentrale::getWorkshopID(void) const {
     return this->_tireWorkshopID;
+}
+
+const int Bandencentrale::getClientID(void) const {
+    return this->_maxClientID;
 }
 
 // setters
@@ -70,7 +75,6 @@ bool Bandencentrale::addClient(Klant& ptr){
 }
 
 int Bandencentrale::getNewClientID(void){
-    // increment value and return
     return ++this->_maxClientID;
 }
 

@@ -18,13 +18,13 @@ class Bandencentrale final
 {
 public:
     // ctor
-    Bandencentrale();
+    Bandencentrale(Adres adr, QString naam, int clientID = 0, int workshopID = 0);
     // dtor
     virtual ~Bandencentrale();
 
     // GETTERS
-    QString getNaam(void);
-    Adres getAdres(void);
+    const QString getNaam(void) const;
+    const Adres getAdres(void) const;
     QList<Klant*> getKlanten(void);
     QList<Artikel*> getArtikels(void);
 
@@ -33,7 +33,14 @@ public:
      * @param  None
      * @retval int      Return the ID of the workshop
      */
-    int getWorkshopID(void);
+    const int getWorkshopID(void) const;
+
+    /**
+     * @brief  Get the client Identifier
+     * @param  None
+     * @retval int      Return the ID of the client
+     */
+    const int getClientID(void) const;
 
     // SETTERS
     void setNaam(QString);
@@ -72,6 +79,7 @@ public:
     Bedrijfsklant* getBedrijfsklant(Klant*);
 
 private:
+
     QString _Naam;
     Adres _Adres;
     QList<Klant*> _Klanten;

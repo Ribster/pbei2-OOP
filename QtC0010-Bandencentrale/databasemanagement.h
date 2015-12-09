@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QtWidgets/QApplication>
 #include <QString>
+#include <QDataStream>
 
 #include "klant.h"
 #include "artikel.h"
@@ -115,5 +116,11 @@ private:
      */
     static QString getBandencentraleFullPathname(Bandencentrale*);
 };
+
+QDataStream &operator<<(QDataStream &out, const Adres &ptr);
+QDataStream &operator>>(QDataStream &in, Adres &ptr);
+
+QDataStream &operator<<(QDataStream &out, const Bandencentrale &ptr);
+QDataStream &operator>>(QDataStream &in, Bandencentrale &ptr);
 
 #endif // DATABASEMANAGEMENT_H
