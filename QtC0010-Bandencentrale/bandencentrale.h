@@ -12,7 +12,7 @@
 #include "bedrijfsklant.h"
 #include "velg.h"
 #include "band.h"
-
+#include "factuur.h"
 
 class Bandencentrale final
 {
@@ -27,6 +27,13 @@ public:
     Adres getAdres(void);
     QList<Klant*> getKlanten(void);
     QList<Artikel*> getArtikels(void);
+
+    /**
+     * @brief  Get the workshop Identifier
+     * @param  None
+     * @retval int      Return the ID of the workshop
+     */
+    int getWorkshopID(void);
 
     // SETTERS
     void setNaam(QString);
@@ -69,6 +76,7 @@ private:
     Adres _Adres;
     QList<Klant*> _Klanten;
     QList<Artikel*> _Artikels;
+    QList<Factuur*> _Facturen;
     int _maxClientID = 0;
     int _tireWorkshopID = 0;
 };

@@ -1,18 +1,19 @@
+#include <QCoreApplication>
+#include <QObject>
+#include <QTimer>
+
 #include "globals.h"
-#include "application.h"
+#include "BCapplication.h"
 
 int main(int argc, char *argv[])
 {
-    application app(argc, argv);
+    QCoreApplication a(argc, argv);
 
-    // call the user login routine
-    app.userLogin();
+    BCapplication *task = new BCapplication(argc, argv, &a);
 
-    // retrieve the database
-        //app.databaseRetrieve();
+    QObject::connect(task, SIGNAL(finished()), &a, SLOT(quit()));
 
-    // call the selection menu with underlying function calls
-    app.selectionMenu();
+    QTimer::singleShot(0, task, SLOT(run()));
 
-    return 0;
+    return a.exec();
 }

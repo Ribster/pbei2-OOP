@@ -28,7 +28,7 @@ SOURCES += main.cpp \
     bedrijfsklant.cpp \
     band.cpp \
     databasemanagement.cpp \
-    application.cpp
+    BCapplication.cpp
 
 HEADERS += \
     bandencentrale.h \
@@ -40,4 +40,4 @@ HEADERS += \
     band.h \
     globals.h \
     databasemanagement.h \
-    application.h
+    BCapplication.h

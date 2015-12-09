@@ -120,6 +120,7 @@ const QString globals_selectionSecond = "]\t";
 const QString globals_selectionFeedbackFirst = "\t[";
 const QString globals_selectionFeedbackSecond = "]\t";
 
+const QString globals_bandencentrale_foldername = " - Bandencentrale";
 
 #endif // GLOBALS_H
 

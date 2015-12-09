@@ -57,7 +57,7 @@ SOURCES       = ../QtC0010-Bandencentrale/main.cpp \
 		../QtC0010-Bandencentrale/bedrijfsklant.cpp \
 		../QtC0010-Bandencentrale/band.cpp \
 		../QtC0010-Bandencentrale/databasemanagement.cpp \
-		../QtC0010-Bandencentrale/application.cpp 
+		../QtC0010-Bandencentrale/BCapplication.cpp moc_BCapplication.cpp
 OBJECTS       = main.o \
 		bandencentrale.o \
 		klant.o \
@@ -67,7 +67,8 @@ OBJECTS       = main.o \
 		bedrijfsklant.o \
 		band.o \
 		databasemanagement.o \
-		application.o
+		BCapplication.o \
+		moc_BCapplication.o
 DIST          = /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/qdevice.pri \
 		/Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/device_config.prf \
@@ -214,7 +215,7 @@ DIST          = /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		../QtC0010-Bandencentrale/band.h \
 		../QtC0010-Bandencentrale/globals.h \
 		../QtC0010-Bandencentrale/databasemanagement.h \
-		../QtC0010-Bandencentrale/application.h ../QtC0010-Bandencentrale/main.cpp \
+		../QtC0010-Bandencentrale/BCapplication.h ../QtC0010-Bandencentrale/main.cpp \
 		../QtC0010-Bandencentrale/bandencentrale.cpp \
 		../QtC0010-Bandencentrale/klant.cpp \
 		../QtC0010-Bandencentrale/factuur.cpp \
@@ -223,7 +224,7 @@ DIST          = /Developer/Qt5.5.0/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		../QtC0010-Bandencentrale/bedrijfsklant.cpp \
 		../QtC0010-Bandencentrale/band.cpp \
 		../QtC0010-Bandencentrale/databasemanagement.cpp \
-		../QtC0010-Bandencentrale/application.cpp
+		../QtC0010-Bandencentrale/BCapplication.cpp
 QMAKE_TARGET  = QtC0010-Bandencentrale
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = QtC0010-Bandencentrale
@@ -559,8 +560,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../QtC0010-Bandencentrale/bandencentrale.h ../QtC0010-Bandencentrale/klant.h ../QtC0010-Bandencentrale/factuur.h ../QtC0010-Bandencentrale/artikel.h ../QtC0010-Bandencentrale/velg.h ../QtC0010-Bandencentrale/bedrijfsklant.h ../QtC0010-Bandencentrale/band.h ../QtC0010-Bandencentrale/globals.h ../QtC0010-Bandencentrale/databasemanagement.h ../QtC0010-Bandencentrale/application.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../QtC0010-Bandencentrale/main.cpp ../QtC0010-Bandencentrale/bandencentrale.cpp ../QtC0010-Bandencentrale/klant.cpp ../QtC0010-Bandencentrale/factuur.cpp ../QtC0010-Bandencentrale/artikel.cpp ../QtC0010-Bandencentrale/velg.cpp ../QtC0010-Bandencentrale/bedrijfsklant.cpp ../QtC0010-Bandencentrale/band.cpp ../QtC0010-Bandencentrale/databasemanagement.cpp ../QtC0010-Bandencentrale/application.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../QtC0010-Bandencentrale/bandencentrale.h ../QtC0010-Bandencentrale/klant.h ../QtC0010-Bandencentrale/factuur.h ../QtC0010-Bandencentrale/artikel.h ../QtC0010-Bandencentrale/velg.h ../QtC0010-Bandencentrale/bedrijfsklant.h ../QtC0010-Bandencentrale/band.h ../QtC0010-Bandencentrale/globals.h ../QtC0010-Bandencentrale/databasemanagement.h ../QtC0010-Bandencentrale/BCapplication.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../QtC0010-Bandencentrale/main.cpp ../QtC0010-Bandencentrale/bandencentrale.cpp ../QtC0010-Bandencentrale/klant.cpp ../QtC0010-Bandencentrale/factuur.cpp ../QtC0010-Bandencentrale/artikel.cpp ../QtC0010-Bandencentrale/velg.cpp ../QtC0010-Bandencentrale/bedrijfsklant.cpp ../QtC0010-Bandencentrale/band.cpp ../QtC0010-Bandencentrale/databasemanagement.cpp ../QtC0010-Bandencentrale/BCapplication.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -586,8 +587,192 @@ compiler_objective_c_make_all:
 compiler_objective_c_clean:
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_BCapplication.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_BCapplication.cpp
+moc_BCapplication.cpp: /Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QtGlobal \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qglobal.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QtCore \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qanimationgroup.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qparallelanimationgroup.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpauseanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpropertyanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsequentialanimationgroup.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvariantanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcompilerdetection.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qendian.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qflags.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qglobalstatic.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qisenum.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlibraryinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qnamespace.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qnumeric.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qprocessordetection.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsysinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsystemdetection.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtypeinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtypetraits.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdiriterator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfiledevice.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfileinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfileselector.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfilesystemwatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlockfile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qloggingcategory.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qresource.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsavefile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsettings.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstandardpaths.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstorageinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtemporarydir.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtemporaryfile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractproxymodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qidentityproxymodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qitemselectionmodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringlistmodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsonvalue.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstracteventdispatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractnativeeventfilter.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbasictimer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcoreevent.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qeventloop.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmetaobject.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmetatype.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmimedata.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qobjectcleanuphandler.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qobjectdefs.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsharedmemory.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsocketnotifier.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsystemsemaphore.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtranslator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qwineventnotifier.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmimedatabase.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmimetype.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfactoryinterface.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlibrary.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qplugin.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpluginloader.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/quuid.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractstate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstracttransition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qeventtransition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfinalstate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qhistorystate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsignaltransition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstatemachine.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qatomic.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qexception.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfuture.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfutureinterface.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfuturesynchronizer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfuturewatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qgenericatomic.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmutex.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qreadwritelock.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qresultstore.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qrunnable.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsemaphore.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qthreadpool.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qthreadstorage.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qwaitcondition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qalgorithms.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qarraydata.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qarraydataops.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qarraydatapointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbitarray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbytearray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbytearraylist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbytearraymatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcache.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qchar.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcollator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcommandlineoption.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcommandlineparser.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcontainerfwd.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcontiguouscache.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcryptographichash.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qeasingcurve.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qelapsedtimer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qhash.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qiterator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qline.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlinkedlist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlocale.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmargins.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmessageauthenticationcode.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpair.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qqueue.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qrefcount.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qregexp.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qregularexpression.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qscopedpointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qscopedvaluerollback.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qset.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qshareddata.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsharedpointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstack.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringbuilder.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringmatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextboundaryfinder.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtimeline.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtimezone.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvarlengtharray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qxmlstream.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtcoreversion.h \
+		../QtC0010-Bandencentrale/globals.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QString \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../QtC0010-Bandencentrale/artikel.h \
+		../QtC0010-Bandencentrale/band.h \
+		../QtC0010-Bandencentrale/bandencentrale.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QList \
+		../QtC0010-Bandencentrale/klant.h \
+		../QtC0010-Bandencentrale/bedrijfsklant.h \
+		../QtC0010-Bandencentrale/velg.h \
+		../QtC0010-Bandencentrale/factuur.h \
+		../QtC0010-Bandencentrale/databasemanagement.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDir \
+		../QtC0010-Bandencentrale/BCapplication.h
+	/Developer/Qt5.5.0/5.5/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Developer/Qt5.5.0/5.5/clang_64/mkspecs/macx-clang -I/Users/Robbe/GITHUB/pbei2-OOP/QtC0010-Bandencentrale -I/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers -I. -F/Developer/Qt5.5.0/5.5/clang_64/lib ../QtC0010-Bandencentrale/BCapplication.h -o moc_BCapplication.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
 compiler_rez_source_make_all:
@@ -598,32 +783,193 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: 
+compiler_clean: compiler_moc_header_clean 
 
 ####### Compile
 
-main.o: ../QtC0010-Bandencentrale/main.cpp ../QtC0010-Bandencentrale/globals.h \
+main.o: ../QtC0010-Bandencentrale/main.cpp /Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QCoreApplication \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTimer \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../QtC0010-Bandencentrale/globals.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QString \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../QtC0010-Bandencentrale/databasemanagement.h \
-		../QtC0010-Bandencentrale/application.h \
+		../QtC0010-Bandencentrale/BCapplication.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QtGlobal \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qglobal.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QtCore \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qanimationgroup.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qparallelanimationgroup.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpauseanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpropertyanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsequentialanimationgroup.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvariantanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcompilerdetection.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qendian.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qflags.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qglobalstatic.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qisenum.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlibraryinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qnamespace.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qnumeric.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qprocessordetection.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsysinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsystemdetection.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtypeinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtypetraits.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdiriterator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfiledevice.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfileinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfileselector.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfilesystemwatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlockfile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qloggingcategory.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qresource.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsavefile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsettings.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstandardpaths.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstorageinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtemporarydir.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtemporaryfile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractproxymodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qidentityproxymodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qitemselectionmodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringlistmodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsonvalue.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstracteventdispatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractnativeeventfilter.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbasictimer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcoreevent.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qeventloop.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmetaobject.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmetatype.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmimedata.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qobjectcleanuphandler.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qobjectdefs.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsharedmemory.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsocketnotifier.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsystemsemaphore.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtranslator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qwineventnotifier.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmimedatabase.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmimetype.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfactoryinterface.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlibrary.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qplugin.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpluginloader.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/quuid.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractstate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstracttransition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qeventtransition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfinalstate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qhistorystate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsignaltransition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstatemachine.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qatomic.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qexception.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfuture.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfutureinterface.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfuturesynchronizer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfuturewatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qgenericatomic.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmutex.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qreadwritelock.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qresultstore.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qrunnable.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsemaphore.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qthreadpool.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qthreadstorage.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qwaitcondition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qalgorithms.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qarraydata.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qarraydataops.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qarraydatapointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbitarray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbytearray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbytearraylist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbytearraymatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcache.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qchar.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcollator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcommandlineoption.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcommandlineparser.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcontainerfwd.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcontiguouscache.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcryptographichash.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qeasingcurve.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qelapsedtimer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qhash.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qiterator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qline.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlinkedlist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlocale.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmargins.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmessageauthenticationcode.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpair.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qqueue.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qrefcount.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qregexp.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qregularexpression.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qscopedpointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qscopedvaluerollback.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qset.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qshareddata.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsharedpointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstack.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringbuilder.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringmatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextboundaryfinder.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtimeline.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtimezone.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvarlengtharray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qxmlstream.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtcoreversion.h \
 		../QtC0010-Bandencentrale/artikel.h \
 		../QtC0010-Bandencentrale/band.h \
 		../QtC0010-Bandencentrale/bandencentrale.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QList \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
 		../QtC0010-Bandencentrale/klant.h \
 		../QtC0010-Bandencentrale/bedrijfsklant.h \
 		../QtC0010-Bandencentrale/velg.h \
-		../QtC0010-Bandencentrale/factuur.h
+		../QtC0010-Bandencentrale/factuur.h \
+		../QtC0010-Bandencentrale/databasemanagement.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDir
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../QtC0010-Bandencentrale/main.cpp
 
 bandencentrale.o: ../QtC0010-Bandencentrale/bandencentrale.cpp ../QtC0010-Bandencentrale/bandencentrale.h \
@@ -637,11 +983,11 @@ bandencentrale.o: ../QtC0010-Bandencentrale/bandencentrale.cpp ../QtC0010-Banden
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../QtC0010-Bandencentrale/globals.h \
-		../QtC0010-Bandencentrale/databasemanagement.h \
 		../QtC0010-Bandencentrale/artikel.h \
 		../QtC0010-Bandencentrale/bedrijfsklant.h \
 		../QtC0010-Bandencentrale/velg.h \
-		../QtC0010-Bandencentrale/band.h
+		../QtC0010-Bandencentrale/band.h \
+		../QtC0010-Bandencentrale/factuur.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bandencentrale.o ../QtC0010-Bandencentrale/bandencentrale.cpp
 
 klant.o: ../QtC0010-Bandencentrale/klant.cpp ../QtC0010-Bandencentrale/klant.h \
@@ -651,8 +997,7 @@ klant.o: ../QtC0010-Bandencentrale/klant.cpp ../QtC0010-Bandencentrale/klant.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../QtC0010-Bandencentrale/globals.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
-		../QtC0010-Bandencentrale/databasemanagement.h
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o klant.o ../QtC0010-Bandencentrale/klant.cpp
 
 factuur.o: ../QtC0010-Bandencentrale/factuur.cpp ../QtC0010-Bandencentrale/factuur.h \
@@ -664,7 +1009,6 @@ factuur.o: ../QtC0010-Bandencentrale/factuur.cpp ../QtC0010-Bandencentrale/factu
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../QtC0010-Bandencentrale/globals.h \
-		../QtC0010-Bandencentrale/databasemanagement.h \
 		../QtC0010-Bandencentrale/artikel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o factuur.o ../QtC0010-Bandencentrale/factuur.cpp
 
@@ -675,8 +1019,7 @@ artikel.o: ../QtC0010-Bandencentrale/artikel.cpp ../QtC0010-Bandencentrale/artik
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../QtC0010-Bandencentrale/databasemanagement.h
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o artikel.o ../QtC0010-Bandencentrale/artikel.cpp
 
 velg.o: ../QtC0010-Bandencentrale/velg.cpp ../QtC0010-Bandencentrale/velg.h \
@@ -687,8 +1030,7 @@ velg.o: ../QtC0010-Bandencentrale/velg.cpp ../QtC0010-Bandencentrale/velg.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../QtC0010-Bandencentrale/databasemanagement.h
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o velg.o ../QtC0010-Bandencentrale/velg.cpp
 
 bedrijfsklant.o: ../QtC0010-Bandencentrale/bedrijfsklant.cpp ../QtC0010-Bandencentrale/bedrijfsklant.h \
@@ -699,7 +1041,6 @@ bedrijfsklant.o: ../QtC0010-Bandencentrale/bedrijfsklant.cpp ../QtC0010-Bandence
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../QtC0010-Bandencentrale/databasemanagement.h \
 		../QtC0010-Bandencentrale/klant.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bedrijfsklant.o ../QtC0010-Bandencentrale/bedrijfsklant.cpp
 
@@ -711,38 +1052,215 @@ band.o: ../QtC0010-Bandencentrale/band.cpp ../QtC0010-Bandencentrale/band.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../QtC0010-Bandencentrale/databasemanagement.h
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o band.o ../QtC0010-Bandencentrale/band.cpp
 
 databasemanagement.o: ../QtC0010-Bandencentrale/databasemanagement.cpp ../QtC0010-Bandencentrale/databasemanagement.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o databasemanagement.o ../QtC0010-Bandencentrale/databasemanagement.cpp
-
-application.o: ../QtC0010-Bandencentrale/application.cpp ../QtC0010-Bandencentrale/application.h \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QtGlobal \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qglobal.h \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		../QtC0010-Bandencentrale/globals.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDir \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdir.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QString \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
-		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../QtC0010-Bandencentrale/klant.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../QtC0010-Bandencentrale/databasemanagement.h \
+		../QtC0010-Bandencentrale/globals.h \
 		../QtC0010-Bandencentrale/artikel.h \
+		../QtC0010-Bandencentrale/bedrijfsklant.h \
+		../QtC0010-Bandencentrale/velg.h \
 		../QtC0010-Bandencentrale/band.h \
 		../QtC0010-Bandencentrale/bandencentrale.h \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QList \
 		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../QtC0010-Bandencentrale/factuur.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o databasemanagement.o ../QtC0010-Bandencentrale/databasemanagement.cpp
+
+BCapplication.o: ../QtC0010-Bandencentrale/BCapplication.cpp ../QtC0010-Bandencentrale/BCapplication.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QtGlobal \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qglobal.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QtCore \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qanimationgroup.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qparallelanimationgroup.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpauseanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpropertyanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsequentialanimationgroup.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvariantanimation.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcompilerdetection.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qendian.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qflags.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qglobalstatic.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qisenum.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlibraryinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qnamespace.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qnumeric.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qprocessordetection.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsysinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsystemdetection.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtypeinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtypetraits.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdiriterator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfiledevice.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfileinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfileselector.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfilesystemwatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlockfile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qloggingcategory.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qresource.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsavefile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsettings.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstandardpaths.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstorageinfo.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtemporarydir.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtemporaryfile.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractproxymodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qidentityproxymodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qitemselectionmodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringlistmodel.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qjsonvalue.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstracteventdispatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractnativeeventfilter.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbasictimer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcoreevent.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qeventloop.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmetaobject.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmetatype.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmimedata.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qobjectcleanuphandler.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qobjectdefs.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsharedmemory.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsocketnotifier.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsystemsemaphore.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtranslator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qwineventnotifier.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmimedatabase.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmimetype.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfactoryinterface.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlibrary.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qplugin.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpluginloader.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/quuid.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstractstate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qabstracttransition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qeventtransition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfinalstate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qhistorystate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsignaltransition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstate.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstatemachine.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qatomic.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qexception.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfuture.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfutureinterface.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfuturesynchronizer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qfuturewatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qgenericatomic.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmutex.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qreadwritelock.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qresultstore.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qrunnable.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsemaphore.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qthreadpool.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qthreadstorage.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qwaitcondition.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qalgorithms.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qarraydata.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qarraydataops.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qarraydatapointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbitarray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbytearray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbytearraylist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qbytearraymatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcache.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qchar.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcollator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcommandlineoption.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcommandlineparser.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcontainerfwd.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcontiguouscache.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qcryptographichash.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qeasingcurve.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qelapsedtimer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qhash.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qiterator.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qline.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlinkedlist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qlocale.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmargins.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qmessageauthenticationcode.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpair.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qqueue.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qrefcount.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qregexp.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qregularexpression.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qscopedpointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qscopedvaluerollback.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qset.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qshareddata.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsharedpointer.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstack.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringbuilder.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qstringmatcher.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtextboundaryfinder.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtimeline.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtimezone.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvarlengtharray.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qxmlstream.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/qtcoreversion.h \
+		../QtC0010-Bandencentrale/globals.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QString \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../QtC0010-Bandencentrale/artikel.h \
+		../QtC0010-Bandencentrale/band.h \
+		../QtC0010-Bandencentrale/bandencentrale.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QList \
 		../QtC0010-Bandencentrale/klant.h \
 		../QtC0010-Bandencentrale/bedrijfsklant.h \
 		../QtC0010-Bandencentrale/velg.h \
-		../QtC0010-Bandencentrale/factuur.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o application.o ../QtC0010-Bandencentrale/application.cpp
+		../QtC0010-Bandencentrale/factuur.h \
+		../QtC0010-Bandencentrale/databasemanagement.h \
+		/Developer/Qt5.5.0/5.5/clang_64/lib/QtCore.framework/Headers/QDir
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o BCapplication.o ../QtC0010-Bandencentrale/BCapplication.cpp
+
+moc_BCapplication.o: moc_BCapplication.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_BCapplication.o moc_BCapplication.cpp
 
 ####### Install
 

@@ -20,36 +20,40 @@ Bandencentrale::~Bandencentrale(){
 
 // getters
 QString Bandencentrale::getNaam(void){
-    return _Naam;
+    return this->_Naam;
 }
 
 Adres Bandencentrale::getAdres(void){
-    return _Adres;
+    return this->_Adres;
 }
 
 QList<Klant*> Bandencentrale::getKlanten(void){
-    return _Klanten;
+    return this->_Klanten;
 }
 
 QList<Artikel*> Bandencentrale::getArtikels(void){
-    return _Artikels;
+    return this->_Artikels;
+}
+
+int Bandencentrale::getWorkshopID(void){
+    return this->_tireWorkshopID;
 }
 
 // setters
 void Bandencentrale::setNaam(QString newVal){
-    _Naam = newVal;
+    this->_Naam = newVal;
 }
 
 void Bandencentrale::setAdres(Adres newVal){
-    _Adres = newVal;
+    this->_Adres = newVal;
 }
 
 void Bandencentrale::setKlanten(QList<Klant*> newVal){
-    _Klanten = newVal;
+    this->_Klanten = newVal;
 }
 
 void Bandencentrale::setArtikels(QList<Artikel*> newVal){
-    _Artikels = newVal;
+    this->_Artikels = newVal;
 }
 
 bool Bandencentrale::addClient(Klant& ptr){

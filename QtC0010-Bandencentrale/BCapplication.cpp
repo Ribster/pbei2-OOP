@@ -1,9 +1,23 @@
-#include "application.h"
+#include "BCapplication.h"
 
 using namespace std;
 
+// SLOTS
+
+void BCapplication::run(void){
+    userLogin();
+    //databaseRetrieve();
+    selectionMenu();
+
+    emit finished();
+}
+
+// SIGNALS
+
 // ctor
-application::application(int argc, char **argv){
+BCapplication::BCapplication(int argc, char **argv, QObject *parent):
+    QObject(parent)
+{
     QTextStream qtout(stdout);
 
     this->_argc = argc;
@@ -34,12 +48,12 @@ application::application(int argc, char **argv){
 }
 
 // dtor
-application::~application(){
+BCapplication::~BCapplication(){
     // delete bandencentrale
     delete _bandencentrale;
 }
 
-void application::getPtr(void){
+void BCapplication::getPtr(void){
     QTextStream qtout(stdout);
 
     QString ptrStr = QString("0x%1").arg((quintptr)this->_bandencentrale,
@@ -49,7 +63,7 @@ void application::getPtr(void){
 
 // login
 
-void application::userLogin(){
+void BCapplication::userLogin(){
     // temp variables
     int selectvalue = 0;
     QString userlevel;
@@ -81,12 +95,12 @@ void application::userLogin(){
     this->_userlevel = selectvalue;
 }
 
-void application::databaseRetrieve(void){
+void BCapplication::databaseRetrieve(void){
     // get the wole company in a dynamically generated object
     this->_bandencentrale = DatabaseManagement::getTireCompany();
 }
 
-void application::selectionMenu(void){
+void BCapplication::selectionMenu(void){
     // do this while the app is being kept alive
     while(this->_app_alive){
 
@@ -118,12 +132,12 @@ void application::selectionMenu(void){
     }
 }
 
-int application::menumain_querySelection(void){
+int BCapplication::menumain_querySelection(void){
     // push and receive main menu selection
     return generalQueryUserselection(globals_menumain, _menulist_main);
 }
 
-void application::menumain_menulistItemexecution(int menuselection){
+void BCapplication::menumain_menulistItemexecution(int menuselection){
     // check the input values
     if(menuselection < 1) return;
     if(menuselection > _menulist_main.size()) return;
@@ -142,12 +156,12 @@ void application::menumain_menulistItemexecution(int menuselection){
     }
 }
 
-int application::menuarticle_querySelection(void){
+int BCapplication::menuarticle_querySelection(void){
     // push and receive article menu selection
     return generalQueryUserselection(globals_menuarticles, _menulist_articles);
 }
 
-void application::menuarticle_menulistItemexecution(int menuselection){
+void BCapplication::menuarticle_menulistItemexecution(int menuselection){
     // check the input values
     if(menuselection < 1) return;
     if(menuselection > _menulist_articles.size()) return;
@@ -172,12 +186,12 @@ void application::menuarticle_menulistItemexecution(int menuselection){
     }
 }
 
-int application::menuclient_querySelection(void){
+int BCapplication::menuclient_querySelection(void){
     // push and receive client menu selection
     return generalQueryUserselection(globals_menuclients, _menulist_clients);
 }
 
-void application::menuclient_menulistItemexecution(int menuselection){
+void BCapplication::menuclient_menulistItemexecution(int menuselection){
     QTextStream qtout(stdout);
 
     // check the input values
@@ -210,7 +224,7 @@ void application::menuclient_menulistItemexecution(int menuselection){
     }
 }
 
-int application::generalQueryUserselection(QString label, QVector<QString> &stringContainer){
+int BCapplication::generalQueryUserselection(QString label, QVector<QString> &stringContainer){
     // print selection header message
     int selectvalue = 0;
 
@@ -231,30 +245,30 @@ int application::generalQueryUserselection(QString label, QVector<QString> &stri
     return selectvalue;
 }
 
-void application::printHeaderText(QString label, QString text){
+void BCapplication::printHeaderText(QString label, QString text){
     QTextStream qtout(stdout);
     qtout << globals_headerLine << endl;
     qtout << globals_headerFirst << label << globals_headerSecond << text << endl;
 }
 
-void application::printSelectionchoice(QString label, int selection, QString text){
+void BCapplication::printSelectionchoice(QString label, int selection, QString text){
     QTextStream qtout(stdout);
     qtout << label << globals_selectionFirst << selection << globals_selectionSecond << text << endl;
 }
 
-void application::printSelectionfeedback(QString label, int selection, QString text){
+void BCapplication::printSelectionfeedback(QString label, int selection, QString text){
     QTextStream qtout(stdout);
     qtout << globals_selectionFeedbackFirst << label << globals_selectionFeedbackSecond << "Your choice is: " << selection << ", you selected: " << text << endl;
 }
 
-void application::menu_exit(void){
+void BCapplication::menu_exit(void){
     this->_app_alive = false;
     printHeaderText(globals_menuexit, "We are closing the application. Bye bye!");
 }
 
 
 // CLIENTS
-bool application::clients_Add(void){
+bool BCapplication::clients_Add(void){
     QTextStream qtin(stdin);
     QTextStream qtout(stdout);
     QString selectvalue;
@@ -398,7 +412,7 @@ bool application::clients_Add(void){
 }
 
 // ERROR MESSAGE
-bool application::getAuthorized(UserLevel lvlCheck){
+bool BCapplication::getAuthorized(UserLevel lvlCheck){
     if(lvlCheck == UserLevel_Admin && _userlevel == UserLevel_User){
             cout << "You are not authorized to do this. We are sorry." << endl;
             return false;
@@ -408,6 +422,6 @@ bool application::getAuthorized(UserLevel lvlCheck){
 }
 
 // CONVERSION
-Bedrijfsklant* application::getBedrijfsklant(Klant* ptr){
+Bedrijfsklant* BCapplication::getBedrijfsklant(Klant* ptr){
     return dynamic_cast<Bedrijfsklant*>(ptr);
 }

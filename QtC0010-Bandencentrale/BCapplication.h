@@ -4,6 +4,8 @@
 #include <iostream>
 #include <QtGlobal>
 #include <QDebug>
+#include <QObject>
+#include <QtCore>
 
 #include "globals.h"
 
@@ -16,14 +18,28 @@
 #include "velg.h"
 #include "databasemanagement.h"
 
-class application final
+class BCapplication : public QObject
 {
+    Q_OBJECT
 public:
     // ctor
-    application(int argc, char **argv);
+    BCapplication(int argc, char **argv, QObject *parent = 0);
     // dtor
-    ~application();
+    ~BCapplication();
 
+public slots:
+    void run(void);
+
+signals:
+    void finished(void);
+
+public:
+
+    /**
+     * @brief  Print the pointer of a selected variable
+     * @param  None
+     * @retval None
+     */
     void getPtr(void);
 
     /**
