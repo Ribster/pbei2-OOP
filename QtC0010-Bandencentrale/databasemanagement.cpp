@@ -26,8 +26,7 @@ bool DatabaseManagement::writeTirecompany(Bandencentrale* ptr){
     writeTirecompanyObject(ptr);
 
     // write each klanten object
-    checkMakeFolder(getBandencentraleFoldernameKlantenCorporate(ptr));
-    checkMakeFolder(getBandencentraleFoldernameKlantenPersonal(ptr));
+    checkMakeFolder(getBandencentraleFoldernameKlanten(ptr));
     writeTirecompanyObjectClients(ptr);
 
     // write each artikels object
@@ -96,6 +95,22 @@ bool DatabaseManagement::writeTirecompanyObjectClients(Bandencentrale* ptr){
     // run over each client
     // determine if it is a company or personal client
     // push it out
+    QList<Klant*> klantenList = ptr->getKlanten();
+    QList<Klant*>::iterator i;
+    for(i = klantenList.begin(); i != klantenList.end(); i++){
+        Klant* tmp = (*i);
+        if(tmp->getClientType() == ClientType_Business){
+            // it is a business client
+            Bedrijfsklant* tmp2 = dynamic_cast<Bedrijfsklant*>(tmp);
+            QString path = getBandencentraleFilenameKlantenCorporate(ptr, tmp2);
+
+
+        } else if (tmp->getClientType() == ClientType_Personal){
+            // it is a personal client
+            QString path = getBandencentraleFilenameKlantenPersonal(ptr, tmp);
+
+        }
+    }
 }
 
 bool DatabaseManagement::writeTirecompanyObjectItems(Bandencentrale* ptr){
@@ -139,12 +154,16 @@ QString DatabaseManagement::getBandencentraleFoldername(int id){
     return QString::number(id) + globals_bandencentrale_foldername;
 }
 
-QString DatabaseManagement::getBandencentraleFoldernameKlantenPersonal(Bandencentrale* ptr){
-    return getBandencentraleFoldername(ptr) + "/" + globals_bandencentrale_foldername_ClientsPersonal;
+QString DatabaseManagement::getBandencentraleFoldernameKlanten(Bandencentrale* ptr){
+    return getBandencentraleFoldername(ptr) + "/" + globals_bandencentrale_foldername_Clients;
 }
 
-QString DatabaseManagement::getBandencentraleFoldernameKlantenCorporate(Bandencentrale* ptr){
-    return getBandencentraleFoldername(ptr) + "/" + globals_bandencentrale_foldername_ClientsCorporate;
+QString DatabaseManagement::getBandencentraleFilenameKlantenCorporate(Bandencentrale* centr, Bedrijfsklant* ptr){
+
+}
+
+QString DatabaseManagement::getBandencentraleFilenameKlantenPersonal(Bandencentrale* centr, Klant* ptr){
+
 }
 
 QString DatabaseManagement::getBandencentraleFoldernameArtikels(Bandencentrale* ptr){

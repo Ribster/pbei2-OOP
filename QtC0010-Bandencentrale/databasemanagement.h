@@ -116,14 +116,23 @@ private:
      * @param  Bandencentrale*  Ptr to the bandencentrale object
      * @retval QString          Folder name for the Bandencentrale object
      */
-    static QString getBandencentraleFoldernameKlantenPersonal(Bandencentrale*);
+    static QString getBandencentraleFoldernameKlanten(Bandencentrale*);
 
     /**
-     * @brief  Get the folder name of bandencentrale Clients
+     * @brief  Get the file name of bandencentrale corporate Clients
      * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @param  Bedrijfsklant*   Ptr to the Bedrijfsklant
      * @retval QString          Folder name for the Bandencentrale object
      */
-    static QString getBandencentraleFoldernameKlantenCorporate(Bandencentrale*);
+    static QString getBandencentraleFilenameKlantenCorporate(Bandencentrale*, Bedrijfsklant*);
+
+    /**
+     * @brief  Get the file name of bandencentrale personal Clients
+     * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @param  Klant*           Ptr to the klant
+     * @retval QString          Folder name for the Bandencentrale object
+     */
+    static QString getBandencentraleFilenameKlantenPersonal(Bandencentrale*, Klant*);
 
     /**
      * @brief  Get the folder name of bandencentrale Articles
@@ -135,6 +144,7 @@ private:
     /**
      * @brief  Get the folder name of bandencentrale Articles
      * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @param  Band*            Ptr to the band
      * @retval QString          Folder name for the Bandencentrale object
      */
     static QString getBandencentraleFilenameArtikelsBand(Bandencentrale*, Band*);
@@ -142,6 +152,7 @@ private:
     /**
      * @brief  Get the folder name of bandencentrale Articles
      * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @param  Velg*            Ptr to the velg
      * @retval QString          Folder name for the Bandencentrale object
      */
     static QString getBandencentraleFilenameArtikelsVelg(Bandencentrale*, Velg*);

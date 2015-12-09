@@ -124,8 +124,9 @@ const QString globals_bandencentrale_foldername = "-Bandencentrale";
 const QString globals_bandencentrale_foldername_Articles = "Items";
 const QString globals_bandencentrale_foldername_Articles_Band = "-Band";
 const QString globals_bandencentrale_foldername_Articles_Velg = "-Velg";
-const QString globals_bandencentrale_foldername_ClientsCorporate = "Clients/Corporate";
-const QString globals_bandencentrale_foldername_ClientsPersonal = "Clients/Personal";
+const QString globals_bandencentrale_foldername_Clients = "Clients";
+const QString globals_bandencentrale_foldername_Clients_Corporate = "-Corporate";
+const QString globals_bandencentrale_foldername_Clients_Personal = "-Personal";
 const QString globals_bandencentrale_foldername_Invoices = "Invoices";
 
 const QString globals_bandencentrale_fileExtension = ".overload";
