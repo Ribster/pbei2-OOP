@@ -239,7 +239,7 @@ QDataStream &operator>>(QDataStream &in, Bedrijfsklant &ptr){
 }
 
 QDataStream &operator<<(QDataStream &out, const Artikel &ptr){
-    out >> ptr.getNaam() >> ptr.getFabrikant() >> ptr.getPrijs() >> ptr.getDiameter() >> ptr.getType() >> ptr.getAantal();
+    out << ptr.getNaam() << ptr.getFabrikant() << ptr.getPrijs() << ptr.getDiameter() << ptr.getType() << ptr.getAantal();
     return out;
 }
 
@@ -256,22 +256,49 @@ QDataStream &operator>>(QDataStream &in, Artikel &ptr){
 }
 
 QDataStream &operator<<(QDataStream &out, const Velg &ptr){
-
+    out << ptr.getBreedte() << ptr.getKleur() << ptr.getAluminium() << ptr.getNaam() << ptr.getFabrikant()
+        << ptr.getPrijs() << ptr.getDiameter() << ptr.getType() << ptr.getAantal();
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, Velg &ptr){
+    double Breedte;
+    Kleuren Kleur;
+    bool Aluminium;
+    QString Naam;
+    QString Fabrikant;
+    double Prijs;
+    double Diameter;
+    ArtikelType Type;
+    int Aantal;
 
+    in >> Breedte >> Kleur >> Aluminium >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal;
+    ptr = Velg(Breedte, Kleur, Aluminium, Naam, Fabrikant, Prijs, Diameter, Type, Aantal);
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const Band &ptr){
-
+    out << ptr.getBreedte() << ptr.getHoogte() << ptr.getSnelheidsindex() << ptr.getSeizoen()
+        << ptr.getNaam() << ptr.getFabrikant() << ptr.getPrijs() << ptr.getDiameter() << ptr.getType()
+        << ptr.getAantal();
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, Band &ptr){
+    double Breedte;
+    double Hoogte;
+    char Snelheidsindex;
+    Seizoen seizoen;
+    QString Naam;
+    QString Fabrikant;
+    double Prijs;
+    double Diameter;
+    ArtikelType Type;
+    int Aantal;
 
+    in >> Breedte >> Hoogte >> Snelheidsindex >> seizoen >> Naam >> Fabrikant >> Prijs >> Diameter
+            >> Type >> Aantal;
+    ptr = Band(Breedte, Hoogte, Snelheidsindex, seizoen, Naam, Fabrikant, Prijs, Diameter, Type, Aantal);
     return in;
 }
 
@@ -301,6 +328,16 @@ QDataStream &operator<<(QDataStream &out, const ArtikelType &ptr){
 }
 
 QDataStream &operator>>(QDataStream &in, ArtikelType &ptr){
+
+    return in;
+}
+
+QDataStream &operator<<(QDataStream &out, const Kleuren &ptr){
+
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, Kleuren &ptr){
 
     return in;
 }

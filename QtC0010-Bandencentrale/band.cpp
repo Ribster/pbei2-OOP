@@ -1,7 +1,8 @@
 #include "band.h"
 
 // ctor
-Band::Band()
+Band::Band(double breedte, double hoogte, char snelheidsindex, Seizoen seizoen, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal):
+    Artikel(naam, fabrikant, prijs, diameter, type, aantal), _Breedte(breedte), _Hoogte(hoogte), _Snelheidsindex(snelheidsindex), _Seizoen(seizoen)
 {
 
 }

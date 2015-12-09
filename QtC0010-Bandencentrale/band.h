@@ -8,7 +8,7 @@ class Band final : public Artikel
 {
 public:
     // ctor
-    Band();
+    Band(double breedte, double hoogte, char snelheidsindex, Seizoen seizoen, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal);
     // dtor
     virtual ~Band();
 

@@ -183,6 +183,9 @@ QDataStream &operator>>(QDataStream &in, ClientType &ptr);
 QDataStream &operator<<(QDataStream &out, const ArtikelType &ptr);
 QDataStream &operator>>(QDataStream &in, ArtikelType &ptr);
 
+QDataStream &operator<<(QDataStream &out, const Kleuren &ptr);
+QDataStream &operator>>(QDataStream &in, Kleuren &ptr);
+
 
 
 #endif // DATABASEMANAGEMENT_H
