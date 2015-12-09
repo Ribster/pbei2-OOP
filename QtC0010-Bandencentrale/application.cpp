@@ -31,8 +31,6 @@ application::application(int argc, char **argv){
     // fetch bandencentrale from filesystem
     _bandencentrale = new Bandencentrale();
 
-    getPtr();
-
 }
 
 // dtor
@@ -194,8 +192,6 @@ void application::menuclient_menulistItemexecution(int menuselection){
         case MenuList_Clients_List:
             // print clients
             if(getAuthorized(UserLevel_User)){
-                getPtr();
-
                 this->_bandencentrale->printClientList();
             }
             break;
@@ -334,12 +330,6 @@ bool application::clients_Add(void){
 
         // if business
         if(tempclass_business == ClientType_Business){
-            // btw nummer
-            do {
-                qtout << "What is the clients Business TAV number ?" << endl;
-                qtin >> tempclass_btw;
-            } while(tempclass_adres.gemeente.isEmpty());
-
             QString tmp;
             // bedrijfskorting
             qtout << "What is the clients company discount? [%]" << endl;
@@ -351,6 +341,13 @@ bool application::clients_Add(void){
             tmp.clear();
             qtin >> tmp;
             tempclass_volumekorting = tmp.toDouble();
+
+            // btw nummer
+            do {
+                qtout << "What is the clients Business TAV number ?" << endl;
+                qtin >> tempclass_btw;
+            } while(tempclass_adres.gemeente.isEmpty());
+
         }
 
         answered = true;
@@ -383,20 +380,19 @@ bool application::clients_Add(void){
 
 
     // print everything out
-    if ( newKlant->getBedrijf() ){
-        // business
-        getBedrijfsklant(newKlant)->print();
-    } else {
-        // personal client
-        newKlant->print();
-    }
+//        if ( newKlant->getBedrijf() ){
+//            // business
+//            getBedrijfsklant(newKlant)->print();
+//        } else {
+//            // personal client
+//            newKlant->print();
+//        }
 
-    // add client to file system
-    QString ptrStr = QString("0x%1").arg((quintptr)this->_bandencentrale,
-                        QT_POINTER_SIZE * 2, 16, QChar('0'));
-    qtout << "1 bandencentrale ptr: " << ptrStr << endl;
-
+    // add client to the Workshop
     this->_bandencentrale->addClient(*newKlant);
+
+    // save the workshop to file
+    DatabaseManagement::writeTirecompany(_bandencentrale);
 
     return answered;
 }

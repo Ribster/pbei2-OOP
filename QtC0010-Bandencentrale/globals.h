@@ -5,7 +5,6 @@
 #include <QVector>
 #include <QTextStream>
 
-#include "databasemanagement.h"
 
 /**
  * @brief  Address structure

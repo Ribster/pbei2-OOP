@@ -65,15 +65,15 @@ void Klant::setClientID(int newVal){
 void Klant::print(void){
     QTextStream qtout(stdout);
     //this->_ClientType;
-    qtout << "Detailed information about the personal client:" << endl;
-    qtout << "ID: " << this->_KlantID << endl;
-    qtout << "Name: " << this->_Naam << endl;
+    qtout << "\tDetailed information about the personal client:" << endl;
+    qtout << "\tID: " << this->_KlantID << endl;
+    qtout << "\tName: " << this->_Naam << endl;
     this->printAddress(this->_Adres);
 
-    qtout << "Set Discount on a set of 4: " << this->_Setkorting << "[%]" << endl;
-    qtout << "Set Discount on a bulk of 10 sets: " << this->_Setkorting2 << "[%]" << endl;
+    qtout << "\tSet Discount on a set of 4: " << this->_Setkorting << "[%]" << endl;
+    qtout << "\tSet Discount on a bulk of 10 sets: " << this->_Setkorting2 << "[%]" << endl;
 
-    qtout << "Client is deleted: ";
+    qtout << "\tClient is deleted: ";
     if(this->_Verwijderd){
         qtout << "Yes" << endl;
     } else {
@@ -83,9 +83,9 @@ void Klant::print(void){
 
 void Klant::printAddress(Adres& pass){
     QTextStream qtout(stdout);
-    qtout << "Streetname: " << pass.straatnaam << endl;
-    qtout << "Streetnumber: " << pass.straatnummer << endl;
-    qtout << "Town: " << pass.gemeente << endl;
-    qtout << "Postal code: " << pass.postcode << endl;
-    qtout << "Country: " << pass.land << endl;
+    qtout << "\tStreetname: " << pass.straatnaam << endl;
+    qtout << "\tStreetnumber: " << pass.straatnummer << endl;
+    qtout << "\tTown: " << pass.gemeente << endl;
+    qtout << "\tPostal code: " << pass.postcode << endl;
+    qtout << "\tCountry: " << pass.land << endl;
 }

@@ -13,6 +13,7 @@
 #include "velg.h"
 #include "band.h"
 
+
 class Bandencentrale final
 {
 public:
@@ -69,6 +70,7 @@ private:
     QList<Klant*> _Klanten;
     QList<Artikel*> _Artikels;
     int _maxClientID = 0;
+    int _tireWorkshopID = 0;
 };
 
 #endif // BANDENCENTRALE_H

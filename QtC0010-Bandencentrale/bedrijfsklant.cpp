@@ -49,19 +49,19 @@ void Bedrijfsklant::setVerwijderd(bool newVal){
 void Bedrijfsklant::print(void){
     QTextStream qtout(stdout);
     //this->_ClientType;
-    qtout << "Detailed information about the company client:" << endl;
-    qtout << "ID: " << this->_KlantID << endl;
-    qtout << "Name: " << this->_Naam << endl;
+    qtout << "\tDetailed information about the company client:" << endl;
+    qtout << "\tID: " << this->_KlantID << endl;
+    qtout << "\tName: " << this->_Naam << endl;
     this->printAddress(this->_Adres);
 
-    qtout << "TAV number: " << this->_BTWnummer << endl;
+    qtout << "\tTAV number: " << this->_BTWnummer << endl;
 
-    qtout << "Set Discount on a set of 4: " << this->_Setkorting << "%" << endl;
-    qtout << "Set Discount on a bulk of 10 sets: " << this->_Setkorting2 << "%" << endl;
-    qtout << "Volume discount: " << this->_Volumekorting << "%" << endl;
-    qtout << "Company discount: " << this->_Bedrijfskorting << "%" << endl;
+    qtout << "\tSet Discount on a set of 4: " << this->_Setkorting << "%" << endl;
+    qtout << "\tSet Discount on a bulk of 10 sets: " << this->_Setkorting2 << "%" << endl;
+    qtout << "\tVolume discount: " << this->_Volumekorting << "%" << endl;
+    qtout << "\tCompany discount: " << this->_Bedrijfskorting << "%" << endl;
 
-    qtout << "Client is deleted: ";
+    qtout << "\tClient is deleted: ";
     if(this->_Verwijderd){
         qtout << "Yes" << endl;
     } else {

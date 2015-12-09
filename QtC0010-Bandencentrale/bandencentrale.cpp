@@ -1,11 +1,11 @@
 #include "bandencentrale.h"
 
+
+
 using namespace std;
 
 Bandencentrale::Bandencentrale()
 {
-//    cout << "Klanten empty: " << _Klanten.isEmpty() << endl;
-//    cout << "Artikel empty: " << _Artikels.isEmpty() << endl;
     _Klanten.clear();
     _Artikels.clear();
 }
@@ -72,9 +72,6 @@ int Bandencentrale::getNewClientID(void){
 
 void Bandencentrale::printClientList(void){
     QTextStream qtout(stdout);
-    QString ptrStr = QString("0x%1").arg((quintptr)this,
-                        QT_POINTER_SIZE * 2, 16, QChar('0'));
-    qtout << "2 bandencentrale ptr: " << ptrStr << endl;
 
     // return if vector is empty
     if(this->_Klanten.isEmpty()) return;
@@ -82,14 +79,13 @@ void Bandencentrale::printClientList(void){
     // loop over the Vector
     QList<Klant*>::iterator i;
     for(i = _Klanten.begin(); i != _Klanten.end(); i++){
+        qtout << "\t" << globals_headerLine << endl;
         if((*i)->getBedrijf()){
-            cout << "Bedrijf" << endl;
             // we are dealing with a company
-            //this->getBedrijfsklant((*i))->print();
+            this->getBedrijfsklant((*i))->print();
         } else {
-            cout << "Client" << endl;
             // client
-            //(*i)->print();
+            (*i)->print();
         }
     }
 }
