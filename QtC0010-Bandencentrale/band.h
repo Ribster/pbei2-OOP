@@ -1,6 +1,8 @@
 #ifndef BAND_H
 #define BAND_H
 
+#include <QChar>
+
 #include "artikel.h"
 #include "globals.h"
 
@@ -8,14 +10,14 @@ class Band final : public Artikel
 {
 public:
     // ctor
-    Band(double breedte, double hoogte, char snelheidsindex, Seizoen seizoen, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal);
+    Band(double breedte, double hoogte, QChar snelheidsindex, Seizoen seizoen, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal);
     // dtor
     virtual ~Band();
 
     // getters
     const double getBreedte(void) const;
     const double getHoogte(void) const;
-    const char getSnelheidsindex(void) const;
+    const QChar getSnelheidsindex(void) const;
     const Seizoen getSeizoen(void) const;
 
     // setters
@@ -27,7 +29,7 @@ public:
 private:
     double _Breedte;
     double _Hoogte;
-    char _Snelheidsindex;
+    QChar _Snelheidsindex;
     Seizoen _Seizoen;
 };
 

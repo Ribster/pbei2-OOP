@@ -11,28 +11,28 @@ class Factuur final
 {
 public:
     // ctor
-    Factuur();
+    Factuur(int factuurnummer, int klant, QMap<int, int> artikelcount, double totaalprijs, double korting);
     // dtor
     virtual ~Factuur();
 
     // getters
     const int getFactuurnummer(void) const;
-    const Klant* getKlant(void) const;
-    QVector<Artikel*> getArtikels(void);
+    const int getKlant(void) const;
+    const QMap<int, int> getArtikels(void) const;
     const double getTotaalprijs(void) const;
     const double getKorting(void) const;
 
     // setters
     void setFactuurnummer(int);
-    void setKlant(Klant*);
-    void setArtikels(QVector<Artikel*>);
+    void setKlant(int);
+    void setArtikels(QMap<int,int>);
     void setTotaalprijs(double);
     void setKorting(double);
 
 private:
     int _Factuurnummer;
-    Klant* _Klant;
-    QVector<Artikel*> _Artikels;
+    int _Klant = 0;
+    QMap<int, int> _ArtikelCount;
     double _Totaalprijs;
     double _Korting;
 };

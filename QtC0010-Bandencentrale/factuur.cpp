@@ -1,7 +1,8 @@
 #include "factuur.h"
 
 // ctor
-Factuur::Factuur()
+Factuur::Factuur(int factuurnummer, int klant, QMap<int, int> artikelcount, double totaalprijs, double korting):
+    _Factuurnummer(factuurnummer), _Klant(klant), _ArtikelCount(artikelcount), _Totaalprijs(totaalprijs), _Korting(korting)
 {
 
 }
@@ -16,12 +17,12 @@ const int Factuur::getFactuurnummer(void) const {
     return _Factuurnummer;
 }
 
-const Klant* Factuur::getKlant(void) const {
+const int Factuur::getKlant(void) const {
     return _Klant;
 }
 
-QVector<Artikel*> Factuur::getArtikels(void){
-    return _Artikels;
+const QMap<int, int> Factuur::getArtikels(void) const{
+    return _ArtikelCount;
 }
 
 const double Factuur::getTotaalprijs(void) const {
@@ -37,12 +38,12 @@ void Factuur::setFactuurnummer(int newVal){
     _Factuurnummer = newVal;
 }
 
-void Factuur::setKlant(Klant* newVal){
+void Factuur::setKlant(int newVal){
     _Klant = newVal;
 }
 
-void Factuur::setArtikels(QVector<Artikel*> newVal){
-    _Artikels = newVal;
+void Factuur::setArtikels(QMap<int,int> newVal){
+    _ArtikelCount = newVal;
 }
 
 void Factuur::setTotaalprijs(double newVal){

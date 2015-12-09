@@ -1,7 +1,7 @@
 #include "band.h"
 
 // ctor
-Band::Band(double breedte, double hoogte, char snelheidsindex, Seizoen seizoen, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal):
+Band::Band(double breedte, double hoogte, QChar snelheidsindex, Seizoen seizoen, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal):
     Artikel(naam, fabrikant, prijs, diameter, type, aantal), _Breedte(breedte), _Hoogte(hoogte), _Snelheidsindex(snelheidsindex), _Seizoen(seizoen)
 {
 
@@ -21,7 +21,7 @@ const double Band::getHoogte(void) const {
     return _Hoogte;
 }
 
-const char Band::getSnelheidsindex(void) const {
+const QChar Band::getSnelheidsindex(void) const {
     return _Snelheidsindex;
 }
 

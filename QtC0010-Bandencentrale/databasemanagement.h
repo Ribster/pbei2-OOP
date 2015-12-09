@@ -6,6 +6,7 @@
 #include <QtWidgets/QApplication>
 #include <QString>
 #include <QDataStream>
+#include <QChar>
 
 #include "klant.h"
 #include "artikel.h"
@@ -185,6 +186,9 @@ QDataStream &operator>>(QDataStream &in, ArtikelType &ptr);
 
 QDataStream &operator<<(QDataStream &out, const Kleuren &ptr);
 QDataStream &operator>>(QDataStream &in, Kleuren &ptr);
+
+QDataStream &operator<<(QDataStream &out, const Seizoen &ptr);
+QDataStream &operator>>(QDataStream &in, Seizoen &ptr);
 
 
 

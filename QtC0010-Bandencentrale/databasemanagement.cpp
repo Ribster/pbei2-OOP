@@ -287,7 +287,7 @@ QDataStream &operator<<(QDataStream &out, const Band &ptr){
 QDataStream &operator>>(QDataStream &in, Band &ptr){
     double Breedte;
     double Hoogte;
-    char Snelheidsindex;
+    QChar Snelheidsindex;
     Seizoen seizoen;
     QString Naam;
     QString Fabrikant;
@@ -303,41 +303,57 @@ QDataStream &operator>>(QDataStream &in, Band &ptr){
 }
 
 QDataStream &operator<<(QDataStream &out, const Factuur &ptr){
-
+    out << ptr.getFactuurnummer() << ptr.getKlant() << ptr.getArtikels() << ptr.getTotaalprijs() << ptr.getKorting();
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, Factuur &ptr){
-
+    int Factuurnummer;
+    int Klant = 0;
+    QMap<int, int> ArtikelCount;
+    double Totaalprijs;
+    double Korting;
+    in >> Factuurnummer >> Klant >> ArtikelCount >> Totaalprijs >> Korting;
+    ptr = Factuur(Factuurnummer, Klant, ArtikelCount, Totaalprijs, Korting);
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const ClientType &ptr){
-
+    out << ptr;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, ClientType &ptr){
-
+    in >> ptr;
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const ArtikelType &ptr){
-
+    out << ptr;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, ArtikelType &ptr){
-
+    in >> ptr;
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const Kleuren &ptr){
-
+    out << ptr;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, Kleuren &ptr){
+    in >> ptr;
+    return in;
+}
 
+QDataStream &operator<<(QDataStream &out, const Seizoen &ptr){
+    out << ptr;
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, Seizoen &ptr){
+    in >> ptr;
     return in;
 }
