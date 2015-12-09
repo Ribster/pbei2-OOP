@@ -45,6 +45,7 @@ BCapplication::BCapplication(int argc, char **argv, QObject *parent):
     // fetch bandencentrale from filesystem
     _bandencentrale = new Bandencentrale();
 
+    DatabaseManagement::writeTirecompany(_bandencentrale);
 }
 
 // dtor

@@ -9,8 +9,9 @@ QT       += core
 QT       -= gui
 
 QMAKE_CXXFLAGS += -Wno-c++11-extensions
+QMAKE_LFLAGS += -v
 
-TARGET    = QtC0010-Bandencentrale
+TARGET    = TireCompany
 CONFIG   += console
 CONFIG   += qt warn_on release rtti exceptions
 CONFIG   -= app_bundle

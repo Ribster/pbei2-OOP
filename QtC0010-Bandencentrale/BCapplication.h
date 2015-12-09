@@ -193,7 +193,7 @@ private:
     QVector<QString> _menulist_clients;
     QVector<QString> _menulist_articles;
 
-    Bandencentrale *_bandencentrale;
+    Bandencentrale *_bandencentrale = NULL;
 };
 
 #endif // APPLICATION_H

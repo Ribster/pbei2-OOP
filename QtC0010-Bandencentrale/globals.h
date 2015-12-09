@@ -120,7 +120,12 @@ const QString globals_selectionSecond = "]\t";
 const QString globals_selectionFeedbackFirst = "\t[";
 const QString globals_selectionFeedbackSecond = "]\t";
 
-const QString globals_bandencentrale_foldername = " - Bandencentrale";
+const QString globals_bandencentrale_foldername = "-Bandencentrale";
+const QString globals_bandencentrale_foldername_Articles = "Items";
+const QString globals_bandencentrale_foldername_Clients = "Clients";
+const QString globals_bandencentrale_foldername_Invoices = "Invoices";
+
+const QString globals_bandencentrale_fileExtension = ".overload";
 
 #endif // GLOBALS_H
 

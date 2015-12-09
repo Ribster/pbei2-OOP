@@ -39,6 +39,34 @@ public:
 private:
 
     /**
+     * @brief  Low Level write of the Bandencentrale object.
+     * @param  Bandencentrale   The object that needs to be written
+     * @retval bool             Wether the action was succesfull
+     */
+    static bool writeTirecompanyObject(Bandencentrale*);
+
+    /**
+     * @brief  Low Level write of the Bandencentrale object's Clients
+     * @param  Bandencentrale   The object that needs to be written
+     * @retval bool             Wether the action was succesfull
+     */
+    static bool writeTirecompanyObjectClients(Bandencentrale*);
+
+    /**
+     * @brief  Low Level write of the Bandencentrale object's Items
+     * @param  Bandencentrale   The object that needs to be written
+     * @retval bool             Wether the action was succesfull
+     */
+    static bool writeTirecompanyObjectItems(Bandencentrale*);
+
+    /**
+     * @brief  Low Level write of the Bandencentrale object's Invoices
+     * @param  Bandencentrale   The object that needs to be written
+     * @retval bool             Wether the action was succesfull
+     */
+    static bool writeTirecompanyObjectInvoices(Bandencentrale*);
+
+    /**
      * @brief  Get current program executable directory
      * @param  None
      * @retval QDir     The current directory path
@@ -52,6 +80,40 @@ private:
      */
     static bool checkMakeFolder(QString folder);
 
+    /**
+     * @brief  Get the folder name of bandencentrale
+     * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @retval QString          Folder name for the Bandencentrale object
+     */
+    static QString getBandencentraleFoldername(Bandencentrale*);
+
+    /**
+     * @brief  Get the folder name of bandencentrale Clients
+     * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @retval QString          Folder name for the Bandencentrale object
+     */
+    static QString getBandencentraleFoldernameKlanten(Bandencentrale*);
+
+    /**
+     * @brief  Get the folder name of bandencentrale Articles
+     * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @retval QString          Folder name for the Bandencentrale object
+     */
+    static QString getBandencentraleFoldernameArtikels(Bandencentrale*);
+
+    /**
+     * @brief  Get the folder name of bandencentrale Invoices
+     * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @retval QString          Folder name for the Bandencentrale object
+     */
+    static QString getBandencentraleFoldernameFacturen(Bandencentrale*);
+
+    /**
+     * @brief  Get the path name of bandencentrale
+     * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @retval QString          Path name for the Bandencentrale object
+     */
+    static QString getBandencentraleFullPathname(Bandencentrale*);
 };
 
 #endif // DATABASEMANAGEMENT_H
