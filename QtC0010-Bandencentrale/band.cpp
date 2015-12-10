@@ -45,3 +45,7 @@ void Band::setSnelheidsindex(char newVal){
 void Band::setSeizoen(Seizoen newVal){
     _Seizoen = newVal;
 }
+
+void Band::print(void){
+
+}

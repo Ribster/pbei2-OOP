@@ -180,6 +180,14 @@ private:
     static QString getBandencentraleFilenameArtikelsVelg(Bandencentrale*, Velg*);
 
     /**
+     * @brief  Get the file name of bandencentrale Factuur
+     * @param  Bandencentrale*  Ptr to the bandencentrale object
+     * @param  Factuur*         Ptr to the Invoice
+     * @retval QString          Folder name for the Bandencentrale object
+     */
+    static QString getBandencentraleFilenameFacturen(Bandencentrale*, Factuur*);
+
+    /**
      * @brief  Get the folder name of bandencentrale Invoices
      * @param  Bandencentrale*  Ptr to the bandencentrale object
      * @retval QString          Folder name for the Bandencentrale object
@@ -225,11 +233,17 @@ QDataStream &operator>>(QDataStream &in, Artikel &ptr);
 QDataStream &operator<<(QDataStream &out, const Velg &ptr);
 QDataStream &operator>>(QDataStream &in, Velg &ptr);
 
+QDataStream &operator>>(QDataStream &in, Velg **ptr);
+
 QDataStream &operator<<(QDataStream &out, const Band &ptr);
 QDataStream &operator>>(QDataStream &in, Band &ptr);
 
+QDataStream &operator>>(QDataStream &in, Band **ptr);
+
 QDataStream &operator<<(QDataStream &out, const Factuur &ptr);
 QDataStream &operator>>(QDataStream &in, Factuur &ptr);
+
+QDataStream &operator>>(QDataStream &in, Factuur **ptr);
 
 QDataStream &operator<<(QDataStream &out, const ClientType &ptr);
 QDataStream &operator>>(QDataStream &in, ClientType &ptr);

@@ -29,6 +29,8 @@ public:
     void setTotaalprijs(double);
     void setKorting(double);
 
+    void print(void);
+
 private:
     int _Factuurnummer;
     int _Klant = 0;

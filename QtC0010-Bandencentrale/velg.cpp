@@ -37,3 +37,7 @@ void Velg::setKleur(Kleuren newVal){
 void Velg::setAluminium(bool newVal){
     _Aluminium = newVal;
 }
+
+void Velg::print(void){
+
+}

@@ -100,6 +100,7 @@ Bandencentrale* DatabaseManagement::readTirecompanyObject(int id){
 }
 
 bool DatabaseManagement::writeTirecompanyObjectClients(Bandencentrale* ptr){
+    if(ptr == NULL) return false;
     QTextStream qtout(stdout);
     // run over each client
     // determine if it is a company or personal client
@@ -198,21 +199,124 @@ QList<Klant*> DatabaseManagement::readTirecompanyObjectClients(Bandencentrale* p
 }
 
 bool DatabaseManagement::writeTirecompanyObjectItems(Bandencentrale* ptr){
+    if(ptr == NULL) return false;
+    QTextStream qtout(stdout);
+    QList<Artikel*> artikelLijst = ptr->getArtikels();
 
+    if(!artikelLijst.isEmpty()){
+        QList<Artikel*>::iterator i;
+        for(i = artikelLijst.begin(); i!= artikelLijst.end(); i++){
+            Artikel* tmp = (*i);
+            if(tmp->getType() == ArtikelType_Band){
+                // it is a tire
+                Band* tmp2 = dynamic_cast<Band*>(tmp);
+                QString path = getBandencentraleFilenameArtikelsBand(ptr, tmp2);
+                QFile file(path);
+                if (file.open(QIODevice::WriteOnly)){
+                    QDataStream out(&file);
+                    out << *tmp2;
+                    file.close();
+                }
+            } else if (tmp->getType() == ArtikelType_Velg){
+                // it is a rimm
+                Velg* tmp2 = dynamic_cast<Velg*>(tmp);
+                QString path = getBandencentraleFilenameArtikelsVelg(ptr, tmp2);
+                QFile file(path);
+                if (file.open(QIODevice::WriteOnly)){
+                    QDataStream out(&file);
+                    out << *tmp2;
+                    file.close();
+                }
+            }
+        }
+    }
     return true;
 }
 
-QList<Artikel*> readTirecompanyObjectItems(Bandencentrale* ptr){
+QList<Artikel*> DatabaseManagement::readTirecompanyObjectItems(Bandencentrale* ptr){
+    QTextStream qtout(stdout);
+    QList<Artikel*> returnList;
+    if(ptr == NULL) return returnList;
 
+    QString artikelFolderPath = getProgramDirectory().path() + "/" + getBandencentraleFoldernameArtikels(ptr);
+
+    QDirIterator it(artikelFolderPath, QStringList() << "*"+globals_bandencentrale_fileExtension, QDir::Files, QDirIterator::NoIteratorFlags);
+
+    while(it.hasNext()){
+        it.next();
+        QString filename = it.fileName();
+
+        if(filename.contains(globals_bandencentrale_foldername_Articles_Band)){
+            QFile file(it.filePath());
+            if(file.exists()){
+                if (file.open(QIODevice::ReadOnly)){
+                    QDataStream in(&file);
+                    Band *tmp = NULL;
+                    in >> &tmp;
+                    file.close();
+                    returnList.append(dynamic_cast<Artikel*>(tmp));
+                }
+            }
+        } else if (filename.contains(globals_bandencentrale_foldername_Articles_Velg)){
+            QFile file(it.filePath());
+            if(file.exists()){
+                if (file.open(QIODevice::ReadOnly)){
+                    QDataStream in(&file);
+                    Velg *tmp = NULL;
+                    in >> &tmp;
+                    file.close();
+                    returnList.append(dynamic_cast<Artikel*>(tmp));
+                }
+            }
+        }
+
+    }
+
+    return returnList;
 }
 
 bool DatabaseManagement::writeTirecompanyObjectInvoices(Bandencentrale* ptr){
+    if(ptr == NULL) return false;
+    QTextStream qtout(stdout);
+    QList<Factuur*> factuurlijst = ptr->getFacturen();
 
+    if(!factuurlijst.isEmpty()){
+        QList<Factuur*>::iterator i;
+        for(i = factuurlijst.begin(); i!= factuurlijst.end(); i++){
+            Factuur* tmp = (*i);
+            QString path = getBandencentraleFilenameFacturen(ptr, tmp);
+            QFile file(path);
+            if(file.exists()){
+                if (file.open(QIODevice::WriteOnly)){
+                    QDataStream out(&file);
+                    out << *tmp;
+                    file.close();
+                }
+            }
+        }
+    }
     return true;
 }
 
-QList<Factuur*> readTirecompanyObjectInvoices(Bandencentrale* ptr){
+QList<Factuur*> DatabaseManagement::readTirecompanyObjectInvoices(Bandencentrale* ptr){
+    QTextStream qtout(stdout);
+    QList<Factuur*> returnList;
+    if(ptr == NULL) return returnList;
 
+    QString invoicesFolderPath = getProgramDirectory().path() + "/" + getBandencentraleFoldernameFacturen(ptr);
+
+    QDirIterator it(invoicesFolderPath, QStringList() << "*"+globals_bandencentrale_fileExtension, QDir::Files, QDirIterator::NoIteratorFlags);
+    while(it.hasNext()){
+        it.next();
+        QString filename = it.fileName();
+        QFile file(it.filePath());
+        QDataStream in(&file);
+        Factuur *tmpFactuur = NULL;
+        in >> &tmpFactuur;
+        file.close();
+        returnList.append(tmpFactuur);
+    }
+    return returnList;
 }
 
 
@@ -253,11 +357,11 @@ QString DatabaseManagement::getBandencentraleFoldernameKlanten(Bandencentrale* p
 }
 
 QString DatabaseManagement::getBandencentraleFilenameKlantenCorporate(Bandencentrale* centr, Bedrijfsklant* ptr){
-return getBandencentraleFoldername(centr) + "/" + globals_bandencentrale_foldername_Clients + "/" + QString::number(ptr->getClientID()) + globals_bandencentrale_foldername_Clients_Corporate + globals_bandencentrale_fileExtension;
+    return getBandencentraleFoldername(centr) + "/" + globals_bandencentrale_foldername_Clients + "/" + QString::number(ptr->getClientID()) + globals_bandencentrale_foldername_Clients_Corporate + globals_bandencentrale_fileExtension;
 }
 
 QString DatabaseManagement::getBandencentraleFilenameKlantenPersonal(Bandencentrale* centr, Klant* ptr){
-return getBandencentraleFoldername(centr) + "/" + globals_bandencentrale_foldername_Clients + "/" + QString::number(ptr->getClientID()) + globals_bandencentrale_foldername_Clients_Personal + globals_bandencentrale_fileExtension;
+    return getBandencentraleFoldername(centr) + "/" + globals_bandencentrale_foldername_Clients + "/" + QString::number(ptr->getClientID()) + globals_bandencentrale_foldername_Clients_Personal + globals_bandencentrale_fileExtension;
 }
 
 QString DatabaseManagement::getBandencentraleFoldernameArtikels(Bandencentrale* ptr){
@@ -270,6 +374,10 @@ QString DatabaseManagement::getBandencentraleFilenameArtikelsBand(Bandencentrale
 
 QString DatabaseManagement::getBandencentraleFilenameArtikelsVelg(Bandencentrale* centr, Velg* ptr){
     return getBandencentraleFoldername(centr) + "/" + globals_bandencentrale_foldername_Articles + "/" + QString::number(ptr->getArtikelID()) + globals_bandencentrale_foldername_Articles_Velg + globals_bandencentrale_fileExtension;
+}
+
+QString DatabaseManagement::getBandencentraleFilenameFacturen(Bandencentrale* centr, Factuur* ptr){
+    return getBandencentraleFoldername(centr) + "/" + globals_bandencentrale_foldername_Invoices + "/" + QString::number(ptr->getFactuurnummer()) + globals_bandencentrale_foldername_Invoices_General + globals_bandencentrale_fileExtension;
 }
 
 QString DatabaseManagement::getBandencentraleFoldernameFacturen(Bandencentrale* ptr){
@@ -452,6 +560,23 @@ QDataStream &operator>>(QDataStream &in, Velg &ptr){
     return in;
 }
 
+QDataStream &operator>>(QDataStream &in, Velg **ptr){
+    double Breedte;
+    Kleuren Kleur;
+    bool Aluminium;
+    QString Naam;
+    QString Fabrikant;
+    double Prijs;
+    double Diameter;
+    ArtikelType Type;
+    int Aantal;
+    int artikelID;
+
+    in >> Breedte >> Kleur >> Aluminium >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal >> artikelID;
+    *ptr = new Velg(Breedte, Kleur, Aluminium, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID);
+    return in;
+}
+
 QDataStream &operator<<(QDataStream &out, const Band &ptr){
     out << ptr.getBreedte() << ptr.getHoogte() << ptr.getSnelheidsindex() << ptr.getSeizoen()
         << ptr.getNaam() << ptr.getFabrikant() << ptr.getPrijs() << ptr.getDiameter() << ptr.getType()
@@ -478,19 +603,49 @@ QDataStream &operator>>(QDataStream &in, Band &ptr){
     return in;
 }
 
+QDataStream &operator>>(QDataStream &in, Band **ptr){
+    double Breedte;
+    double Hoogte;
+    QChar Snelheidsindex;
+    Seizoen seizoen;
+    QString Naam;
+    QString Fabrikant;
+    double Prijs;
+    double Diameter;
+    ArtikelType Type;
+    int Aantal;
+    int artikelID;
+
+    in >> Breedte >> Hoogte >> Snelheidsindex >> seizoen >> Naam >> Fabrikant >> Prijs >> Diameter
+            >> Type >> Aantal >> artikelID;
+    *ptr = new Band(Breedte, Hoogte, Snelheidsindex, seizoen, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID);
+    return in;
+}
+
 QDataStream &operator<<(QDataStream &out, const Factuur &ptr){
     out << ptr.getFactuurnummer() << ptr.getKlant() << ptr.getArtikels() << ptr.getTotaalprijs() << ptr.getKorting();
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, Factuur &ptr){
-    int Factuurnummer;
+    int Factuurnummer = 0;
     int Klant = 0;
     QMap<int, int> ArtikelCount;
     double Totaalprijs;
     double Korting;
     in >> Factuurnummer >> Klant >> ArtikelCount >> Totaalprijs >> Korting;
     ptr = Factuur(Factuurnummer, Klant, ArtikelCount, Totaalprijs, Korting);
+    return in;
+}
+
+QDataStream &operator>>(QDataStream &in, Factuur **ptr){
+    int Factuurnummer = 0;
+    int Klant = 0;
+    QMap<int, int> ArtikelCount;
+    double Totaalprijs;
+    double Korting;
+    in >> Factuurnummer >> Klant >> ArtikelCount >> Totaalprijs >> Korting;
+    *ptr = new Factuur(Factuurnummer, Klant, ArtikelCount, Totaalprijs, Korting);
     return in;
 }
 

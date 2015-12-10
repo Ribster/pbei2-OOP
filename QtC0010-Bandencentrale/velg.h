@@ -22,6 +22,8 @@ public:
     void setKleur(Kleuren);
     void setAluminium(bool);
 
+    void print(void);
+
 private:
     double _Breedte;
     Kleuren _Kleur;

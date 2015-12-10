@@ -194,7 +194,9 @@ void BCapplication::menuarticle_menulistItemexecution(int menuselection){
             _app_menuarticle = false;
             break;
         case MenuList_Articles_List:
-
+            if(getAuthorized(UserLevel_User)){
+                this->_bandencentrale->printItemList();
+            }
             break;
         case MenuList_Articles_Add:
 

@@ -26,6 +26,8 @@ public:
     void setSnelheidsindex(char);
     void setSeizoen(Seizoen);
 
+    void print(void);
+
 private:
     double _Breedte;
     double _Hoogte;

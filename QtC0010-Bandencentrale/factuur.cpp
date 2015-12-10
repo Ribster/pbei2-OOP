@@ -53,3 +53,7 @@ void Factuur::setTotaalprijs(double newVal){
 void Factuur::setKorting(double newVal){
     _Korting = newVal;
 }
+
+void Factuur::print(void){
+
+}
