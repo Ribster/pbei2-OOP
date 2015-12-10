@@ -23,6 +23,10 @@ void BCapplication::run(void){
 
     DatabaseManagement::writeTirecompany(_bandencentrale);
 
+    // testing
+
+    DatabaseManagement::testSerialization();
+
     // blocking selection loop
     selectionMenu();
 
@@ -318,7 +322,7 @@ bool BCapplication::clients_Add(void){
 
     // addition of client
         // client variables
-        ClientType tempclass_business;
+        ClientType tempclass_business = ClientType_Personal;
             // only for business
             QString tempclass_btw;
             double tempclass_bedrijfskorting;

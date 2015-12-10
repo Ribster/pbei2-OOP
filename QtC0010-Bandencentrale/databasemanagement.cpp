@@ -40,6 +40,51 @@ bool DatabaseManagement::writeTirecompany(Bandencentrale* ptr){
     return true;
 }
 
+void DatabaseManagement::testSerialization(void){
+    QTextStream qtout(stdout);
+
+    QString path = getProgramDirectory().path() + "/" + "testfile.bin";
+
+    // testing database serialization
+    qtout << "start testing database serialization" << endl;
+
+    // create client
+        Adres tmpAdres;
+        tmpAdres.gemeente = "Gemeente";
+        tmpAdres.land = "Land";
+        tmpAdres.postcode = 2390;
+        tmpAdres.straatnaam = "Straatnaam";
+        tmpAdres.straatnummer = "Straatnummer";
+        Bedrijfsklant tmp = Bedrijfsklant("Naam",tmpAdres,10.0,12.0,"BTWNUMMER",15.0,25.0,true,25);
+        tmp.print();
+    // save
+        // it is a business client
+        QFile file(path);
+        if (file.open(QIODevice::WriteOnly))
+        {
+            QDataStream out(&file);
+            out << tmp;
+            file.close();
+        }
+        qtout << "saved file" << endl;
+    // read
+        Bedrijfsklant *tmpClient = NULL;
+
+        QFile file2(path);
+        if(file2.exists()){
+          if (file2.open(QIODevice::ReadOnly)){
+             QDataStream in(&file2);
+             in >> &tmpClient;
+             file2.close();
+             tmpClient->setBedrijf(true);
+            }
+        }
+        qtout << "read file" << endl;
+        tmpClient->print();
+
+    qtout << "end testing database serialization" << endl;
+}
+
 bool DatabaseManagement::writeTirecompanyObject(Bandencentrale* ptr){
     QString path = getBandencentraleFullPathname(ptr) + "/" + getBandencentraleFoldername(ptr) + globals_bandencentrale_fileExtension;
     QFile file(path);
@@ -109,6 +154,7 @@ bool DatabaseManagement::writeTirecompanyObjectClients(Bandencentrale* ptr){
         QList<Klant*>::iterator i;
         for(i = klantenList.begin(); i != klantenList.end(); i++){
             Klant* tmp = (*i);
+            qtout << "writing client...." << QString::number(tmp->getClientID()) << " client type: " << QString::number(tmp->getClientType()) << endl;
             if(tmp->getClientType() == ClientType_Business){
                 // it is a business client
                 qtout << "writing business client" << endl;
@@ -349,7 +395,7 @@ QDataStream &operator>>(QDataStream &in, Klant **ptr){
 QDataStream &operator<<(QDataStream &out, const Bedrijfsklant &ptr){
     out << ptr.getNaam() << ptr.getAdres() << ptr.getSetKorting() << ptr.getSetkorting2() << ptr.getBedrijf()
         << ptr.getDeleted() << ptr.getClientType() << ptr.getClientID()
-        << ptr.getBTWnummer() << ptr.getBedrijfskorting() << ptr.getVolumekorting();
+        << ptr.getBedrijfskorting() << ptr.getVolumekorting() << ptr.getBTWnummer();
     return out;
 }
 
@@ -365,8 +411,7 @@ QDataStream &operator>>(QDataStream &in, Bedrijfsklant &ptr){
     QString btwnummer;
     double bedrijfskorting;
     double volumekorting;
-    in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf
-            >> verwijderd >> clienttype >> klantid >> btwnummer >> bedrijfskorting >> volumekorting;
+    in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf >> verwijderd >> clienttype >> klantid >> bedrijfskorting >> volumekorting >> btwnummer;
     ptr = Bedrijfsklant(naam, adres, setkorting1, setkorting2, btwnummer, volumekorting, bedrijfskorting, verwijderd, klantid);
     return in;
 }
@@ -375,7 +420,7 @@ QDataStream &operator<<(QDataStream &out, const Bedrijfsklant *ptr){
     // push the pointer out. Assume that the object already exists
     out << ptr->getNaam() << ptr->getAdres() << ptr->getSetKorting() << ptr->getSetkorting2() << ptr->getBedrijf()
         << ptr->getDeleted() << ptr->getClientType() << ptr->getClientID()
-        << ptr->getBTWnummer() << ptr->getBedrijfskorting() << ptr->getVolumekorting();
+        << ptr->getBedrijfskorting() << ptr->getVolumekorting() << ptr->getBTWnummer();
     return out;
 }
 
@@ -393,11 +438,7 @@ QDataStream &operator>>(QDataStream &in, Bedrijfsklant **ptr){
     QString btwnummer;
     double bedrijfskorting;
     double volumekorting;
-    in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf
-            >> verwijderd >> clienttype >> klantid >> btwnummer >> bedrijfskorting >> volumekorting;
-
-    //qtout << "Bedrijfskorting: " << bedrijfskorting << " Volumekorting: " << volumekorting << endl;
-
+    in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf >> verwijderd >> clienttype >> klantid >> bedrijfskorting >> volumekorting >> btwnummer;
     // use the data from the stream in the constructor of the new object
     *ptr = new Bedrijfsklant(naam, adres, setkorting1, setkorting2, btwnummer, volumekorting, bedrijfskorting, verwijderd, klantid);
     return in;
@@ -489,41 +530,49 @@ QDataStream &operator>>(QDataStream &in, Factuur &ptr){
 }
 
 QDataStream &operator<<(QDataStream &out, const ClientType &ptr){
-    out << ptr;
+    out << (int)ptr;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, ClientType &ptr){
-    in >> ptr;
+    int tmp;
+    in >> tmp;
+    ptr = (ClientType)tmp;
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const ArtikelType &ptr){
-    out << ptr;
+    out << (int)ptr;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, ArtikelType &ptr){
-    in >> ptr;
+    int tmp;
+    in >> tmp;
+    ptr = (ArtikelType)tmp;
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const Kleuren &ptr){
-    out << ptr;
+    out << (int)ptr;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, Kleuren &ptr){
-    in >> ptr;
+    int tmp;
+    in >> tmp;
+    ptr = (Kleuren)tmp;
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const Seizoen &ptr){
-    out << ptr;
+    out << (int)ptr;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, Seizoen &ptr){
-    in >> ptr;
+    int tmp;
+    in >> tmp;
+    ptr = (Seizoen)tmp;
     return in;
 }

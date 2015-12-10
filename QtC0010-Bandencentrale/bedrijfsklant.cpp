@@ -17,11 +17,11 @@ QString Bedrijfsklant::getBTWnummer(void) const {
     return _BTWnummer;
 }
 
-bool Bedrijfsklant::getVolumekorting(void) const {
+double Bedrijfsklant::getVolumekorting(void) const {
     return _Volumekorting;
 }
 
-bool Bedrijfsklant::getBedrijfskorting(void) const {
+double Bedrijfsklant::getBedrijfskorting(void) const {
     return _Bedrijfskorting;
 }
 
@@ -34,11 +34,11 @@ void Bedrijfsklant::setBTWnummer(QString newVal){
     this->_BTWnummer = newVal;
 }
 
-void Bedrijfsklant::setVolumekorting(bool newVal){
+void Bedrijfsklant::setVolumekorting(double newVal){
     this->_Volumekorting = newVal;
 }
 
-void Bedrijfsklant::setBedrijfskorting(bool newVal){
+void Bedrijfsklant::setBedrijfskorting(double newVal){
     this->_Bedrijfskorting = newVal;
 }
 

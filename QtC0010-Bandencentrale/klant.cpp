@@ -14,23 +14,23 @@ Klant::~Klant(){
 
 // getters
 QString Klant::getNaam(void) const {
-    return _Naam;
+    return this->_Naam;
 }
 
 Adres Klant::getAdres(void) const {
-    return _Adres;
+    return this->_Adres;
 }
 
 double Klant::getSetKorting(void) const {
-    return _Setkorting;
+    return this->_Setkorting;
 }
 
 bool Klant::getBedrijf(void) const {
-    return _Bedrijf;
+    return this->_Bedrijf;
 }
 
 double Klant::getSetkorting2(void) const {
-    return _Setkorting2;
+    return this->_Setkorting2;
 }
 
 int Klant::getClientID(void) const {

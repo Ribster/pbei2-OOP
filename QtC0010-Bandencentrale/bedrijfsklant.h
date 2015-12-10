@@ -16,14 +16,14 @@ public:
 
     // getters
     QString getBTWnummer(void) const;
-    bool getVolumekorting(void) const;
-    bool getBedrijfskorting(void) const;
+    double getVolumekorting(void) const;
+    double getBedrijfskorting(void) const;
     bool getVerwijderd(void) const;
 
     // setters
     void setBTWnummer(QString);
-    void setVolumekorting(bool);
-    void setBedrijfskorting(bool);
+    void setVolumekorting(double);
+    void setBedrijfskorting(double);
     void setVerwijderd(bool);
 
     /**
