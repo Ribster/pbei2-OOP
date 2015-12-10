@@ -23,10 +23,6 @@ void BCapplication::run(void){
 
     DatabaseManagement::writeTirecompany(_bandencentrale);
 
-    // testing
-
-    DatabaseManagement::testSerialization();
-
     // blocking selection loop
     selectionMenu();
 

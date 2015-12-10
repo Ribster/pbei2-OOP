@@ -39,8 +39,6 @@ public:
      */
     static bool writeTirecompany(Bandencentrale*);
 
-    static void testSerialization(void);
-
 private:
 
     /**

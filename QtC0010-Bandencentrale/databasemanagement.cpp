@@ -40,51 +40,6 @@ bool DatabaseManagement::writeTirecompany(Bandencentrale* ptr){
     return true;
 }
 
-void DatabaseManagement::testSerialization(void){
-    QTextStream qtout(stdout);
-
-    QString path = getProgramDirectory().path() + "/" + "testfile.bin";
-
-    // testing database serialization
-    qtout << "start testing database serialization" << endl;
-
-    // create client
-        Adres tmpAdres;
-        tmpAdres.gemeente = "Gemeente";
-        tmpAdres.land = "Land";
-        tmpAdres.postcode = 2390;
-        tmpAdres.straatnaam = "Straatnaam";
-        tmpAdres.straatnummer = "Straatnummer";
-        Bedrijfsklant tmp = Bedrijfsklant("Naam",tmpAdres,10.0,12.0,"BTWNUMMER",15.0,25.0,true,25);
-        tmp.print();
-    // save
-        // it is a business client
-        QFile file(path);
-        if (file.open(QIODevice::WriteOnly))
-        {
-            QDataStream out(&file);
-            out << tmp;
-            file.close();
-        }
-        qtout << "saved file" << endl;
-    // read
-        Bedrijfsklant *tmpClient = NULL;
-
-        QFile file2(path);
-        if(file2.exists()){
-          if (file2.open(QIODevice::ReadOnly)){
-             QDataStream in(&file2);
-             in >> &tmpClient;
-             file2.close();
-             tmpClient->setBedrijf(true);
-            }
-        }
-        qtout << "read file" << endl;
-        tmpClient->print();
-
-    qtout << "end testing database serialization" << endl;
-}
-
 bool DatabaseManagement::writeTirecompanyObject(Bandencentrale* ptr){
     QString path = getBandencentraleFullPathname(ptr) + "/" + getBandencentraleFoldername(ptr) + globals_bandencentrale_fileExtension;
     QFile file(path);
