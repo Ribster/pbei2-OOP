@@ -76,6 +76,9 @@ bool DatabaseManagement::readTirecompanyObject(Bandencentrale* ptr){
 }
 
 Bandencentrale* DatabaseManagement::readTirecompanyObject(int id){
+    QTextStream qtout(stdout);
+
+    //qtout << "Reading the tire company object from file" << endl;
     QString path = getBandencentraleFullPathname(id) + "/" + getBandencentraleFoldername(id) + globals_bandencentrale_fileExtension;
     QFile file(path);
     Bandencentrale *tempCentrale = new Bandencentrale();
@@ -88,6 +91,11 @@ Bandencentrale* DatabaseManagement::readTirecompanyObject(int id){
          file.close();
          }
     }
+
+    // read all the clients
+    //qtout << "Reading all the clients from file" << endl;
+    tempCentrale->setKlanten(readTirecompanyObjectClients(tempCentrale));
+
     return tempCentrale;
 }
 
@@ -135,7 +143,51 @@ QList<Klant*> DatabaseManagement::readTirecompanyObjectClients(Bandencentrale* p
     // convert data in file to a new object
     // put the object in the list
     // return the whole list
+    QTextStream qtout(stdout);
     QList<Klant*> returnList;
+    if(ptr == NULL) return returnList;
+
+    // loop over every item in folder
+    QString itemsFolderPath = getProgramDirectory().path() + "/" + getBandencentraleFoldernameKlanten(ptr);
+
+    //qtout << "Reading files from folder: " << itemsFolderPath << endl;
+
+    QDirIterator it(itemsFolderPath, QStringList() << "*"+globals_bandencentrale_fileExtension, QDir::Files, QDirIterator::NoIteratorFlags);
+    while (it.hasNext()) {
+        it.next();
+        QString filename = it.fileName();
+
+        //qtout << "Item: " << filename << endl;
+
+
+        if(filename.contains(globals_bandencentrale_foldername_Clients_Corporate)){
+            // filename contains corporate
+            QFile file(it.filePath());
+            if(file.exists()){
+              if (file.open(QIODevice::ReadOnly)){
+                 QDataStream in(&file);
+                 Bedrijfsklant *tmpClient = NULL;
+                 in >> tmpClient;
+                 file.close();
+                 returnList.append(dynamic_cast<Klant*>(tmpClient));
+                }
+            }
+        } else if (filename.contains(globals_bandencentrale_foldername_Clients_Personal)){
+            // filename contains personal
+            QFile file(it.filePath());
+            if(file.exists()){
+              if (file.open(QIODevice::ReadOnly)){
+                 QDataStream in(&file);
+                 Klant *tmpClient = NULL;
+                 in >> tmpClient;
+                 file.close();
+                 returnList.append(tmpClient);
+                }
+            }
+        }
+    }
+
+    return returnList;
 }
 
 bool DatabaseManagement::writeTirecompanyObjectItems(Bandencentrale* ptr){
@@ -267,6 +319,27 @@ QDataStream &operator>>(QDataStream &in, Klant &ptr){
     return in;
 }
 
+QDataStream &operator<<(QDataStream &out, const Klant *ptr){
+    out << ptr->getNaam() << ptr->getAdres() << ptr->getSetKorting() << ptr->getSetkorting2() << ptr->getBedrijf()
+        << ptr->getDeleted() << ptr->getClientType() << ptr->getClientID();
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, Klant *ptr){
+    QString naam;
+    Adres adres;
+    double setkorting1;
+    double setkorting2;
+    bool bedrijf;
+    bool verwijderd;
+    ClientType clienttype;
+    int klantid;
+    in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf
+            >> verwijderd >> clienttype >> klantid;
+    ptr = new Klant(naam, adres, setkorting1, setkorting2, verwijderd, clienttype, klantid);
+    return in;
+}
+
 QDataStream &operator<<(QDataStream &out, const Bedrijfsklant &ptr){
     out << ptr.getNaam() << ptr.getAdres() << ptr.getSetKorting() << ptr.getSetkorting2() << ptr.getBedrijf()
         << ptr.getDeleted() << ptr.getClientType() << ptr.getClientID()
@@ -289,6 +362,34 @@ QDataStream &operator>>(QDataStream &in, Bedrijfsklant &ptr){
     in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf
             >> verwijderd >> clienttype >> klantid >> btwnummer >> bedrijfskorting >> volumekorting;
     ptr = Bedrijfsklant(naam, adres, setkorting1, setkorting2, btwnummer, volumekorting, bedrijfskorting, verwijderd, klantid);
+    return in;
+}
+
+QDataStream &operator<<(QDataStream &out, const Bedrijfsklant *ptr){
+    // push the pointer out. Assume that the object already exists
+    out << ptr->getNaam() << ptr->getAdres() << ptr->getSetKorting() << ptr->getSetkorting2() << ptr->getBedrijf()
+        << ptr->getDeleted() << ptr->getClientType() << ptr->getClientID()
+        << ptr->getBTWnummer() << ptr->getBedrijfskorting() << ptr->getVolumekorting();
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, Bedrijfsklant *ptr){
+    // dynamically create a new pointer and assign to ptr
+    QString naam;
+    Adres adres;
+    double setkorting1;
+    double setkorting2;
+    bool bedrijf;
+    bool verwijderd;
+    ClientType clienttype;
+    int klantid;
+    QString btwnummer;
+    double bedrijfskorting;
+    double volumekorting;
+    in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf
+            >> verwijderd >> clienttype >> klantid >> btwnummer >> bedrijfskorting >> volumekorting;
+    // use the data from the stream in the constructor of the new object
+    ptr = new Bedrijfsklant(naam, adres, setkorting1, setkorting2, btwnummer, volumekorting, bedrijfskorting, verwijderd, klantid);
     return in;
 }
 

@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QDir>
+#include <QDirIterator>
 #include <QtWidgets/QApplication>
 #include <QString>
 #include <QDataStream>
@@ -195,8 +196,14 @@ QDataStream &operator>>(QDataStream &in, Bandencentrale &ptr);
 QDataStream &operator<<(QDataStream &out, const Klant &ptr);
 QDataStream &operator>>(QDataStream &in, Klant &ptr);
 
+QDataStream &operator<<(QDataStream &out, const Klant *ptr);
+QDataStream &operator>>(QDataStream &in, Klant *ptr);
+
 QDataStream &operator<<(QDataStream &out, const Bedrijfsklant &ptr);
 QDataStream &operator>>(QDataStream &in, Bedrijfsklant &ptr);
+
+QDataStream &operator<<(QDataStream &out, const Bedrijfsklant *ptr);
+QDataStream &operator>>(QDataStream &in, Bedrijfsklant *ptr);
 
 QDataStream &operator<<(QDataStream &out, const Artikel &ptr);
 QDataStream &operator>>(QDataStream &in, Artikel &ptr);
