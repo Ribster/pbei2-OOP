@@ -70,11 +70,13 @@ typedef enum UserLevel{
  * @brief  Main Menu selection list
  */
 typedef enum MenuList{
-    MenuList_Exit           = 1,
-    MenuList_Clientlist     = 2,
-    MenuList_Articlelist    = 3,
+    MenuList_Exit               = 1,
+    MenuList_Clientlist         = 2,
+    MenuList_Articlelist        = 3,
+    MenuList_SaveDatabase       = 4,
+    MenuList_RetrieveDatabase   = 5,
     MenuList_Min            = MenuList_Exit,
-    MenuList_Max            = MenuList_Articlelist
+    MenuList_Max            = MenuList_RetrieveDatabase
 } MenuList;
 
 /**

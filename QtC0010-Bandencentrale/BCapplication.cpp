@@ -44,6 +44,8 @@ BCapplication::BCapplication(int argc, char **argv, QObject *parent):
     _menulist_main.push_back("End program");
     _menulist_main.push_back("Client management");
     _menulist_main.push_back("Article management");
+    _menulist_main.push_back("Save Database");
+    _menulist_main.push_back("Retrieve Database");
 
     // set client list options
     _menulist_clients.push_back("Back to Main Menu");
@@ -165,6 +167,13 @@ void BCapplication::menumain_menulistItemexecution(int menuselection){
             break;
         case MenuList_Articlelist:
             _app_menuarticle = true;
+            break;
+        case MenuList_SaveDatabase:
+            DatabaseManagement::writeTirecompany(_bandencentrale);
+            break;
+        case MenuList_RetrieveDatabase:
+            delete _bandencentrale;
+            _bandencentrale = DatabaseManagement::getTireCompany();
             break;
     }
 }

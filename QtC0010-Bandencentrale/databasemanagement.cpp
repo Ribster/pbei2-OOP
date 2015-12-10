@@ -170,6 +170,7 @@ QList<Klant*> DatabaseManagement::readTirecompanyObjectClients(Bandencentrale* p
                  Bedrijfsklant *tmpClient = NULL;
                  in >> &tmpClient;
                  file.close();
+                 tmpClient->setBedrijf(true);
                  returnList.append(dynamic_cast<Klant*>(tmpClient));
                 }
             }
@@ -376,6 +377,7 @@ QDataStream &operator<<(QDataStream &out, const Bedrijfsklant *ptr){
 }
 
 QDataStream &operator>>(QDataStream &in, Bedrijfsklant **ptr){
+    QTextStream qtout(stdout);
     // dynamically create a new pointer and assign to ptr
     QString naam;
     Adres adres;
@@ -390,6 +392,9 @@ QDataStream &operator>>(QDataStream &in, Bedrijfsklant **ptr){
     double volumekorting;
     in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf
             >> verwijderd >> clienttype >> klantid >> btwnummer >> bedrijfskorting >> volumekorting;
+
+    qtout << "Bedrijfskorting: " << bedrijfskorting << " Volumekorting: " << volumekorting << endl;
+
     // use the data from the stream in the constructor of the new object
     *ptr = new Bedrijfsklant(naam, adres, setkorting1, setkorting2, btwnummer, volumekorting, bedrijfskorting, verwijderd, klantid);
     return in;
