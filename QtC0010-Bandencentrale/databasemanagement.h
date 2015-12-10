@@ -197,13 +197,13 @@ QDataStream &operator<<(QDataStream &out, const Klant &ptr);
 QDataStream &operator>>(QDataStream &in, Klant &ptr);
 
 QDataStream &operator<<(QDataStream &out, const Klant *ptr);
-QDataStream &operator>>(QDataStream &in, Klant *ptr);
+QDataStream &operator>>(QDataStream &in, Klant **ptr);
 
 QDataStream &operator<<(QDataStream &out, const Bedrijfsklant &ptr);
 QDataStream &operator>>(QDataStream &in, Bedrijfsklant &ptr);
 
 QDataStream &operator<<(QDataStream &out, const Bedrijfsklant *ptr);
-QDataStream &operator>>(QDataStream &in, Bedrijfsklant *ptr);
+QDataStream &operator>>(QDataStream &in, Bedrijfsklant **ptr);
 
 QDataStream &operator<<(QDataStream &out, const Artikel &ptr);
 QDataStream &operator>>(QDataStream &in, Artikel &ptr);

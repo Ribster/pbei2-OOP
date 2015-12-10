@@ -58,11 +58,6 @@ BCapplication::BCapplication(int argc, char **argv, QObject *parent):
     _menulist_articles.push_back("Add Article");
     _menulist_articles.push_back("Delete Article");
     _menulist_articles.push_back("Stock/Selling History");
-
-    // fetch bandencentrale from filesystem
-    //_bandencentrale = new Bandencentrale();
-
-    //DatabaseManagement::writeTirecompany(_bandencentrale);
 }
 
 // dtor

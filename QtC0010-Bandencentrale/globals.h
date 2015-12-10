@@ -128,6 +128,7 @@ const QString globals_bandencentrale_foldername_Clients = "Clients";
 const QString globals_bandencentrale_foldername_Clients_Corporate = "-Corporate";
 const QString globals_bandencentrale_foldername_Clients_Personal = "-Personal";
 const QString globals_bandencentrale_foldername_Invoices = "Invoices";
+const QString globals_bandencentrale_foldername_Invoices_General = "-invoice";
 
 const QString globals_bandencentrale_fileExtension = ".overload";
 

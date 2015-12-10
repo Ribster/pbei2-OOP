@@ -161,25 +161,27 @@ QList<Klant*> DatabaseManagement::readTirecompanyObjectClients(Bandencentrale* p
 
 
         if(filename.contains(globals_bandencentrale_foldername_Clients_Corporate)){
+            //qtout << "Item corporate: " << filename << endl;
             // filename contains corporate
             QFile file(it.filePath());
             if(file.exists()){
               if (file.open(QIODevice::ReadOnly)){
                  QDataStream in(&file);
                  Bedrijfsklant *tmpClient = NULL;
-                 in >> tmpClient;
+                 in >> &tmpClient;
                  file.close();
                  returnList.append(dynamic_cast<Klant*>(tmpClient));
                 }
             }
         } else if (filename.contains(globals_bandencentrale_foldername_Clients_Personal)){
+            //qtout << "Item personal: " << filename << endl;
             // filename contains personal
             QFile file(it.filePath());
             if(file.exists()){
               if (file.open(QIODevice::ReadOnly)){
                  QDataStream in(&file);
                  Klant *tmpClient = NULL;
-                 in >> tmpClient;
+                 in >> &tmpClient;
                  file.close();
                  returnList.append(tmpClient);
                 }
@@ -325,7 +327,7 @@ QDataStream &operator<<(QDataStream &out, const Klant *ptr){
     return out;
 }
 
-QDataStream &operator>>(QDataStream &in, Klant *ptr){
+QDataStream &operator>>(QDataStream &in, Klant **ptr){
     QString naam;
     Adres adres;
     double setkorting1;
@@ -336,7 +338,7 @@ QDataStream &operator>>(QDataStream &in, Klant *ptr){
     int klantid;
     in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf
             >> verwijderd >> clienttype >> klantid;
-    ptr = new Klant(naam, adres, setkorting1, setkorting2, verwijderd, clienttype, klantid);
+    *ptr = new Klant(naam, adres, setkorting1, setkorting2, verwijderd, clienttype, klantid);
     return in;
 }
 
@@ -373,7 +375,7 @@ QDataStream &operator<<(QDataStream &out, const Bedrijfsklant *ptr){
     return out;
 }
 
-QDataStream &operator>>(QDataStream &in, Bedrijfsklant *ptr){
+QDataStream &operator>>(QDataStream &in, Bedrijfsklant **ptr){
     // dynamically create a new pointer and assign to ptr
     QString naam;
     Adres adres;
@@ -389,7 +391,7 @@ QDataStream &operator>>(QDataStream &in, Bedrijfsklant *ptr){
     in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf
             >> verwijderd >> clienttype >> klantid >> btwnummer >> bedrijfskorting >> volumekorting;
     // use the data from the stream in the constructor of the new object
-    ptr = new Bedrijfsklant(naam, adres, setkorting1, setkorting2, btwnummer, volumekorting, bedrijfskorting, verwijderd, klantid);
+    *ptr = new Bedrijfsklant(naam, adres, setkorting1, setkorting2, btwnummer, volumekorting, bedrijfskorting, verwijderd, klantid);
     return in;
 }
 
