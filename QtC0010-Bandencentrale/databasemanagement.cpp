@@ -109,10 +109,10 @@ bool DatabaseManagement::writeTirecompanyObjectClients(Bandencentrale* ptr){
         QList<Klant*>::iterator i;
         for(i = klantenList.begin(); i != klantenList.end(); i++){
             Klant* tmp = (*i);
-            qtout << "writing client...." << QString::number(tmp->getClientID()) << " client type: " << QString::number(tmp->getClientType()) << endl;
+            //qtout << "writing client...." << QString::number(tmp->getClientID()) << " client type: " << QString::number(tmp->getClientType()) << endl;
             if(tmp->getClientType() == ClientType_Business){
                 // it is a business client
-                qtout << "writing business client" << endl;
+                //qtout << "writing business client" << endl;
                 Bedrijfsklant* tmp2 = dynamic_cast<Bedrijfsklant*>(tmp);
                 QString path = getBandencentraleFilenameKlantenCorporate(ptr, tmp2);
                 QFile file(path);
@@ -124,7 +124,7 @@ bool DatabaseManagement::writeTirecompanyObjectClients(Bandencentrale* ptr){
                 }
             } else if (tmp->getClientType() == ClientType_Personal){
                 // it is a personal client
-                qtout << "writing personal client" << endl;
+                //qtout << "writing personal client" << endl;
                 QString path = getBandencentraleFilenameKlantenPersonal(ptr, tmp);
                 QFile file(path);
                 if (file.open(QIODevice::WriteOnly))
@@ -199,9 +199,19 @@ QList<Klant*> DatabaseManagement::readTirecompanyObjectClients(Bandencentrale* p
 
 bool DatabaseManagement::writeTirecompanyObjectItems(Bandencentrale* ptr){
 
+    return true;
+}
+
+QList<Artikel*> readTirecompanyObjectItems(Bandencentrale* ptr){
+
 }
 
 bool DatabaseManagement::writeTirecompanyObjectInvoices(Bandencentrale* ptr){
+
+    return true;
+}
+
+QList<Factuur*> readTirecompanyObjectInvoices(Bandencentrale* ptr){
 
 }
 

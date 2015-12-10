@@ -85,11 +85,25 @@ private:
     static bool writeTirecompanyObjectItems(Bandencentrale*);
 
     /**
+     * @brief  Low Level read of the Bandencentrale object's Items
+     * @param  Bandencentrale       The object that needs to be written
+     * @retval QList<Artikel*>      The list of dynamically created Artikel objects
+     */
+    static QList<Artikel*> readTirecompanyObjectItems(Bandencentrale*);
+
+    /**
      * @brief  Low Level write of the Bandencentrale object's Invoices
      * @param  Bandencentrale   The object that needs to be written
      * @retval bool             Wether the action was succesfull
      */
     static bool writeTirecompanyObjectInvoices(Bandencentrale*);
+
+    /**
+     * @brief  Low Level read of the Bandencentrale object's Invoices
+     * @param  Bandencentrale       The object that needs to be written
+     * @retval QList<Factuur*>      The list of dynamically created Factuur objects
+     */
+    static QList<Factuur*> readTirecompanyObjectInvoices(Bandencentrale*);
 
     /**
      * @brief  Get current program executable directory
