@@ -100,6 +100,7 @@ Bandencentrale* DatabaseManagement::readTirecompanyObject(int id){
 }
 
 bool DatabaseManagement::writeTirecompanyObjectClients(Bandencentrale* ptr){
+    QTextStream qtout(stdout);
     // run over each client
     // determine if it is a company or personal client
     // push it out
@@ -110,6 +111,7 @@ bool DatabaseManagement::writeTirecompanyObjectClients(Bandencentrale* ptr){
             Klant* tmp = (*i);
             if(tmp->getClientType() == ClientType_Business){
                 // it is a business client
+                qtout << "writing business client" << endl;
                 Bedrijfsklant* tmp2 = dynamic_cast<Bedrijfsklant*>(tmp);
                 QString path = getBandencentraleFilenameKlantenCorporate(ptr, tmp2);
                 QFile file(path);
@@ -121,6 +123,7 @@ bool DatabaseManagement::writeTirecompanyObjectClients(Bandencentrale* ptr){
                 }
             } else if (tmp->getClientType() == ClientType_Personal){
                 // it is a personal client
+                qtout << "writing personal client" << endl;
                 QString path = getBandencentraleFilenameKlantenPersonal(ptr, tmp);
                 QFile file(path);
                 if (file.open(QIODevice::WriteOnly))
@@ -393,7 +396,7 @@ QDataStream &operator>>(QDataStream &in, Bedrijfsklant **ptr){
     in >> naam >> adres >> setkorting1 >> setkorting2 >> bedrijf
             >> verwijderd >> clienttype >> klantid >> btwnummer >> bedrijfskorting >> volumekorting;
 
-    qtout << "Bedrijfskorting: " << bedrijfskorting << " Volumekorting: " << volumekorting << endl;
+    //qtout << "Bedrijfskorting: " << bedrijfskorting << " Volumekorting: " << volumekorting << endl;
 
     // use the data from the stream in the constructor of the new object
     *ptr = new Bedrijfsklant(naam, adres, setkorting1, setkorting2, btwnummer, volumekorting, bedrijfskorting, verwijderd, klantid);

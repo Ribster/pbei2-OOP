@@ -267,6 +267,26 @@ int BCapplication::generalQueryUserselection(QString label, QVector<QString> &st
     return selectvalue;
 }
 
+// USER INTERFACE
+QString BCapplication::getQuestion(QTextStream &ostream, QTextStream &istream, QString question){
+    ostream << question << endl;
+    return istream.readLine();
+}
+
+int BCapplication::getQuestionYN(QTextStream &ostream, QTextStream &istream, QString question){
+    ostream << question << " [Y / N]" << endl;
+    QString returnLine = istream.readLine();
+    returnLine = returnLine.trimmed();
+    if(returnLine == "Y" || returnLine == "y" || returnLine == "yes" || returnLine == "YES"){
+        return 1;
+    } else if (returnLine == "N" || returnLine == "n" || returnLine == "no" || returnLine == "NO"){
+        return 0;
+    }
+    return 2;
+}
+
+
+// PRINTING
 void BCapplication::printHeaderText(QString label, QString text){
     QTextStream qtout(stdout);
     qtout << globals_headerLine << endl;
@@ -310,83 +330,40 @@ bool BCapplication::clients_Add(void){
         double tempclass_setkorting2;
 
     // business
-    do {
-        qtout << "Is the new client a business ? [Y / N]" << endl;
-            qtin >> selectvalue;
-        answered = true;
-        if(selectvalue == "Y" || selectvalue == "y" || selectvalue == "yes" || selectvalue == "YES"){
+        int businessQuestion = getQuestionYN(qtout, qtin, "Is the new client a business?");
+        while(businessQuestion == 2){
+            businessQuestion = getQuestionYN(qtout, qtin, "Is the new client a business?");
+        }
+        if(businessQuestion == 1){
             tempclass_business = ClientType_Business;
-        } else if(selectvalue == "N" || selectvalue == "n" || selectvalue == "no" || selectvalue == "NO"){
+        } else if (businessQuestion == 0){
             tempclass_business = ClientType_Personal;
-        } else {
-            answered = false;
         }
 
-    } while(answered == false);
 
     // naam
-    do {
-        qtout << "What is the clients name ?" << endl;
-        qtin >> tempclass_naam;
-    } while(tempclass_naam.isEmpty());
+    tempclass_naam = getQuestion(qtout, qtin, "Clients name?");
 
     // adres
-        do {
-            qtout << "What is the clients Street Name ?" << endl;
-            qtin >> tempclass_adres.straatnaam;
-        } while(tempclass_adres.straatnaam.isEmpty());
-        do {
-            qtout << "What is the clients Street Number ?" << endl;
-            qtin >> tempclass_adres.straatnummer;
-        } while(tempclass_adres.straatnummer.isEmpty());
-        do {
-            QString tmp;
-            qtout << "What is the clients Postal Code ?" << endl;
-            qtin >> tmp;
-            tempclass_adres.postcode = tmp.toInt();
-        } while(tempclass_adres.postcode == 0);
-        do {
-            qtout << "What is the clients Town Name ?" << endl;
-            qtin >> tempclass_adres.gemeente;
-        } while(tempclass_adres.gemeente.isEmpty());
-        do {
-            qtout << "What is the clients Country Name ?" << endl;
-            qtin >> tempclass_adres.land;
-        } while(tempclass_adres.land.isEmpty());
+    tempclass_adres.straatnaam = getQuestion(qtout, qtin, "Street name?");
+    tempclass_adres.straatnummer = getQuestion(qtout, qtin, "Street number?");
+    tempclass_adres.postcode = getQuestion(qtout, qtin, "Postal code?").toInt();
+    tempclass_adres.gemeente = getQuestion(qtout, qtin, "Town name?");
+    tempclass_adres.land = getQuestion(qtout, qtin, "Country name?");
+
     // setkorting 1
-            QString tmp;
-            qtout << "What is the clients Set Discount on a set of 4 ? [%]" << endl;
-            qtin >> tmp;
-            tempclass_setkorting1 = tmp.toDouble();
+    tempclass_setkorting1 = getQuestion(qtout, qtin, "Set discount 4 PCS? [%]").toDouble();
+
     // setkorting 2
-            qtout << "What is the clients Set Discount on a bulk of 10 sets ? [%]" << endl;
-            tmp.clear();
-            qtin >> tmp;
-            tempclass_setkorting2 = tmp.toDouble();
+    tempclass_setkorting2 = getQuestion(qtout, qtin, "Set discount on 10 sets? [%]").toDouble();
 
         // if business
         if(tempclass_business == ClientType_Business){
-            QString tmp;
-            // bedrijfskorting
-            qtout << "What is the clients company discount? [%]" << endl;
-            qtin >> tmp;
-            tempclass_bedrijfskorting = tmp.toDouble();
+            tempclass_bedrijfskorting = getQuestion(qtout, qtin, "Company discount? [%]").toDouble();
+            tempclass_volumekorting = getQuestion(qtout, qtin, "Volume discount? [%]").toDouble();
 
-            // volumekorting
-            qtout << "What is the clients company volume discount ? [%]" << endl;
-            tmp.clear();
-            qtin >> tmp;
-            tempclass_volumekorting = tmp.toDouble();
-
-            // btw nummer
-            do {
-                qtout << "What is the clients Business TAV number ?" << endl;
-                qtin >> tempclass_btw;
-            } while(tempclass_adres.gemeente.isEmpty());
-
+            tempclass_btw = getQuestion(qtout, qtin, "Company TAV number?");
         }
-
-        answered = true;
 
     Klant *newKlant;
     // create klant
@@ -412,17 +389,6 @@ bool BCapplication::clients_Add(void){
                     false
                     );
     }
-
-
-
-    // print everything out
-//        if ( newKlant->getBedrijf() ){
-//            // business
-//            getBedrijfsklant(newKlant)->print();
-//        } else {
-//            // personal client
-//            newKlant->print();
-//        }
 
     // add client to the Workshop
     this->_bandencentrale->addClient(*newKlant);
