@@ -96,21 +96,46 @@ bool DatabaseManagement::writeTirecompanyObjectClients(Bandencentrale* ptr){
     // determine if it is a company or personal client
     // push it out
     QList<Klant*> klantenList = ptr->getKlanten();
-    QList<Klant*>::iterator i;
-    for(i = klantenList.begin(); i != klantenList.end(); i++){
-        Klant* tmp = (*i);
-        if(tmp->getClientType() == ClientType_Business){
-            // it is a business client
-            Bedrijfsklant* tmp2 = dynamic_cast<Bedrijfsklant*>(tmp);
-            QString path = getBandencentraleFilenameKlantenCorporate(ptr, tmp2);
-
-
-        } else if (tmp->getClientType() == ClientType_Personal){
-            // it is a personal client
-            QString path = getBandencentraleFilenameKlantenPersonal(ptr, tmp);
-
+    if(!klantenList.isEmpty()){
+        QList<Klant*>::iterator i;
+        for(i = klantenList.begin(); i != klantenList.end(); i++){
+            Klant* tmp = (*i);
+            if(tmp->getClientType() == ClientType_Business){
+                // it is a business client
+                Bedrijfsklant* tmp2 = dynamic_cast<Bedrijfsklant*>(tmp);
+                QString path = getBandencentraleFilenameKlantenCorporate(ptr, tmp2);
+                QFile file(path);
+                if (file.open(QIODevice::WriteOnly))
+                {
+                    QDataStream out(&file);
+                    out << *tmp2;
+                    file.close();
+                }
+            } else if (tmp->getClientType() == ClientType_Personal){
+                // it is a personal client
+                QString path = getBandencentraleFilenameKlantenPersonal(ptr, tmp);
+                QFile file(path);
+                if (file.open(QIODevice::WriteOnly))
+                {
+                    QDataStream out(&file);
+                    out << *tmp;
+                    file.close();
+                }
+            }
         }
     }
+    return true;
+}
+
+QList<Klant*> DatabaseManagement::readTirecompanyObjectClients(Bandencentrale* ptr){
+    // loop over all the items in the clients folder
+    // split the filename on -
+    // get instring corporate or private
+    // convert first split part to an int
+    // convert data in file to a new object
+    // put the object in the list
+    // return the whole list
+    QList<Klant*> returnList;
 }
 
 bool DatabaseManagement::writeTirecompanyObjectItems(Bandencentrale* ptr){
@@ -159,11 +184,11 @@ QString DatabaseManagement::getBandencentraleFoldernameKlanten(Bandencentrale* p
 }
 
 QString DatabaseManagement::getBandencentraleFilenameKlantenCorporate(Bandencentrale* centr, Bedrijfsklant* ptr){
-
+return getBandencentraleFoldername(centr) + "/" + globals_bandencentrale_foldername_Clients + "/" + QString::number(ptr->getClientID()) + globals_bandencentrale_foldername_Clients_Corporate + globals_bandencentrale_fileExtension;
 }
 
 QString DatabaseManagement::getBandencentraleFilenameKlantenPersonal(Bandencentrale* centr, Klant* ptr){
-
+return getBandencentraleFoldername(centr) + "/" + globals_bandencentrale_foldername_Clients + "/" + QString::number(ptr->getClientID()) + globals_bandencentrale_foldername_Clients_Personal + globals_bandencentrale_fileExtension;
 }
 
 QString DatabaseManagement::getBandencentraleFoldernameArtikels(Bandencentrale* ptr){

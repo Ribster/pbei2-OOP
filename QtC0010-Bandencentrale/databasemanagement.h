@@ -70,6 +70,13 @@ private:
     static bool writeTirecompanyObjectClients(Bandencentrale*);
 
     /**
+     * @brief  Low Level read of the Bandencentrale object's Clients
+     * @param  Bandencentrale   The object that needs to be written
+     * @retval QList<Klant*>    The list of dynamically created klant objects
+     */
+    static QList<Klant*> readTirecompanyObjectClients(Bandencentrale*);
+
+    /**
      * @brief  Low Level write of the Bandencentrale object's Items
      * @param  Bandencentrale   The object that needs to be written
      * @retval bool             Wether the action was succesfull
