@@ -93,8 +93,13 @@ Bandencentrale* DatabaseManagement::readTirecompanyObject(int id){
     }
 
     // read all the clients
-    //qtout << "Reading all the clients from file" << endl;
     tempCentrale->setKlanten(readTirecompanyObjectClients(tempCentrale));
+
+    // read all the items
+    tempCentrale->setArtikels(readTirecompanyObjectItems(tempCentrale));
+
+    // read all the invoices
+    tempCentrale->setFacturen(readTirecompanyObjectInvoices(tempCentrale));
 
     return tempCentrale;
 }

@@ -130,6 +130,15 @@ private:
 
     // USER INTERFACE
     /**
+     * @brief  Print a question, get a response back, using qvector for polling
+     * @param  QTextStream      The textstream from which we will fetch the data
+     * @param  QString          The question you want to ask
+     * @param  QVector<QString> The option list
+     * @retval QString          Give the response back
+     */
+    QString getQuestion(QTextStream &ostream, QTextStream &istream, QString, QVector<QString>&);
+
+    /**
      * @brief  Print a question, get a response back
      * @param  QTextStream  The textstream from which we will fetch the data
      * @param  QString      The question you want to ask

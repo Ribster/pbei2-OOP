@@ -317,6 +317,26 @@ int BCapplication::generalQueryUserselection(QString label, QVector<QString> &st
 }
 
 // USER INTERFACE
+QString BCapplication::getQuestion(QTextStream &ostream, QTextStream &istream, QString question, QVector<QString> &options){
+    int selectedOption = 0;
+    int maxSelectionOption = options.size();
+
+    do {
+        ostream << question << endl;
+        ostream << globals_headerLine << endl;
+        for(int i = 0; i<options.size(); i++){
+            printSelectionchoice("", i+1, options.at(i));
+        }
+        // print options
+        selectedOption = istream.readLine().toInt();
+
+    } while(selectedOption < 1 || selectedOption > maxSelectionOption);
+
+
+
+    return QString::number(selectedOption);
+}
+
 QString BCapplication::getQuestion(QTextStream &ostream, QTextStream &istream, QString question){
     ostream << question << endl;
     return istream.readLine();
@@ -394,10 +414,8 @@ bool BCapplication::clients_Add(void){
         double tempclass_setkorting2;
 
     // business
-        int businessQuestion = getQuestionYN(qtout, qtin, "Is the new client a business?");
-        while(businessQuestion == 2){
-            businessQuestion = getQuestionYN(qtout, qtin, "Is the new client a business?");
-        }
+        int businessQuestion = getQuestionYNBlocking(qtout, qtin, "Is the new client a business?");
+
         if(businessQuestion == 1){
             tempclass_business = ClientType_Business;
         } else if (businessQuestion == 0){
@@ -493,14 +511,64 @@ bool BCapplication::item_Add(void){
     bool answered = false;
 
     // addition of item
+        ArtikelType temp_type = ArtikelType_Band;
 
         // selection of velg or band
+        int businessQuestion = getQuestionYNBlocking(qtout, qtin, "Is the new item a Rimm?");
+        if(businessQuestion == 1){
+            temp_type = ArtikelType_Velg;
+        } else if (businessQuestion == 0){
+            int businessQuestion2 = getQuestionYNBlocking(qtout, qtin, "Is the new item a Tire?");
+            if(businessQuestion2 == 1){
+                temp_type = ArtikelType_Band;
+            } else if (businessQuestion2 == 0){
+                return false;
+            }
+        }
 
         // get info of artikel class
+        QString temp_name = getQuestion(qtout, qtin, "Item name?");
+        QString temp_manufacturer = getQuestion(qtout, qtin, "Item manufacturer?");
+        double temp_price = getQuestion(qtout, qtin, "Item price?").toDouble();
+        double temp_diameter = getQuestion(qtout, qtin, "Item diameter?").toDouble();
 
         // get specific info of subclass
+        double temp_width, temp_height;
+        QChar temp_speedindex;
+        Seizoen temp_season;
+        Kleuren temp_color;
+        bool temp_aluminum;
 
-        //
+        QVector<QString> templist_seizoen;
+        QVector<QString> templist_kleuren;
+
+        templist_seizoen << "Zomer" << "Winter";
+        templist_kleuren << "Rood" << "Blauw" << "Goud";
+
+        if(temp_type == ArtikelType_Band){
+            temp_width = getQuestion(qtout, qtin, "Item width?").toDouble();
+            temp_height = getQuestion(qtout, qtin, "Item height?").toDouble();
+            temp_speedindex = getQuestion(qtout, qtin, "Speed index?").at(0);
+            temp_season = (Seizoen)getQuestion(qtout, qtin, "Item season parameter?", templist_seizoen).toInt();
+        } else if (temp_type == ArtikelType_Velg){
+            temp_width = getQuestion(qtout, qtin, "Item width?").toDouble();
+            temp_color = (Kleuren)getQuestion(qtout, qtin, "Item color?", templist_kleuren).toInt();
+            temp_aluminum = (bool)getQuestionYNBlocking(qtout, qtin, "Item is made of aluminum?");
+        }
+
+        // dynamically create new object
+        Artikel* temp_object = NULL;
+        if(temp_type == ArtikelType_Band){
+            temp_object = dynamic_cast<Artikel*>(new Band(temp_width, temp_height, temp_speedindex, temp_season, temp_name, temp_manufacturer, temp_price, temp_diameter, ArtikelType_Band, 0, 0));
+        } else if (temp_type == ArtikelType_Velg){
+            temp_object = dynamic_cast<Artikel*>(new Velg(temp_width, temp_color, temp_aluminum, temp_name, temp_manufacturer, temp_price, temp_diameter, ArtikelType_Velg, 0, 0));
+        }
+
+        // add item to the workshop
+        _bandencentrale->addArtikel(*temp_object);
+
+        // save workshop
+        DatabaseManagement::writeTirecompany(_bandencentrale);
 
     return answered;
 }
