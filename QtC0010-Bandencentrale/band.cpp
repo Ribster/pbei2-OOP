@@ -52,11 +52,11 @@ void Band::print(void){
     qtout << "\tID: " << this->_ArtikelID << endl;
     qtout << "\tName: " << this->_Naam << endl;
     qtout << "\tManufacturer: " << this->_Fabrikant << endl;
-    qtout << "\tPrice: " << this->_Prijs << endl;
-    qtout << "\tDiameter: " << this->_Diameter << endl;
+    qtout << "\tPrice: " << this->_Prijs << "EUR" << endl;
+    qtout << "\tDiameter: " << this->_Diameter << "[mm]" << endl;
     qtout << "\tAmount: " << this->_Aantal << endl;
-    qtout << "\tWidth: " << this->_Breedte << endl;
-    qtout << "\tHeigth: " << this->_Hoogte << endl;
+    qtout << "\tWidth: " << this->_Breedte << "[mm]" << endl;
+    qtout << "\tHeight: " << this->_Hoogte << "[mm]" << endl;
     qtout << "\tSpeed Index: " << this->_Snelheidsindex << endl;
 
     qtout << "\tSeason: ";

@@ -536,7 +536,7 @@ bool BCapplication::item_Add(void){
         QString temp_name = getQuestion(qtout, qtin, "Item name?");
         QString temp_manufacturer = getQuestion(qtout, qtin, "Item manufacturer?");
         double temp_price = getQuestion(qtout, qtin, "Item price?").toDouble();
-        double temp_diameter = getQuestion(qtout, qtin, "Item diameter?").toDouble();
+        double temp_diameter = getQuestion(qtout, qtin, "Item diameter [mm]?").toDouble();
 
         // get specific info of subclass
         double temp_width, temp_height;
@@ -552,12 +552,12 @@ bool BCapplication::item_Add(void){
         templist_kleuren << "Rood" << "Blauw" << "Goud";
 
         if(temp_type == ArtikelType_Band){
-            temp_width = getQuestion(qtout, qtin, "Item width?").toDouble();
-            temp_height = getQuestion(qtout, qtin, "Item height?").toDouble();
+            temp_width = getQuestion(qtout, qtin, "Item width? [mm]").toDouble();
+            temp_height = getQuestion(qtout, qtin, "Item height? [mm]").toDouble();
             temp_speedindex = getQuestion(qtout, qtin, "Speed index?").at(0);
             temp_season = (Seizoen)getQuestion(qtout, qtin, "Item season parameter?", templist_seizoen).toInt();
         } else if (temp_type == ArtikelType_Velg){
-            temp_width = getQuestion(qtout, qtin, "Item width?").toDouble();
+            temp_width = getQuestion(qtout, qtin, "Item width? [inch]").toDouble();
             temp_color = (Kleuren)getQuestion(qtout, qtin, "Item color?", templist_kleuren).toInt();
             temp_aluminum = (bool)getQuestionYNBlocking(qtout, qtin, "Item is made of aluminum?");
         }
