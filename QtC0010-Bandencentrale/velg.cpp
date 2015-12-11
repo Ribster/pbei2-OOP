@@ -1,8 +1,8 @@
 #include "velg.h"
 
 // ctor
-Velg::Velg(double breedte, Kleuren kleur, bool aluminium, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal, int artikelID):
-    Artikel(naam, fabrikant, prijs, diameter, type, aantal, artikelID), _Breedte(breedte), _Kleur(kleur), _Aluminium(aluminium)
+Velg::Velg(double breedte, Kleuren kleur, bool aluminium, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal, int artikelID, bool verwijderd):
+    Artikel(naam, fabrikant, prijs, diameter, type, aantal, artikelID, verwijderd), _Breedte(breedte), _Kleur(kleur), _Aluminium(aluminium)
 {
 
 }

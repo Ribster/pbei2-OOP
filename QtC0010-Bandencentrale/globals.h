@@ -102,9 +102,10 @@ typedef enum MenuList_Articles {
     MenuList_Articles_List      = 2,
     MenuList_Articles_Add       = 3,
     MenuList_Articles_Delete    = 4,
-    MenuList_Articles_History   = 5,
+    MenuList_Articles_Filter    = 5,
+    MenuList_Articles_Stock     = 6,
     MenuList_Articles_Min       = MenuList_Articles_Exit,
-    MenuList_Articles_Max       = MenuList_Articles_History
+    MenuList_Articles_Max       = MenuList_Articles_Stock
 } MenuList_Articles;
 
 /**

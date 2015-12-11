@@ -95,6 +95,23 @@ bool Bandencentrale::addArtikel(Artikel& ptr){
     return true;
 }
 
+bool Bandencentrale::removeArtikel(int artikelID){
+    // loop over each item
+    // if artikel ID matches
+    // set removed on true
+    QList<Artikel*> tmp = _Artikels;
+    QList<Artikel*>::iterator i;
+    for(i = tmp.begin(); i!= tmp.end(); i++){
+       int tmpID = (*i)->getArtikelID();
+       if(tmpID == artikelID){
+           (*i)->setVerwijderd(true);
+           return true;
+       }
+    }
+
+    return false;
+}
+
 bool Bandencentrale::addFactuur(Factuur& ptr){
     if(ptr.getFactuurnummer() == 0){
         ptr.setFactuurnummer(this->getNewFactuurID());

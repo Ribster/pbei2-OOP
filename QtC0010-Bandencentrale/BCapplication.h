@@ -232,6 +232,15 @@ private:
     void item_List(void);
 
     /**
+     * @brief  User interface for deleting an item
+     * @param  None
+     * @retval None
+     */
+    void item_Delete(void);
+
+    QMap<int, QString> getArtikelInfo(void);
+
+    /**
      * @brief  User interface for adding an invoice
      * @param  None
      * @retval bool Wether the addition of the invoice was successfull

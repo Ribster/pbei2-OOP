@@ -1,8 +1,8 @@
 #include "artikel.h"
 
 // ctor
-Artikel::Artikel(QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal, int artikelID):
-    _Naam(naam), _Fabrikant(fabrikant), _Prijs(prijs), _Diameter(diameter), _Type(type), _Aantal(aantal), _ArtikelID(artikelID)
+Artikel::Artikel(QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal, int artikelID, bool verwijderd):
+    _Naam(naam), _Fabrikant(fabrikant), _Prijs(prijs), _Diameter(diameter), _Type(type), _Aantal(aantal), _ArtikelID(artikelID), _Verwijderd(verwijderd)
 {
 
 }
@@ -40,6 +40,9 @@ int Artikel::getAantal(void) const {
 int Artikel::getArtikelID(void) const{
     return this->_ArtikelID;
 }
+bool Artikel::getVerwijderd(void) const{
+    return this->_Verwijderd;
+}
 
 // setters
 void Artikel::setNaam(QString newVal){
@@ -67,4 +70,7 @@ void Artikel::setAantal(int newVal){
 }
 void Artikel::setArtikelID(int newVal){
     this->_ArtikelID = newVal;
+}
+void Artikel::setVerwijderd(bool newVal){
+    this->_Verwijderd = newVal;
 }

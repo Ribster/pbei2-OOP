@@ -524,7 +524,7 @@ QDataStream &operator>>(QDataStream &in, Bedrijfsklant **ptr){
 
 QDataStream &operator<<(QDataStream &out, const Artikel &ptr){
     out << ptr.getNaam() << ptr.getFabrikant() << ptr.getPrijs()
-        << ptr.getDiameter() << ptr.getType() << ptr.getAantal() << ptr.getArtikelID();
+        << ptr.getDiameter() << ptr.getType() << ptr.getAantal() << ptr.getArtikelID() << ptr.getVerwijderd();
     return out;
 }
 
@@ -536,15 +536,16 @@ QDataStream &operator>>(QDataStream &in, Artikel &ptr){
     ArtikelType Type;
     int Aantal;
     int artikelID;
-    in >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal >> artikelID;
-    ptr = Artikel(Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID);
+    bool verwijderd;
+    in >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal >> artikelID >> verwijderd;
+    ptr = Artikel(Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID, verwijderd);
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const Velg &ptr){
     out << ptr.getBreedte() << ptr.getKleur() << ptr.getAluminium() << ptr.getNaam() << ptr.getFabrikant()
         << ptr.getPrijs() << ptr.getDiameter() << ptr.getType()
-        << ptr.getAantal() << ptr.getArtikelID();
+        << ptr.getAantal() << ptr.getArtikelID() << ptr.getVerwijderd();
     return out;
 }
 
@@ -559,9 +560,10 @@ QDataStream &operator>>(QDataStream &in, Velg &ptr){
     ArtikelType Type;
     int Aantal;
     int artikelID;
+    bool verwijderd;
 
-    in >> Breedte >> Kleur >> Aluminium >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal >> artikelID;
-    ptr = Velg(Breedte, Kleur, Aluminium, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID);
+    in >> Breedte >> Kleur >> Aluminium >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal >> artikelID >> verwijderd;
+    ptr = Velg(Breedte, Kleur, Aluminium, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID, verwijderd);
     return in;
 }
 
@@ -576,9 +578,10 @@ QDataStream &operator>>(QDataStream &in, Velg **ptr){
     ArtikelType Type;
     int Aantal;
     int artikelID;
+    bool verwijderd;
 
-    in >> Breedte >> Kleur >> Aluminium >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal >> artikelID;
-    *ptr = new Velg(Breedte, Kleur, Aluminium, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID);
+    in >> Breedte >> Kleur >> Aluminium >> Naam >> Fabrikant >> Prijs >> Diameter >> Type >> Aantal >> artikelID >> verwijderd;
+    *ptr = new Velg(Breedte, Kleur, Aluminium, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID, verwijderd);
     return in;
 }
 
@@ -601,10 +604,10 @@ QDataStream &operator>>(QDataStream &in, Band &ptr){
     ArtikelType Type;
     int Aantal;
     int artikelID;
-
+    bool verwijderd;
     in >> Breedte >> Hoogte >> Snelheidsindex >> seizoen >> Naam >> Fabrikant >> Prijs >> Diameter
-            >> Type >> Aantal >> artikelID;
-    ptr = Band(Breedte, Hoogte, Snelheidsindex, seizoen, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID);
+            >> Type >> Aantal >> artikelID >> verwijderd;
+    ptr = Band(Breedte, Hoogte, Snelheidsindex, seizoen, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID, verwijderd);
     return in;
 }
 
@@ -620,10 +623,10 @@ QDataStream &operator>>(QDataStream &in, Band **ptr){
     ArtikelType Type;
     int Aantal;
     int artikelID;
-
+    bool verwijderd;
     in >> Breedte >> Hoogte >> Snelheidsindex >> seizoen >> Naam >> Fabrikant >> Prijs >> Diameter
-            >> Type >> Aantal >> artikelID;
-    *ptr = new Band(Breedte, Hoogte, Snelheidsindex, seizoen, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID);
+            >> Type >> Aantal >> artikelID >> verwijderd;
+    *ptr = new Band(Breedte, Hoogte, Snelheidsindex, seizoen, Naam, Fabrikant, Prijs, Diameter, Type, Aantal, artikelID, verwijderd);
     return in;
 }
 

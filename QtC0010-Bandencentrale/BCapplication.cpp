@@ -61,7 +61,8 @@ BCapplication::BCapplication(int argc, char **argv, QObject *parent):
     _menulist_articles.push_back("List Articles");
     _menulist_articles.push_back("Add Article");
     _menulist_articles.push_back("Delete Article");
-    _menulist_articles.push_back("Stock/Selling History");
+    _menulist_articles.push_back("Filter Article");
+    _menulist_articles.push_back("Manage Stock");
 
     // set invoice list options
     _menulist_invoices.push_back("Back to Main Menu");
@@ -223,9 +224,14 @@ void BCapplication::menuarticle_menulistItemexecution(int menuselection){
             }
             break;
         case MenuList_Articles_Delete:
+            if(getAuthorized(UserLevel_User)){
+                item_Delete();
+            }
+            break;
+        case MenuList_Articles_Filter:
 
             break;
-        case MenuList_Articles_History:
+        case MenuList_Articles_Stock:
 
             break;
     }
@@ -559,9 +565,9 @@ bool BCapplication::item_Add(void){
         // dynamically create new object
         Artikel* temp_object = NULL;
         if(temp_type == ArtikelType_Band){
-            temp_object = dynamic_cast<Artikel*>(new Band(temp_width, temp_height, temp_speedindex, temp_season, temp_name, temp_manufacturer, temp_price, temp_diameter, ArtikelType_Band, 0, 0));
+            temp_object = dynamic_cast<Artikel*>(new Band(temp_width, temp_height, temp_speedindex, temp_season, temp_name, temp_manufacturer, temp_price, temp_diameter, ArtikelType_Band, 0, 0, false));
         } else if (temp_type == ArtikelType_Velg){
-            temp_object = dynamic_cast<Artikel*>(new Velg(temp_width, temp_color, temp_aluminum, temp_name, temp_manufacturer, temp_price, temp_diameter, ArtikelType_Velg, 0, 0));
+            temp_object = dynamic_cast<Artikel*>(new Velg(temp_width, temp_color, temp_aluminum, temp_name, temp_manufacturer, temp_price, temp_diameter, ArtikelType_Velg, 0, 0, false));
         }
 
         // add item to the workshop
@@ -578,22 +584,74 @@ void BCapplication::item_List(void){
     // list items
     qtout << globals_headerLine << endl;
     qtout << "\tThe list of Items:" << endl;
+
+    QStringList printList;
+    printList << "ID" << "NAME" << "TYPE" << "MANUFACTURER" << "STOCK";
+    qtout << globals_selectionFeedbackFirst << "NR" << globals_selectionFeedbackSecond << printList.join(" - ") << endl;
+
+    QMap<int, QString> itemListPrint = getArtikelInfo();
+    QMap<int, QString>::iterator i;
     int iteration = 0;
+    for(i = itemListPrint.begin(); i != itemListPrint.end(); i++){
+        qtout << globals_selectionFeedbackFirst << ++iteration << globals_selectionFeedbackSecond << i.value() << endl;
+    }
+
+
+}
+
+void BCapplication::item_Delete(void){
+    QTextStream qtout(stdout);
+    QTextStream qtin(stdin);
+    // give a list of items
+
+    QVector<QString> stringList;
+
+    QMap<int, QString> itemListPrint = getArtikelInfo();
+    QMap<int, QString>::iterator i;
+
+    QMap<int,int> getback;
+
+    int iteration = 0;
+    for(i = itemListPrint.begin(); i != itemListPrint.end(); i++){
+        getback.insert(++iteration, i.key());
+        stringList.push_back(i.value());
+    }
+
+    QStringList printList;
+    printList << "ID" << "NAME" << "TYPE" << "MANUFACTURER" << "STOCK";
+    qtout << globals_selectionFeedbackFirst << "NR" << globals_selectionFeedbackSecond << printList.join(" - ") << endl;
+    int questionDeleteItem = getQuestion(qtout, qtin, "Which item do you want to delete?",stringList).toInt();
+
+
+    if(_bandencentrale->removeArtikel(getback.value(questionDeleteItem))){
+        qtout << "The item was sucessfully removed!" << endl;
+    } else {
+        qtout << "The item was NOT removed!" << endl;
+    }
+
+    //qtout << "You selected : " << getback.value(questionDeleteItem) << endl;
+
+}
+
+QMap<int, QString> BCapplication::getArtikelInfo(void){
+    QMap<int, QString> returnList;
     QList<Artikel*>::iterator i;
     QList<Artikel*> tmpList = _bandencentrale->getArtikels();
     for( i = tmpList.begin(); i!=tmpList.end(); i++){
         Artikel* tmp = (*i);
-        QStringList printList;
-        if(tmp->getType() == ArtikelType_Band){
-            Band* tmp2 = dynamic_cast<Band*>(tmp);
-            printList << QString::number(tmp2->getArtikelID()) << tmp2->getNaam() << "Band" << tmp2->getFabrikant() << tmp2->getSnelheidsindex();
-        } else if (tmp->getType() == ArtikelType_Velg){
-            Velg* tmp2 = dynamic_cast<Velg*>(tmp);
-            printList << QString::number(tmp2->getArtikelID()) << tmp2->getNaam() << "Velg";
+        if(tmp->getVerwijderd() == false){
+            QStringList printList;
+            if(tmp->getType() == ArtikelType_Band){
+                Band* tmp2 = dynamic_cast<Band*>(tmp);
+                printList << QString::number(tmp2->getArtikelID()) << tmp2->getNaam() << "Band" << QString::number(tmp2->getAantal())+"PCS";
+            } else if (tmp->getType() == ArtikelType_Velg){
+                Velg* tmp2 = dynamic_cast<Velg*>(tmp);
+                printList << QString::number(tmp2->getArtikelID()) << tmp2->getNaam() << "Velg" << QString::number(tmp2->getAantal())+"PCS";
+            }
+            returnList.insert(tmp->getArtikelID(), printList.join(" - "));
         }
-
-        qtout << globals_selectionFeedbackFirst << ++iteration << globals_selectionFeedbackSecond << printList.join(" - ") << endl;
     }
+    return returnList;
 }
 
 bool BCapplication::invoice_Add(void){

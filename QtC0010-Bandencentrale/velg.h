@@ -8,7 +8,7 @@ class Velg final : public Artikel
 {
 public:
     // ctor
-    Velg(double breedte, Kleuren kleur, bool aluminium, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal, int artikelID);
+    Velg(double breedte, Kleuren kleur, bool aluminium, QString naam, QString fabrikant, double prijs, double diameter, ArtikelType type, int aantal, int artikelID, bool verwijderd);
     // dtor
     virtual ~Velg();
 

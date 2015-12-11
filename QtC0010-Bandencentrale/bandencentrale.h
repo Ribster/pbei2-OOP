@@ -81,6 +81,13 @@ public:
     bool addArtikel(Artikel&);
 
     /**
+     * @brief Remove artikel based on artikel ID
+     * @param int   artikelID
+     * @return bool if removed successfully
+     */
+    bool removeArtikel(int artikelID);
+
+    /**
      * @brief  Add an Invoice
      * @param  Klant    The object that needs to be written
      * @retval bool     Wether the action was succesfull
