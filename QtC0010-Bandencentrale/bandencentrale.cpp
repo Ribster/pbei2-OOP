@@ -85,6 +85,19 @@ bool Bandencentrale::addClient(Klant& ptr){
     return true;
 }
 
+bool Bandencentrale::removeClient(int clientID){
+    QList<Klant*> tmp = _Klanten;
+    QList<Klant*>::iterator i;
+    for(i = tmp.begin(); i != tmp.end(); i++){
+        int tmpID = (*i)->getClientID();
+        if(tmpID == clientID){
+            (*i)->setDeleted(true);
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Bandencentrale::addArtikel(Artikel& ptr){
     if(ptr.getArtikelID() == 0){
         ptr.setArtikelID(this->getNewArtikelID());

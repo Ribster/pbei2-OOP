@@ -50,6 +50,7 @@ public:
     void setSetkorting(double);
     void setBedrijf(bool);
     void setSetkorting2(double);
+    void setDeleted(bool);
 
     /**
      * @brief  Set the client ID

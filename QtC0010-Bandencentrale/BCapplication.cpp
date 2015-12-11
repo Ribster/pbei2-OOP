@@ -266,7 +266,9 @@ void BCapplication::menuclient_menulistItemexecution(int menuselection){
             }
             break;
         case MenuList_Clients_Delete:
-
+            if(getAuthorized(UserLevel_Admin)){
+                clients_Delete();
+            }
             break;
         case MenuList_Clients_View:
 
@@ -507,7 +509,33 @@ void BCapplication::clients_List(void){
 }
 
 void BCapplication::clients_Delete(void){
-    //
+    QTextStream qtout(stdout);
+    QTextStream qtin(stdin);
+
+    QVector<QString> stringList;
+
+    QMap<int, QString> itemListPrint = getClientInfo();
+    QMap<int, QString>::iterator i;
+
+    QMap<int,int> getback;
+
+    int iteration = 0;
+    for(i = itemListPrint.begin(); i != itemListPrint.end(); i++){
+        getback.insert(++iteration, i.key());
+        stringList.push_back(i.value());
+    }
+
+    QStringList printList;
+    printList << "ID" << "NAME";
+    qtout << globals_selectionFeedbackFirst << "NR" << globals_selectionFeedbackSecond << printList.join(" - ") << endl;
+
+    int questionDeleteItem = getQuestion(qtout, qtin, "Which client do you want to delete?",stringList).toInt();
+
+    if(_bandencentrale->removeClient(getback.value(questionDeleteItem))){
+        qtout << "The item was sucessfully removed!" << endl;
+    } else {
+        qtout << "The item was NOT removed!" << endl;
+    }
 }
 
 QMap<int, QString> BCapplication::getClientInfo(void){

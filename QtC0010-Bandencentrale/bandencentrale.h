@@ -74,6 +74,13 @@ public:
     bool addClient(Klant&);
 
     /**
+     * @brief removeClient
+     * @param   int     client ID
+     * @retval  bool    if the client was successfully removed
+     */
+    bool removeClient(int clientID);
+
+    /**
      * @brief  Add an Item
      * @param  Klant    The object that needs to be written
      * @retval bool     Wether the action was succesfull

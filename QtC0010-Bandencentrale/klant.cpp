@@ -66,6 +66,10 @@ void Klant::setSetkorting2(double newVal){
     _Setkorting2 = newVal;
 }
 
+void Klant::setDeleted(bool newVal){
+    _Verwijderd = newVal;
+}
+
 void Klant::setClientID(int newVal){
     this->_KlantID = newVal;
 }
