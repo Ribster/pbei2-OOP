@@ -260,6 +260,13 @@ private:
     void item_ManageStock(void);
 
     /**
+     * @brief   Show and Filter items
+     * @param   None
+     * @retval  None
+     */
+    void item_Filter(void);
+
+    /**
      * @brief   Get Item information
      * @param   None
      * @retval  QMap<int, QString>  Pair of artikel ID and Description string

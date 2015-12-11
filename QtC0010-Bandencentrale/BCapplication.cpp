@@ -229,7 +229,9 @@ void BCapplication::menuarticle_menulistItemexecution(int menuselection){
             }
             break;
         case MenuList_Articles_Filter:
-
+            if(getAuthorized(UserLevel_User)){
+                item_Filter();
+            }
             break;
         case MenuList_Articles_Stock:
             if(getAuthorized(UserLevel_User)){
@@ -726,6 +728,28 @@ void BCapplication::item_ManageStock(void){
 
     // save the workshop to file
     DatabaseManagement::writeTirecompany(_bandencentrale);
+}
+
+void BCapplication::item_Filter(void){
+    // filter items
+    QTextStream qtout(stdout);
+    // list items
+    qtout << globals_headerLine << endl;
+    qtout << "\tFilter in the itemlist:" << endl;
+
+
+    // get the filters
+        // Tire / Rim
+        // Size
+
+    // print the items
+    QMap<int, QString> itemListPrint = getArtikelInfo();
+    QMap<int, QString>::iterator i;
+
+    for(i = itemListPrint.begin(); i != itemListPrint.end(); i++){
+        qtout << globals_headerLine << endl;
+        _bandencentrale->printArtikel(i.key());
+    }
 }
 
 QMap<int, QString> BCapplication::getArtikelInfo(void){

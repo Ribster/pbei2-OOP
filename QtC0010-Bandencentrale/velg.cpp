@@ -41,7 +41,7 @@ void Velg::setAluminium(bool newVal){
 void Velg::print(void){
     QTextStream qtout(stdout);
 
-    qtout << "\tDetailed information about the tire:" << endl;
+    qtout << "\tDetailed information about the rim:" << endl;
     qtout << "\tID: " << this->_ArtikelID << endl;
     qtout << "\tName: " << this->_Naam << endl;
     qtout << "\tManufacturer: " << this->_Fabrikant << endl;
