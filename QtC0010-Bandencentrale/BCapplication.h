@@ -177,6 +177,13 @@ private:
      */
     bool clients_Add(void);
 
+    /**
+     * @brief  User interface for listing the clients
+     * @param  None
+     * @retval None
+     */
+    void clients_List(void);
+
     // ARTICLES
 
 

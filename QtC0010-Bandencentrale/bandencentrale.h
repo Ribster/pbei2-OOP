@@ -129,6 +129,13 @@ public:
      */
     void printInvoiceList(void);
 
+    /**
+     * @brief  Print the bandencentrale information
+     * @param  None
+     * @retval None
+     */
+    void print(void);
+
     // CONVERSION
     /**
      * @brief  Converting the base class to the subclass

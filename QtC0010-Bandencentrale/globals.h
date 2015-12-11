@@ -75,8 +75,9 @@ typedef enum MenuList{
     MenuList_Articlelist        = 3,
     MenuList_SaveDatabase       = 4,
     MenuList_RetrieveDatabase   = 5,
+    MenuList_PrintDBInfo        = 6,
     MenuList_Min            = MenuList_Exit,
-    MenuList_Max            = MenuList_RetrieveDatabase
+    MenuList_Max            = MenuList_PrintDBInfo
 } MenuList;
 
 /**

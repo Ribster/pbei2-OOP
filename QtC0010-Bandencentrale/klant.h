@@ -70,7 +70,7 @@ public:
      * @param  Adres&   The structure that needs to be printed
      * @retval None
      */
-    void printAddress(Adres&);
+    static void printAddress(Adres&);
 
 protected:
     QString _Naam;

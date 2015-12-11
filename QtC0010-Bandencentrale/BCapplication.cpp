@@ -46,6 +46,7 @@ BCapplication::BCapplication(int argc, char **argv, QObject *parent):
     _menulist_main.push_back("Article management");
     _menulist_main.push_back("Save Database");
     _menulist_main.push_back("Retrieve Database");
+    _menulist_main.push_back("Workshop Info");
 
     // set client list options
     _menulist_clients.push_back("Back to Main Menu");
@@ -175,6 +176,8 @@ void BCapplication::menumain_menulistItemexecution(int menuselection){
             delete _bandencentrale;
             _bandencentrale = DatabaseManagement::getTireCompany();
             break;
+        case MenuList_PrintDBInfo:
+            _bandencentrale->print();
     }
 }
 
@@ -230,7 +233,8 @@ void BCapplication::menuclient_menulistItemexecution(int menuselection){
         case MenuList_Clients_List:
             // print clients
             if(getAuthorized(UserLevel_User)){
-                this->_bandencentrale->printClientList();
+                //this->_bandencentrale->printClientList();
+                clients_List();
             }
             break;
         case MenuList_Clients_Add:
@@ -399,6 +403,30 @@ bool BCapplication::clients_Add(void){
     DatabaseManagement::writeTirecompany(_bandencentrale);
 
     return answered;
+}
+
+void BCapplication::clients_List(void){
+    // loop over client list and print out all the info
+    QTextStream qtout(stdout);
+    qtout << globals_headerLine << endl;
+    qtout << "\tThe list of clients:" << endl;
+    int iteration = 0;
+    QList<Klant*>::iterator i;
+    QList<Klant*> tmpList = _bandencentrale->getKlanten();
+    for(i = tmpList.begin(); i!= tmpList.end(); i++){
+        Klant* tmp = (*i);
+        QStringList printList;
+        if(tmp->getClientType() == ClientType_Business){
+            Bedrijfsklant* tmp2 = dynamic_cast<Bedrijfsklant*>(tmp);
+            printList << QString::number(tmp->getClientID()) << tmp->getNaam() << "Business" << tmp2->getBTWnummer();
+        } else {
+            printList << QString::number(tmp->getClientID()) << tmp->getNaam() << "Personal";
+        }
+
+
+        qtout << globals_selectionFeedbackFirst << ++iteration << globals_selectionFeedbackSecond << printList.join(" - ") << endl;
+    }
+
 }
 
 // ERROR MESSAGE

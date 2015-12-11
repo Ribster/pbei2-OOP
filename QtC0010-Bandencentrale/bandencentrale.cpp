@@ -161,6 +161,15 @@ void Bandencentrale::printInvoiceList(void){
     if(this->_Facturen.isEmpty()) return;
 }
 
+void Bandencentrale::print(void){
+    QTextStream qtout(stdout);
+    qtout << "\tInformation about the workshop:" << endl;
+    qtout << "\tID: " << this->_tireWorkshopID << endl;
+    qtout << "\tName: " << this->_Naam << endl;
+    Klant::printAddress(this->_Adres);
+
+}
+
 // CONVERSION
 Bedrijfsklant* Bandencentrale::getBedrijfsklant(Klant* ptr){
     return dynamic_cast<Bedrijfsklant*>(ptr);
