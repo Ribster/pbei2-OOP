@@ -333,6 +333,22 @@ int BCapplication::getQuestionYN(QTextStream &ostream, QTextStream &istream, QSt
     }
     return 2;
 }
+int BCapplication::getQuestionYNBlocking(QTextStream &ostream, QTextStream &istream, QString question){
+    int returnValue = 2;
+
+    do {
+        ostream << question << " [Y / N]" << endl;
+        QString returnLine = istream.readLine();
+        returnLine = returnLine.trimmed();
+        if(returnLine == "Y" || returnLine == "y" || returnLine == "yes" || returnLine == "YES"){
+            returnValue = 1;
+        } else if (returnLine == "N" || returnLine == "n" || returnLine == "no" || returnLine == "NO"){
+            returnValue = 0;
+        }
+    } while(returnValue != 0 && returnValue != 1);
+
+    return returnValue;
+}
 
 
 // PRINTING
@@ -362,7 +378,6 @@ void BCapplication::menu_exit(void){
 bool BCapplication::clients_Add(void){
     QTextStream qtin(stdin);
     QTextStream qtout(stdout);
-    QString selectvalue;
     bool answered = false;
 
     // addition of client
@@ -473,21 +488,68 @@ void BCapplication::clients_List(void){
 }
 
 bool BCapplication::item_Add(void){
+    QTextStream qtin(stdin);
+    QTextStream qtout(stdout);
+    bool answered = false;
 
+    // addition of item
+
+        // selection of velg or band
+
+        // get info of artikel class
+
+        // get specific info of subclass
+
+        //
+
+    return answered;
 }
 
 void BCapplication::item_List(void){
     QTextStream qtout(stdout);
     // list items
+    qtout << globals_headerLine << endl;
+    qtout << "\tThe list of Items:" << endl;
+    int iteration = 0;
+    QList<Artikel*>::iterator i;
+    QList<Artikel*> tmpList = _bandencentrale->getArtikels();
+    for( i = tmpList.begin(); i!=tmpList.end(); i++){
+        Artikel* tmp = (*i);
+        QStringList printList;
+        if(tmp->getType() == ArtikelType_Band){
+            Band* tmp2 = dynamic_cast<Band*>(tmp);
+            printList << QString::number(tmp2->getArtikelID()) << tmp2->getNaam() << "Band" << tmp2->getFabrikant() << tmp2->getSnelheidsindex();
+        } else if (tmp->getType() == ArtikelType_Velg){
+            Velg* tmp2 = dynamic_cast<Velg*>(tmp);
+            printList << QString::number(tmp2->getArtikelID()) << tmp2->getNaam() << "Velg";
+        }
+
+        qtout << globals_selectionFeedbackFirst << ++iteration << globals_selectionFeedbackSecond << printList.join(" - ") << endl;
+    }
 }
 
 bool BCapplication::invoice_Add(void){
+    QTextStream qtin(stdin);
+    QTextStream qtout(stdout);
+    bool answered = false;
 
+    return answered;
 }
 
 void BCapplication::invoice_List(void){
     QTextStream qtout(stdout);
     // list invoices
+    qtout << globals_headerLine << endl;
+    qtout << "\tThe list of Invoices:" << endl;
+    int iteration = 0;
+    QList<Factuur*>::iterator i;
+    QList<Factuur*> tmpList = _bandencentrale->getFacturen();
+    for( i = tmpList.begin(); i!=tmpList.end(); i++){
+        Factuur* tmp = (*i);
+        QStringList printList;
+        printList << QString::number(tmp->getFactuurnummer()) << QString::number(tmp->getKlant()) << QString::number(tmp->getTotaalprijs());
+        qtout << globals_selectionFeedbackFirst << ++iteration << globals_selectionFeedbackSecond << printList.join(" - ") << endl;
+    }
 }
 
 // ERROR MESSAGE

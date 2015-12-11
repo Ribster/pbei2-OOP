@@ -148,6 +148,16 @@ private:
      */
     int getQuestionYN(QTextStream &ostream, QTextStream &istream, QString);
 
+    /**
+     * @brief  Print a question, get a response back, only true or false
+     * @param  QTextStream  The textstream from which we will fetch the data
+     * @param  QString      The question you want to ask
+     * @retval int          Give the response back
+     *                      0: False
+     *                      1: True
+     */
+    int getQuestionYNBlocking(QTextStream &ostream, QTextStream &istream, QString);
+
     // PRINTING
     /**
      * @brief  Print the header string with label and text
