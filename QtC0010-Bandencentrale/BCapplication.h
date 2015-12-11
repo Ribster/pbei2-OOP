@@ -107,6 +107,20 @@ private:
     void menuclient_menulistItemexecution(int);
 
     /**
+     * @brief  Get the user input for the invoice menu selection
+     * @param  None
+     * @retval int  Selected menu item
+     */
+    int menuinvoice_querySelection(void);
+
+    /**
+     * @brief  Execute the user selected invoice menu
+     * @param  int  Selected menu item
+     * @retval None
+     */
+    void menuinvoice_menulistItemexecution(int);
+
+    /**
      * @brief  Get the user input for the menu selection (general)
      * @param  QString label    The label for print prefix
      * @param  stringContainer  The container for the selection possibilities
@@ -184,6 +198,34 @@ private:
      */
     void clients_List(void);
 
+    /**
+     * @brief  User interface for adding an item
+     * @param  None
+     * @retval bool Wether the addition of the item was successfull
+     */
+    bool item_Add(void);
+
+    /**
+     * @brief  User interface for listing the items
+     * @param  None
+     * @retval None
+     */
+    void item_List(void);
+
+    /**
+     * @brief  User interface for adding an invoice
+     * @param  None
+     * @retval bool Wether the addition of the invoice was successfull
+     */
+    bool invoice_Add(void);
+
+    /**
+     * @brief  User interface for listing the invoices
+     * @param  None
+     * @retval None
+     */
+    void invoice_List(void);
+
     // ARTICLES
 
 
@@ -214,11 +256,13 @@ private:
     bool _app_alive         = true;
     bool _app_menuclient    = false;
     bool _app_menuarticle   = false;
+    bool _app_menuinvoice   = false;
 
     int _userlevel;
     QVector<QString> _menulist_main;
     QVector<QString> _menulist_clients;
     QVector<QString> _menulist_articles;
+    QVector<QString> _menulist_invoices;
 
     Bandencentrale *_bandencentrale = NULL;
 };

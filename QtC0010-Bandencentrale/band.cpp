@@ -47,5 +47,24 @@ void Band::setSeizoen(Seizoen newVal){
 }
 
 void Band::print(void){
+    QTextStream qtout(stdout);
+    qtout << "\tDetailed information about the tire:" << endl;
+    qtout << "\tID: " << this->_ArtikelID << endl;
+    qtout << "\tName: " << this->_Naam << endl;
+    qtout << "\tManufacturer: " << this->_Fabrikant << endl;
+    qtout << "\tPrice: " << this->_Prijs << endl;
+    qtout << "\tDiameter: " << this->_Diameter << endl;
+    qtout << "\tAmount: " << this->_Aantal << endl;
+    qtout << "\tWidth: " << this->_Breedte << endl;
+    qtout << "\tHeigth: " << this->_Hoogte << endl;
+    qtout << "\tSpeed Index: " << this->_Snelheidsindex << endl;
+
+    qtout << "\tSeason: ";
+    if(_Seizoen == Seizoen_Winter){
+        qtout << "Winter";
+    } else {
+        qtout << "Zomer";
+    }
+    qtout << endl;
 
 }

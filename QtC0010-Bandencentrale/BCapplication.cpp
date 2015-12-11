@@ -44,6 +44,7 @@ BCapplication::BCapplication(int argc, char **argv, QObject *parent):
     _menulist_main.push_back("End program");
     _menulist_main.push_back("Client management");
     _menulist_main.push_back("Article management");
+    _menulist_main.push_back("Invoice management");
     _menulist_main.push_back("Save Database");
     _menulist_main.push_back("Retrieve Database");
     _menulist_main.push_back("Workshop Info");
@@ -61,6 +62,11 @@ BCapplication::BCapplication(int argc, char **argv, QObject *parent):
     _menulist_articles.push_back("Add Article");
     _menulist_articles.push_back("Delete Article");
     _menulist_articles.push_back("Stock/Selling History");
+
+    // set invoice list options
+    _menulist_invoices.push_back("Back to Main Menu");
+    _menulist_invoices.push_back("List Invoices");
+    _menulist_invoices.push_back("Add Invoice");
 }
 
 // dtor
@@ -137,6 +143,13 @@ void BCapplication::selectionMenu(void){
 
                 // let the menu be selected
                 menuarticle_menulistItemexecution(selectvalue);
+        } else if (_app_menuinvoice){
+            // Article menu is selected
+                // get the user selection
+                selectvalue = menuinvoice_querySelection();
+
+                // let the menu be selected
+                menuinvoice_menulistItemexecution(selectvalue);
         } else {
             // Main menu is selected
                 // get the user selection
@@ -169,6 +182,9 @@ void BCapplication::menumain_menulistItemexecution(int menuselection){
         case MenuList_Articlelist:
             _app_menuarticle = true;
             break;
+        case MenuList_InvoiceList:
+            _app_menuinvoice = true;
+            break;
         case MenuList_SaveDatabase:
             DatabaseManagement::writeTirecompany(_bandencentrale);
             break;
@@ -198,11 +214,13 @@ void BCapplication::menuarticle_menulistItemexecution(int menuselection){
             break;
         case MenuList_Articles_List:
             if(getAuthorized(UserLevel_User)){
-                this->_bandencentrale->printItemList();
+                item_List();
             }
             break;
         case MenuList_Articles_Add:
-
+            if(getAuthorized(UserLevel_User)){
+                item_Add();
+            }
             break;
         case MenuList_Articles_Delete:
 
@@ -219,8 +237,6 @@ int BCapplication::menuclient_querySelection(void){
 }
 
 void BCapplication::menuclient_menulistItemexecution(int menuselection){
-    QTextStream qtout(stdout);
-
     // check the input values
     if(menuselection < 1) return;
     if(menuselection > _menulist_clients.size()) return;
@@ -248,6 +264,33 @@ void BCapplication::menuclient_menulistItemexecution(int menuselection){
             break;
         case MenuList_Clients_View:
 
+            break;
+    }
+}
+
+int BCapplication::menuinvoice_querySelection(void){
+    return generalQueryUserselection(globals_menuinvoices, _menulist_invoices);
+}
+
+void BCapplication::menuinvoice_menulistItemexecution(int menuselection){
+    // check the input values
+    if(menuselection < 1) return;
+    if(menuselection > _menulist_invoices.size()) return;
+
+    // select the input and execute the correct application
+    switch (menuselection) {
+        case MenuList_Invoices_Exit:
+            _app_menuinvoice = false;
+            break;
+        case MenuList_Invoices_List:
+            if(getAuthorized(UserLevel_User)){
+                invoice_List();
+            }
+            break;
+        case MenuList_Invoices_Add:
+            if(getAuthorized(UserLevel_User)){
+                invoice_Add();
+            }
             break;
     }
 }
@@ -427,6 +470,24 @@ void BCapplication::clients_List(void){
         qtout << globals_selectionFeedbackFirst << ++iteration << globals_selectionFeedbackSecond << printList.join(" - ") << endl;
     }
 
+}
+
+bool BCapplication::item_Add(void){
+
+}
+
+void BCapplication::item_List(void){
+    QTextStream qtout(stdout);
+    // list items
+}
+
+bool BCapplication::invoice_Add(void){
+
+}
+
+void BCapplication::invoice_List(void){
+    QTextStream qtout(stdout);
+    // list invoices
 }
 
 // ERROR MESSAGE

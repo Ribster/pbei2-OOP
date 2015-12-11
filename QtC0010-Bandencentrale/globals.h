@@ -73,9 +73,10 @@ typedef enum MenuList{
     MenuList_Exit               = 1,
     MenuList_Clientlist         = 2,
     MenuList_Articlelist        = 3,
-    MenuList_SaveDatabase       = 4,
-    MenuList_RetrieveDatabase   = 5,
-    MenuList_PrintDBInfo        = 6,
+    MenuList_InvoiceList        = 4,
+    MenuList_SaveDatabase       = 5,
+    MenuList_RetrieveDatabase   = 6,
+    MenuList_PrintDBInfo        = 7,
     MenuList_Min            = MenuList_Exit,
     MenuList_Max            = MenuList_PrintDBInfo
 } MenuList;
@@ -106,6 +107,17 @@ typedef enum MenuList_Articles {
     MenuList_Articles_Max       = MenuList_Articles_History
 } MenuList_Articles;
 
+/**
+ * @brief  Invoice Menu selection list
+ */
+typedef enum MenuList_Invoices {
+    MenuList_Invoices_Exit      = 1,
+    MenuList_Invoices_List      = 2,
+    MenuList_Invoices_Add       = 3,
+    MenuList_Invoices_Min       = MenuList_Invoices_Exit,
+    MenuList_Invoices_Max       = MenuList_Invoices_Add
+} MenuList_Invoices;
+
 const QString globals_director = "Director";
 const QString globals_salesman = "Salesman";
 const QString globals_info = "INFO";
@@ -115,6 +127,7 @@ const QString globals_menumain = "MAIN MENU";
 const QString globals_menuexit = "MAIN MENU > EXIT";
 const QString globals_menuarticles = "MAIN MENU > ARTICLE MENU";
 const QString globals_menuclients = "MAIN MENU > CLIENT MENU";
+const QString globals_menuinvoices = "MAIN MENU > INVOICE MENU";
 const QString globals_headerLine = "------------------------------------------------------------------";
 const QString globals_headerFirst = "[";
 const QString globals_headerSecond = "]\t";
