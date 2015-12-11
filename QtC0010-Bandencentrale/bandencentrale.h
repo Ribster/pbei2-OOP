@@ -95,6 +95,21 @@ public:
     bool removeArtikel(int artikelID);
 
     /**
+     * @brief Print the given artikel ID
+     * @param   int     artikel ID
+     * @retval  None
+     */
+    void printArtikel(int artikelID);
+
+    /**
+     * @brief Set new artikel stock count
+     * @param   int     artikel ID
+     * @param   int     new stock count
+     * @retval  None
+     */
+    void setArtikelStock(int artikelID, int newStock);
+
+    /**
      * @brief  Add an Invoice
      * @param  Klant    The object that needs to be written
      * @retval bool     Wether the action was succesfull

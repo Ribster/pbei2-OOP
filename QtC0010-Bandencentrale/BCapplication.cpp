@@ -232,7 +232,9 @@ void BCapplication::menuarticle_menulistItemexecution(int menuselection){
 
             break;
         case MenuList_Articles_Stock:
-
+            if(getAuthorized(UserLevel_User)){
+                item_ManageStock();
+            }
             break;
     }
 }
@@ -536,6 +538,9 @@ void BCapplication::clients_Delete(void){
     } else {
         qtout << "The item was NOT removed!" << endl;
     }
+
+    // save the workshop to file
+    DatabaseManagement::writeTirecompany(_bandencentrale);
 }
 
 QMap<int, QString> BCapplication::getClientInfo(void){
@@ -681,8 +686,46 @@ void BCapplication::item_Delete(void){
         qtout << "The item was NOT removed!" << endl;
     }
 
-    //qtout << "You selected : " << getback.value(questionDeleteItem) << endl;
+    // save the workshop to file
+    DatabaseManagement::writeTirecompany(_bandencentrale);
 
+}
+
+void BCapplication::item_ManageStock(void){
+    QTextStream qtout(stdout);
+    QTextStream qtin(stdin);
+    // manage the stock
+
+        // let user select item
+        QVector<QString> stringList;
+
+        QMap<int, QString> itemListPrint = getArtikelInfo();
+        QMap<int, QString>::iterator i;
+
+        QMap<int,int> getback;
+
+        int iteration = 0;
+        for(i = itemListPrint.begin(); i != itemListPrint.end(); i++){
+            getback.insert(++iteration, i.key());
+            stringList.push_back(i.value());
+        }
+
+        int questionDeleteItem = getQuestion(qtout, qtin, "Which item do you want to set the stock for?",stringList).toInt();
+
+
+
+        int itemID = getback.value(questionDeleteItem);
+        // print information about item
+        _bandencentrale->printArtikel(itemID);
+
+        // ask user for new stockcount
+        int newStock = getQuestion(qtout, qtin, "What is the new stock amount?").toInt();
+
+        // modify stock count
+        _bandencentrale->setArtikelStock(itemID, newStock);
+
+    // save the workshop to file
+    DatabaseManagement::writeTirecompany(_bandencentrale);
 }
 
 QMap<int, QString> BCapplication::getArtikelInfo(void){

@@ -125,6 +125,37 @@ bool Bandencentrale::removeArtikel(int artikelID){
     return false;
 }
 
+void Bandencentrale::printArtikel(int artikelID){
+    QList<Artikel*> tmp = _Artikels;
+    QList<Artikel*>::iterator i;
+    for(i = tmp.begin(); i!= tmp.end(); i++){
+       int tmpID = (*i)->getArtikelID();
+       if(tmpID == artikelID){
+            if((*i)->getType() == ArtikelType_Band){
+                //
+                Band* tmp2 = dynamic_cast<Band*>((*i));
+                tmp2->print();
+            } else if ((*i)->getType() == ArtikelType_Velg){
+                //
+                Velg* tmp2 = dynamic_cast<Velg*>((*i));
+                tmp2->print();
+            }
+       }
+    }
+
+}
+
+void Bandencentrale::setArtikelStock(int artikelID, int newStock){
+    QList<Artikel*> tmp = _Artikels;
+    QList<Artikel*>::iterator i;
+    for(i = tmp.begin(); i!= tmp.end(); i++){
+       int tmpID = (*i)->getArtikelID();
+       if(tmpID == artikelID){
+           (*i)->setAantal(newStock);
+       }
+    }
+}
+
 bool Bandencentrale::addFactuur(Factuur& ptr){
     if(ptr.getFactuurnummer() == 0){
         ptr.setFactuurnummer(this->getNewFactuurID());

@@ -253,6 +253,13 @@ private:
     void item_Delete(void);
 
     /**
+     * @brief   Manage the stockcount for the items
+     * @param   None
+     * @retval  None
+     */
+    void item_ManageStock(void);
+
+    /**
      * @brief   Get Item information
      * @param   None
      * @retval  QMap<int, QString>  Pair of artikel ID and Description string
