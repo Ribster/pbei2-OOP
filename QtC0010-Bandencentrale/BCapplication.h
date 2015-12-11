@@ -218,6 +218,20 @@ private:
     void clients_List(void);
 
     /**
+     * @brief User interface for deleting client
+     * @param None
+     * @retval None
+     */
+    void clients_Delete(void);
+
+    /**
+     * @brief   Get Client information
+     * @param   None
+     * @retval  QMap<int, Qstring>  Pair of Client ID and Description String
+     */
+    QMap<int, QString> getClientInfo(void);
+
+    /**
      * @brief  User interface for adding an item
      * @param  None
      * @retval bool Wether the addition of the item was successfull
@@ -238,6 +252,11 @@ private:
      */
     void item_Delete(void);
 
+    /**
+     * @brief   Get Item information
+     * @param   None
+     * @retval  QMap<int, QString>  Pair of artikel ID and Description string
+     */
     QMap<int, QString> getArtikelInfo(void);
 
     /**

@@ -492,23 +492,47 @@ void BCapplication::clients_List(void){
     QTextStream qtout(stdout);
     qtout << globals_headerLine << endl;
     qtout << "\tThe list of clients:" << endl;
+
+    QStringList printList;
+    printList << "ID" << "NAME";
+    qtout << globals_selectionFeedbackFirst << "NR" << globals_selectionFeedbackSecond << printList.join(" - ") << endl;
+
+    QMap<int, QString> itemListPrint = getClientInfo();
+    QMap<int, QString>::iterator i;
     int iteration = 0;
-    QList<Klant*>::iterator i;
-    QList<Klant*> tmpList = _bandencentrale->getKlanten();
-    for(i = tmpList.begin(); i!= tmpList.end(); i++){
-        Klant* tmp = (*i);
-        QStringList printList;
-        if(tmp->getClientType() == ClientType_Business){
-            Bedrijfsklant* tmp2 = dynamic_cast<Bedrijfsklant*>(tmp);
-            printList << QString::number(tmp->getClientID()) << tmp->getNaam() << "Business" << tmp2->getBTWnummer();
-        } else {
-            printList << QString::number(tmp->getClientID()) << tmp->getNaam() << "Personal";
-        }
-
-
-        qtout << globals_selectionFeedbackFirst << ++iteration << globals_selectionFeedbackSecond << printList.join(" - ") << endl;
+    for(i = itemListPrint.begin(); i != itemListPrint.end(); i++){
+        qtout << globals_selectionFeedbackFirst << ++iteration << globals_selectionFeedbackSecond << i.value() << endl;
     }
 
+}
+
+void BCapplication::clients_Delete(void){
+    //
+}
+
+QMap<int, QString> BCapplication::getClientInfo(void){
+    //
+    QMap<int, QString> returnList;
+    QList<Klant*>::iterator i;
+    QList<Klant*> tmpList = _bandencentrale->getKlanten();
+
+
+    for ( i = tmpList.begin(); i!= tmpList.end(); i++){
+        Klant* tmp = (*i);
+        if(tmp->getDeleted() == false){
+            QStringList printlist;
+            if(tmp->getClientType() == ClientType_Personal){
+                // personal
+                printlist << QString::number(tmp->getClientID()) << tmp->getNaam() << "Personal";
+            } else if (tmp->getClientType() == ClientType_Business) {
+                // business
+                Bedrijfsklant *tmp2 = dynamic_cast<Bedrijfsklant*>(tmp);
+                printlist << QString::number(tmp2->getClientID()) << tmp2->getNaam() << "Business";
+            }
+            returnList.insert(tmp->getClientID(), printlist.join(" - "));
+        }
+    }
+    return returnList;
 }
 
 bool BCapplication::item_Add(void){
